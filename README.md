@@ -3,7 +3,7 @@ Conflux Improvement Proposals (CIPs) describe standards for the Conflux platform
 
 # Contributing
 
-1. Review [CIP-1](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/CIP-1.md).
+1. Review [CIP-1](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/cip-1.md).
 2. Fork the repository by clicking "Fork" in the top right.
 3. Add your CIP to your fork of the repository. There is a [template CIP here](cip-template.md).
 4. Submit a Pull Request to Conflux's [CIPs repository](https://github.com/Conflux-Chain/CIPs).
