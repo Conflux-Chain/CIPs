@@ -12,25 +12,25 @@ created: 2020-07-22
 
 ## Simple Summary
 <!--"If you can't explain it simply, you don't understand it well enough." Provide a simplified and layman-accessible explanation of the CIP.-->
-During a transaction execution, if the code owner is a contract, this contract can not be destructed when the call stack depth is non-zero. 
+During the execution of a transaction, if a contract acts as the storage owner via the sponsorship mechanism, then that contract should not be destructed in this execution unless such desctruction is called directly by the transaction sender, i.e. the call stack depth is zero. 
 
 ## Abstract
 <!--A short (~200 word) description of the technical issue being addressed.-->
-In the third phase of mainnet, if a contract is the code owner during transaction execution, it can not be destructed if the call stack depth is non-zero. Otherwise, a VM exception will be triggered and the execution of sub-call fails. 
+In the third phase of mainnet, if a contract is the storage owner during transaction execution, then it can not be destructed when the call stack depth is non-zero. Otherwise, a VM exception will be triggered and the execution of sub-call fails. 
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
 
-Currently, we require a contract to be destructed occupy no storage entry. However If the contract is the code owner, it can still occupy storage entries after destruction in the same transaction execution. This breaks the assumption that all the destructed contract occupy no storage entry. 
+Currently, we require that a contract can only be destructed when it occupies no storage. However If the contract is the storage owner of the execution causing its destruction, it may become the owner of newly occupied storage after its destruction in the same transaction execution. This breaks the assumption that no destructed contract occupies any storage. 
 
-One solution is to move the check for storage collateral to the end of transaction execution. But the problem is the contract can not know whether the contract destruction succeeds at once, and the following execution may depends on the return value of suicided contract. 
+One solution is to move the check for storage collateral to the end of transaction execution. But the problem is that the contract can not determine whether the contract destruction succeeds during execution, while subsequent operations may depend on the return value of suicided contract. 
 
 When the depth of call stack is zero, we don't have this problem because the transaction execution halts after contract destruction. 
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 
-When destructing a contract, before checking its collateral for storage, if the call depth is not zero and the contract to be destructed is the code owner, a VM exception will be triggered. 
+When destructing a contract, before checking its collateral for storage, if the call depth is not zero and the contract to be destructed is the storage owner in this execution, a VM exception will be triggered. 
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
@@ -40,7 +40,7 @@ TBD
 ## Backwards Compatibility
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
 
-This CIP is not backwards compatible. But it is only different with the current specification in one corner cases. If sender S calls contract A, contract A calls itself recursively and contract A suicides in sub-call. If this transaction is sponsored, the suicide will succeed in the old implementation and fail in this proposal. 
+This CIP is not backwards compatible. But it is only different with the current specification in one corner case. If sender S calls contract A, contract A may call itself recursively and cause the destruction of contract A in a sub-call. If this transaction is sponsored (by contract A), the suicide will succeed in the old implementation and fail after this proposal is implemented. 
 
 (Note, if contract A calls contract B and then contract B calls contract A, the reentrancy protection will be triggered.)
 
