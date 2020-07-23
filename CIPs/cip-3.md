@@ -1,5 +1,5 @@
 ---
-cip: <to-be-assigned>
+cip: 3
 title: Octopus Proof-of-Work Mining Algorithm
 author: Fan Long <longfan@conflux-chain.org> and Dong Zhou <dong.zhou@conflux-chain.org>
 discussions-to: <URL>
