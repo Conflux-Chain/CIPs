@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 8
 title: Put off code collateral settlement. 
 author: <Chenxing Li (@ChenxingLi)>
 discussions-to: <URL>
