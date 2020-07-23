@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 5 
 title: Fix corner case in MPT key encoding
 author: Thegaram <th307q@gmail.com>
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1693
