@@ -1,6 +1,6 @@
 ---
 cip: 2
-title: Forbid destruct the code owner in sub-call
+title: Forbid destruct storage owner in sub-call
 author: Chenxing Li (@ChenxingLi)
 discussions-to: <URL>
 status: Draft
@@ -16,16 +16,16 @@ During a transaction execution, if the code owner is a contract, this contract c
 
 ## Abstract
 <!--A short (~200 word) description of the technical issue being addressed.-->
-In the third phase of mainnet, if a contract is the code owner during transaction execution, it can not be destructed if the call stack depth is non-zero. Otherwise, a VM exception will be triggered and the execution of sub-call fails. 
+During the execution of a transaction, if a contract acts as the storage owner via the sponsorship mechanism, then that contract should not be destructed in this execution unless such destruction is called directly by the transaction sender, i.e. the call stack depth is zero. Otherwise, a VM exception will be triggered and the execution of sub-call fails. 
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
 
-Currently, we require a contract to be destructed occupy no storage entry. However If the contract is the code owner, it can still occupy storage entries after destruction in the same transaction execution. This breaks the assumption that all the destructed contract occupy no storage entry. 
+Currently, we require a contract to be destructed have no storage collateral. However if the contract is the code owner, it can still occupy storage entries after destruction in the same transaction execution. 
 
-One solution is to move the check for storage collateral to the end of transaction execution. But the problem is the contract can not know whether the contract destruction succeeds at once, and the following execution may depends on the return value of suicided contract. 
+One solution is to move the check for storage collateral to the end of transaction execution. But the contract can not know whether the contract destruction succeeds at once, and the following execution after `SELFDESTRUCT (0xff)` operation may depend on the return value from destructed contract. 
 
-When the depth of call stack is zero, we don't have this problem because the transaction execution halts after contract destruction. 
+Thus, this proposal forbid the destruct storage owner. A exceptional case is, if the destruction is called directly by the transaction sender, the transaction execution will halt after destruction and we don't need to worry about this problem. 
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
