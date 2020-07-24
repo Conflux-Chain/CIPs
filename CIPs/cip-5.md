@@ -3,7 +3,7 @@ cip: 5
 title: Fix corner case in MPT key encoding
 author: Thegaram <th307q@gmail.com>
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1693
-status: Draft
+status: Accepted
 type: Spec Breaking
 created: 2020-07-22
 ---
@@ -45,6 +45,8 @@ The fix to handle the corner case correctly is straightforward. The main questio
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
 
 If the fix is adopted by only a portion of the nodes, a block with exactly 256 transactions will result in a pivot chain fork.
+
+We will enable this change in a hard fork of Oceanus.
 
 ## Test Cases
 <!--Test cases for an implementation are mandatory for CIPs that are affecting consensus changes. Other CIPs can choose to include links to test cases if applicable.-->
