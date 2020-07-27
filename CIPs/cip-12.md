@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 12
 title: Tolerate non-existent sponsor for collateral
 author: Chenxing Li(@Chenxing Li)
 discussions-to: <URL>
