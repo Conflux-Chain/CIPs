@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 13
 title: Use Big-Endian MPT Keys
 author: Thegaram <th307q@gmail.com>
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1693
