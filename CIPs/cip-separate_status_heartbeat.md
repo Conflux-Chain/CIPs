@@ -1,8 +1,8 @@
 ---
-cip: <to be assigned>
+cip: 11
 title: Separate Status and Heartbeat Messages
 author: Ming Wu <ming@conflux-chain.org>
-discussions-to: <URL>
+discussions-to: Peilun Li <peilun.li@conflux-chain.org>
 status: Draft
 type: Protocol Breaking
 created: 2020-07-25
