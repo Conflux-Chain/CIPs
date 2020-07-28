@@ -17,20 +17,20 @@ We allow a contract with non-zero storage collateral to be destructed. In case r
 
 ## Abstract
 <!--A short (~200 word) description of the technical issue being addressed.-->
-Currently, we forbid the contract with non-zero storage collateral to be destructed. This proposal plans to stop checking storage collateral when contract destruction. After the contract destruction, all the contract state will be removed from the world-state except its storage collateral if the collateral is non-zero. When the some storage collaterals are refunded to a dead contract, the refunded token will be burnt. 
+Currently, we forbid the contract with non-zero storage collateral to be destructed. This proposal plans to stop checking storage collateral during contract destruction. After the contract destruction, all the contract state will be removed from the world-state except its storage collateral if the collateral is non-zero. When some portion of the storage collateral is refunded to a dead contract, the refunded token will be burnt. 
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
-Currently, we forbid a contract with non-zero storage collateral to be destructed to guarantee the dead contract is not the owner of any storage entry. However, some corner cases break this guarantee. Suppose the sender call contract A and contract A sponsor the collateral for this transaction. If contract A call itself and self-destruct, the outside executive can still execute as usual and occupy additional storage entry.
+Currently, we forbid a contracts with non-zero storage collateral to be destructed to guarantee the dead contract is not the owner of any storage entry. However, some corner cases break this guarantee. Suppose the sender calls contract A and contract A sponsors the collateral for this transaction. If contract A calls itself and self-destructs, the outside executive can still execute as usual and occupy additional storage entries.
 
-In order to handle this problem, CIP-2 proposed to forbid storage owner to be destruct in a sub-call. This proposal provides a more straightforward solution. 
+In order to handle this problem, CIP-2 proposed to forbid storage owner to be destructed in a sub-call. This proposal provides a more straightforward solution. 
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 
-In the `SELFDESTRUCT(0xff)` operation or the internal contract function `destroy()`, we no longer check whether `contract.storage_collateral>0`. However, if the `contract.storage_collateral>0`, the account field `storage_collateral` will be retained. Formally, the account state of contract will be reset to a a default initialization value while the `storage_collateral` is retained. 
+In the `SELFDESTRUCT(0xff)` operation or the internal contract function `destroy()`, we no longer check whether `contract.storage_collateral>0`. However, if the `contract.storage_collateral>0`, the account field `storage_collateral` will be retained. Formally, the account state of contract will be reset to a default initialization value while the `storage_collateral` is retained. 
 
-Each time refunding storage collateral to a contract, if its `sponsor_for_collateral` is zero address, the `sponsor_balance_for_collateral` will not be updated, the refunded token will be burnt and the statistic information *total issued tokens* will be updated accordingly. 
+Each time refunding storage collateral to a contract, if its `sponsor_for_collateral` is the zero address, the `sponsor_balance_for_collateral` will not be updated, the refunded token will be burnt and the statistic information *total issued tokens* will be updated accordingly. 
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
