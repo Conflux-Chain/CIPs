@@ -38,7 +38,10 @@ This is a specification breaking changes.
 
 ## Test Cases
 <!--Test cases for an implementation are mandatory for CIPs that are affecting consensus changes. Other CIPs can choose to include links to test cases if applicable.-->
-TBD
+It is tested in:
+
+tests/secondary_reward_test.py
+tests/rpc/test_get_block_reward_info.py
 
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
