@@ -3,7 +3,7 @@ cip: 2
 title: Forbid destruct storage owner in sub-call
 author: Chenxing Li (@ChenxingLi)
 discussions-to: <URL>
-status: Draft
+status: Abandoned
 type: Spec Breaking
 created: 2020-07-22
 ---
@@ -12,6 +12,8 @@ created: 2020-07-22
 
 ## Simple Summary
 <!--"If you can't explain it simply, you don't understand it well enough." Provide a simplified and layman-accessible explanation of the CIP.-->
+This CIP is replaced by CIP-12.
+
 During the execution of a transaction, if a contract acts as the storage owner via the sponsorship mechanism, then that contract should not be destructed in this execution unless such desctruction is called directly by the transaction sender, i.e. the call stack depth is zero. 
 
 ## Abstract
