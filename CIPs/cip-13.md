@@ -3,7 +3,7 @@ cip: 13
 title: Use Big-Endian MPT Keys
 author: Thegaram <th307q@gmail.com>
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1693
-status: Draft
+status: Accepted
 type: Spec Breaking
 created: 2020-07-27
 ---
@@ -75,12 +75,12 @@ We will enable this change in a hard fork of Oceanus.
 ## Test Cases
 <!--Test cases for an implementation are mandatory for CIPs that are affecting consensus changes. Other CIPs can choose to include links to test cases if applicable.-->
 
-The existing unit tests [[1](https://github.com/Conflux-Chain/conflux-rust/blob/6b8e82b2304d2837f26a760e7b808e3f5ba74320/core/src/storage/impls/merkle_patricia_trie/simple_mpt.rs#L141)] and [[2](https://github.com/Conflux-Chain/conflux-rust/blob/6b8e82b2304d2837f26a760e7b808e3f5ba74320/core/src/storage/impls/merkle_patricia_trie/simple_mpt.rs#L201)] demonstrate the current behavior. Along with the fix, we will update these tests as well.
+The existing unit tests [[1](https://github.com/Conflux-Chain/conflux-rust/blob/6b8e82b2304d2837f26a760e7b808e3f5ba74320/core/src/storage/impls/merkle_patricia_trie/simple_mpt.rs#L141)] and [[2](https://github.com/Conflux-Chain/conflux-rust/blob/6b8e82b2304d2837f26a760e7b808e3f5ba74320/core/src/storage/impls/merkle_patricia_trie/simple_mpt.rs#L201)] demonstrate the current behavior. Along with the fix, these are updated as well.
 
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
 
-The fix is probably a single-line change [[here](https://github.com/Conflux-Chain/conflux-rust/blob/6b8e82b2304d2837f26a760e7b808e3f5ba74320/core/src/storage/impls/merkle_patricia_trie/simple_mpt.rs#L22)] to reverse the byte order. A PR will be submitted later.
+The fix is a single-line change. See the corresponding PR [here](https://github.com/Conflux-Chain/conflux-rust/pull/1717).
 
 ## Security Considerations
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
