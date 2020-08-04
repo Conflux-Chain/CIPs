@@ -1,11 +1,11 @@
 ---
-cip: <to be assigned>
+cip: 16
 title: Put the logics for contract destruction together. 
 author: Chenxing Li (@ChenxingLi)
-discussions-to: <URL>
+discussions-to: [Conflux-Chain/conflux-rust#1747](https://github.com/Conflux-Chain/conflux-rust/issues/1747)
 status: Draft
-type: <Backward Compatible | Database/RPC Breaking | Protocol Breaking | Spec Breaking>
-created: <date created on, in ISO 8601 (yyyy-mm-dd) format>
+type: Spec Breaking
+created: 2020-08-05
 requires: 12
 ---
 

@@ -6,7 +6,7 @@ discussions-to: <URL>
 status: Draft
 type: Spec Breaking
 created: 2020-07-23
-requires: 2
+requires: 12
 ---
 
 ## Simple Summary
@@ -27,7 +27,7 @@ In the implementation view, the storage will not be write to disk or removed fro
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 
-CIP-\<to be assigned\> will handle all the logics about contract destruction. So we skim collateral information maintenance in contract destruction here.  
+CIP-16 will handle all the logics about contract destruction. So we skim collateral information maintenance in contract destruction here.  
 
 Besides contract destruction, the collateral of contract code will be charged in transaction post-processing other than in contract creation. 
 
@@ -52,7 +52,7 @@ TBA.
 
 ## Security Considerations
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
-If the suicide operation is called multiple times in one transaction, the code collateral will be recorded multiple times. This is a known issue which is not brought from this CIP. It will be fixed in the CIP-\<to be assigned\>.
+If the suicide operation is called multiple times in one transaction, the code collateral will be recorded multiple times. This is a known issue which is not brought from this CIP. It will be fixed in the CIP-16.
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
