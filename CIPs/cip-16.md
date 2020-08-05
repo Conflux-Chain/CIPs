@@ -60,6 +60,7 @@ This CIP will replace the third step with following steps,
 2. Conflux no longer recycle storage at the end of epochs since they are recycled in transaction execution.
 3. In case a contract is refunded to an invalid address, `SUICIDE (0xff)` will not trigger an exception. The balance for killed contract will be burnt. 
 
+
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
 
