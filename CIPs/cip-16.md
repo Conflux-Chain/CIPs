@@ -36,6 +36,8 @@ In Ethereum, the killing command only transfers the rest balance to specified ad
 
 Since Ethereum kill all the contract (removing their code from word-state) at the end of transaction execution, it is a good idea to put all the logic about killing contract at this place, like recycling storage, refunding collaterals and sponsor balance to the same place as removing code. And thus, the collateral mechanism doesn't need to deal with the killing command as a special case.
 
+Since Conflux does not trigger exception in `SUICIDE (0xff)` operation due to collateral, it also stops trigger exception in `SUICIDE (0xff)` operation due to invalid refunding address. So the `SUICIDE (0xff)` operation will not generate exception now. Instead, in case a contract is refunded to an invalid address, the balance for killed contract will be burnt. 
+
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 
@@ -56,6 +58,8 @@ This CIP will replace the third step with following steps,
 ### Other changes
 1. For a killing command, Conflux does exactly the same thing as Ethereum. 
 2. Conflux no longer recycle storage at the end of epochs since they are recycled in transaction execution.
+3. In case a contract is refunded to an invalid address, `SUICIDE (0xff)` will not trigger an exception. The balance for killed contract will be burnt. 
+
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
