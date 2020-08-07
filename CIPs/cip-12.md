@@ -13,31 +13,31 @@ replaces: 2
 
 ## Simple Summary
 <!--"If you can't explain it simply, you don't understand it well enough." Provide a simplified and layman-accessible explanation of the CIP.-->
-We allow a contract with non-zero storage collateral to be destructed. In case refunding a storage collateral to a dead contract, the refunded token will be burnt. 
+We allow a contract with non-zero storage collateral to be destructed. When refunding storage collateral to a dead contract, the refunded tokens will be burnt.
 
 ## Abstract
 <!--A short (~200 word) description of the technical issue being addressed.-->
-Currently, we forbid the contracts with non-zero storage collateral to be destructed. This proposal plans to stop checking storage collateral during contract destruction. If a contract has the same address of a killed contract, it may receive refunding collateral for the killed contract. So each time a contract receives a collateral refunding, no matter who paid this collateral, the part that exceeds the current storage collateral will be refunded to *sponsor balance for collateral* and the rest part will be burnt. 
+Currently, we forbid the destruction of contracts with non-zero storage collateral. This proposal plans to stop checking storage collateral during contract destruction. If a contract has the same address as a contract destructed previously, it may receive the refunded collateral for the killed contract. So each time a contract receives a collateral refunding, no matter who paid this collateral, the part that exceeds the current storage collateral will be refunded to *sponsor balance for collateral* and the rest will be burnt.
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
-Currently, we forbid a contracts with non-zero storage collateral to be destructed to guarantee the dead contract is not the owner of any storage entry. However, some corner cases break this guarantee. Suppose the sender calls contract A and contract A sponsors the collateral for this transaction. If contract A calls itself and self-destructs, the outside executive can still execute as usual and occupy additional storage entries.
+Currently, we forbid the destruction of contracts with non-zero storage collateral to guarantee the dead contract is not the owner of any storage entry. However, some corner cases break this guarantee. Suppose the sender calls contract A and contract A sponsors the collateral for this transaction. If contract A calls itself and self-destructs, the outside executive can still execute as usual and occupy additional storage entries.
 
-In order to handle this problem, CIP-2 proposed to forbid storage owner to be destructed in a sub-call. This proposal provides a more straightforward solution. 
+In order to handle this problem, CIP-2 proposed to forbid storage owner to be destructed in a sub-call. This proposal provides a more straightforward solution.
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 
-In the `SELFDESTRUCT(0xff)` operation or the internal contract function `destroy()`, we no longer check whether `contract.storage_collateral>0`. 
+In the `SELFDESTRUCT(0xff)` operation or the internal contract function `destroy()`, we no longer check whether `contract.storage_collateral > 0`.
 
-Each time we're refunding storage collateral to a contract, let `v = min(refunding_collateral, contract.storage_collateral)`. The contract can only receive `v` refunding collaterals and the reset part will be burnt. Formally 
+Each time we're refunding storage collateral to a contract, let `v = min(refunding_collateral, contract.storage_collateral)`. The contract can only receive `v` refunding collateral and the rest will be burnt. Formally
 
 ```
 contract.storage_collateral -= v
-contract.sponsor_balance_for_collateral += v 
+contract.sponsor_balance_for_collateral += v
 ```
 
-The global statistic values are update as follows
+The global statistic values are updated as follows
 ```
 total_storage_tokens -= refunding_collateral
 total_issued_tokens -= refunding_collateral - v
@@ -46,7 +46,7 @@ total_issued_tokens -= refunding_collateral - v
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
 
-The `total_storage_tokens` and the `total_issued_tokens` are updated at the time point of refunding collateral other than killing contract. Because the storage entries owned by killed contract should continue to generate collateral interest until they are released. 
+The `total_storage_tokens` and the `total_issued_tokens` are updated at the time point of refunding collateral rather than killing contract. Because the storage entries owned by the killed contract should continue to generate collateral interest until they are released.
 
 ## Backwards Compatibility
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
