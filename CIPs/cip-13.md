@@ -3,7 +3,7 @@ cip: 13
 title: Use Big-Endian MPT Keys
 author: Thegaram <th307q@gmail.com>
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1693
-status: Accepted
+status: Final
 type: Spec Breaking
 created: 2020-07-27
 ---

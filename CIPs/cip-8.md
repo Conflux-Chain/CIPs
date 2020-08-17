@@ -1,6 +1,6 @@
 ---
 cip: 8
-title: Put off code collateral settlement. 
+title: Put off code collateral settlement.
 author: <Chenxing Li (@ChenxingLi)>
 discussions-to: <URL>
 status: Draft
@@ -11,7 +11,7 @@ requires: 12
 
 ## Simple Summary
 
-Let all the storage collateral be charged and refunded at the end of transaction execution. 
+Let all the storage collateral be charged and refunded at the end of transaction execution.
 
 ## Abstract
 
@@ -22,14 +22,14 @@ Currently, most storage collateral settlements are executed at the post-processi
 
 Each time the storage collateral is charged, a *Not enough balance for collateral* exception could be triggered. If this exception happens in a sub-message call, only the execution of callee will be reverted and the caller can still execute normally. Such corner cases bring unnecessary tasks in contract debugging and make the collateral mechanism hard to understand.
 
-In the implementation view, the storage will not be write to disk or removed from disk until the transaction execution is done. So it is reasonable to move all the storage collateral charging and refunding to the end of execution. 
+In the implementation view, the storage will not be written to disk or removed from disk until the transaction execution is done. So it is reasonable to move all the storage collateral charging and refunding to the end of execution.
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 
-CIP-16 will handle all the logics about contract destruction. So we skim collateral information maintenance in contract destruction here.  
+CIP-16 will handle all the logics about contract destruction. So we skim collateral information maintenance in contract destruction here.
 
-Besides contract destruction, the collateral of contract code will be charged in transaction post-processing other than in contract creation. 
+Besides contract destruction, the collateral of contract code will be charged in transaction post-processing other than in contract creation.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
