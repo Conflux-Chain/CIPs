@@ -151,7 +151,7 @@ contract Staking {
     function get_vote_locked(address user) public returns (uint) {}
 		
     /**
-     * @dev get user's vote unlocked BlockNumber 
+     * @dev get user's vote unlocked BlockNumbers in array 
      * @param user The address of specific user
      */
     function get_vote_unlock_block_numbers(address user) public returns (uint[] memory) {}
