@@ -36,29 +36,29 @@ pragma solidity >=0.4.15;
 
 contract SponsorWhitelistControl {
     /*** Query Functions ***/
-  	/**
+    /**
      * @dev get gas sponsor address of specific contract
      * @param contract The address of the sponsored contract
      */
-  	function getSponsorForGas(address contract) public returns (address) {}
+    function getSponsorForGas(address contract) public returns (address) {}
   	
-  	/**
+    /**
      * @dev get current Sponsored Balance for gas
      * @param contract The address of the sponsored contract
      */
-  	function getSponsoredBalanceForGas(address contract) public returns (uint) {}
+    function getSponsoredBalanceForGas(address contract) public returns (uint) {}
   	
-  	/**
+    /**
      * @dev get current Sponsored Gas fee upper bound
      * @param contract The address of the sponsored contract
      */
-		function getSponsoredGasFeeUpperBound(address contract) public returns (uint) {}
+    function getSponsoredGasFeeUpperBound(address contract) public returns (uint) {}
 		 
-  	/**
+    /**
      * @dev get collateral sponsor address
      * @param contract The address of the sponsored contract
      */
-  	function getSponsorForCollateral(address contract) public returns (address) {}
+    function getSponsorForCollateral(address contract) public returns (address) {}
 		
     /**
      * @dev get current Sponsored Balance for collateral
@@ -73,11 +73,11 @@ contract SponsorWhitelistControl {
      */
     function isWhitelisted(address contract, address user) public returns (bool) {}
 		
-		/**
+    /**
      * @dev check if all users are in a contract's whitelist 
      * @param contract The address of the sponsored contract
      */
-		function isAllWhitelisted(address contract) public returns (bool) {}
+    function isAllWhitelisted(address contract) public returns (bool) {}
 
     /*** for contract admin only **/
     /**
@@ -87,14 +87,14 @@ contract SponsorWhitelistControl {
      */
     function addPrivilege(address contract, address[] memory) public {}
 		
-		/**
+    /**
      * @dev contract admin remove user from whitelist 
      * @param contract The address of the sponsored contract
      * @param address[] The user address array
      */
-		function removePrivilege(address contract, address[] memory) public {}
+    function removePrivilege(address contract, address[] memory) public {}
 
-  	// ------------------------------------------------------------------------
+    // ------------------------------------------------------------------------
     // Someone will sponsor the gas cost for contract `contract_addr` with an
     // `upper_bound` for a single transaction.
     // ------------------------------------------------------------------------
@@ -121,12 +121,12 @@ contract SponsorWhitelistControl {
 pragma solidity >=0.4.15;
 
 contract AdminControl {
-  	/*** Query Functions ***/
-  	/**
+    /*** Query Functions ***/
+    /**
      * @dev get admin of specific contract 
      * @param contract The address of specific contract
      */
-  	function getAdmin(address contract) public returns (address) {}
+    function getAdmin(address contract) public returns (address) {}
 
     function set_admin(address, address) public {}
     function destroy(address) public {}
@@ -138,25 +138,25 @@ pragma solidity >=0.4.15;
 
 contract Staking {
     /*** Query Functions ***/
-  	/**
+    /**
      * @dev get user's staking balance 
      * @param user The address of specific user
      */
-  	function getStakingBalance(address user) public returns (uint) {}
+    function getStakingBalance(address user) public returns (uint) {}
 		
-		/**
+    /**
      * @dev get user's locked vote
      * @param uesr The address of specific user
      */
-		function getVoteLocked(address user) public returns (uint) {}
+    function getVoteLocked(address user) public returns (uint) {}
 		
-		/**
+    /**
      * @dev get user's vote unlocked BlockNumber 
      * @param user The address of specific user
      */
-		function getVoteUnlockBlockNumber(address user) public returns (uint) {}
+    function getVoteUnlockBlockNumber(address user) public returns (uint) {}
   
-  	function deposit(uint amount) external {}
+    function deposit(uint amount) external {}
 
     function withdraw(uint amount) external {}
 
