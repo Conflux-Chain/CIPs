@@ -1,6 +1,6 @@
 ---
 cip: <to be assigned>
-title:  Add Query interfaces for Internal contracts 
+title:  Add interfaces for Internal contracts 
 author: Yu Xiong <@oo7ww> 
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1784
 status: Draft
