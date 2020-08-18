@@ -4,7 +4,7 @@ title:  Add interfaces for Internal contracts
 author: Yu Xiong <@oo7ww> 
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1784
 status: Draft
-type: Protocol Breaking
+type: Spec Breaking
 created: 2020-08-17
 ---
 
@@ -40,44 +40,44 @@ contract SponsorWhitelistControl {
      * @dev get gas sponsor address of specific contract
      * @param contract The address of the sponsored contract
      */
-    function getSponsorForGas(address contract) public returns (address) {}
+    function get_sponsor_for_gas(address contract) public returns (address) {}
   	
     /**
      * @dev get current Sponsored Balance for gas
      * @param contract The address of the sponsored contract
      */
-    function getSponsoredBalanceForGas(address contract) public returns (uint) {}
+    function get_sponsored_balance_for_gas(address contract) public returns (uint) {}
   	
     /**
      * @dev get current Sponsored Gas fee upper bound
      * @param contract The address of the sponsored contract
      */
-    function getSponsoredGasFeeUpperBound(address contract) public returns (uint) {}
+    function get_sponsored_gas_fee_upperbound(address contract) public returns (uint) {}
 		 
     /**
      * @dev get collateral sponsor address
      * @param contract The address of the sponsored contract
      */
-    function getSponsorForCollateral(address contract) public returns (address) {}
+    function get_sponsor_for_collateral(address contract) public returns (address) {}
 		
     /**
      * @dev get current Sponsored Balance for collateral
      * @param contract The address of the sponsored contract
      */
-    function getSponsoredBalanceForCollateral(address contract) public returns (uint) {}
+    function get_sponsored_balance_for_collateral(address contract) public returns (uint) {}
     
     /**
      * @dev check if a user is in a contract's whitelist
      * @param contract The address of the sponsored contract
      * @param user The address of contract user
      */
-    function isWhitelisted(address contract, address user) public returns (bool) {}
+    function is_whitelisted(address contract, address user) public returns (bool) {}
 		
     /**
      * @dev check if all users are in a contract's whitelist 
      * @param contract The address of the sponsored contract
      */
-    function isAllWhitelisted(address contract) public returns (bool) {}
+    function is_all_whitelisted(address contract) public returns (bool) {}
 
     /*** for contract admin only **/
     /**
@@ -85,14 +85,14 @@ contract SponsorWhitelistControl {
      * @param contract The address of the sponsored contract
      * @param address[] The user address array
      */
-    function addPrivilege(address contract, address[] memory) public {}
+    function add_privilege_by_admin(address contract, address[] memory) public {}
 		
     /**
      * @dev contract admin remove user from whitelist 
      * @param contract The address of the sponsored contract
      * @param address[] The user address array
      */
-    function removePrivilege(address contract, address[] memory) public {}
+    function remove_privilege_by_admin(address contract, address[] memory) public {}
 
     // ------------------------------------------------------------------------
     // Someone will sponsor the gas cost for contract `contract_addr` with an
@@ -126,7 +126,7 @@ contract AdminControl {
      * @dev get admin of specific contract 
      * @param contract The address of specific contract
      */
-    function getAdmin(address contract) public returns (address) {}
+    function get_admin(address contract) public returns (address) {}
 
     function set_admin(address, address) public {}
     function destroy(address) public {}
@@ -142,19 +142,19 @@ contract Staking {
      * @dev get user's staking balance 
      * @param user The address of specific user
      */
-    function getStakingBalance(address user) public returns (uint) {}
+    function get_staking_balance(address user) public returns (uint) {}
 		
     /**
      * @dev get user's locked vote
      * @param uesr The address of specific user
      */
-    function getVoteLocked(address user) public returns (uint) {}
+    function get_vote_locked(address user) public returns (uint) {}
 		
     /**
      * @dev get user's vote unlocked BlockNumber 
      * @param user The address of specific user
      */
-    function getVoteUnlockBlockNumber(address user) public returns (uint) {}
+    function get_vote_unlock_block_numbers(address user) public returns (uint[] memory) {}
   
     function deposit(uint amount) external {}
 
@@ -173,7 +173,7 @@ There is no more details to be explained.
 ## Backwards Compatibility
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
 
-This proposal is backwards compatible.
+This proposal is not backwards compatible. Because this introduce new functions to internal contracts and make contract execution have different behaviors.
 
 ## Test Cases
 <!--Test cases for an implementation are mandatory for CIPs that are affecting consensus changes. Other CIPs can choose to include links to test cases if applicable.-->
