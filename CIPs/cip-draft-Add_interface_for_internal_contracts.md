@@ -40,44 +40,44 @@ contract SponsorWhitelistControl {
      * @dev get gas sponsor address of specific contract
      * @param contract The address of the sponsored contract
      */
-    function get_sponsor_for_gas(address contract) public returns (address) {}
+    function getSponsorforGas(address contract) public returns (address) {}
   	
     /**
      * @dev get current Sponsored Balance for gas
      * @param contract The address of the sponsored contract
      */
-    function get_sponsored_balance_for_gas(address contract) public returns (uint) {}
+    function getSponsoredBalanceforGas(address contract) public returns (uint) {}
   	
     /**
      * @dev get current Sponsored Gas fee upper bound
      * @param contract The address of the sponsored contract
      */
-    function get_sponsored_gas_fee_upperbound(address contract) public returns (uint) {}
+    function getSponsoredGasFeeUpperbound(address contract) public returns (uint) {}
 		 
     /**
      * @dev get collateral sponsor address
      * @param contract The address of the sponsored contract
      */
-    function get_sponsor_for_collateral(address contract) public returns (address) {}
+    function getSponsorforCollateral(address contract) public returns (address) {}
 		
     /**
      * @dev get current Sponsored Balance for collateral
      * @param contract The address of the sponsored contract
      */
-    function get_sponsored_balance_for_collateral(address contract) public returns (uint) {}
+    function getSponsoredBalanceforCollateral(address contract) public returns (uint) {}
     
     /**
      * @dev check if a user is in a contract's whitelist
      * @param contract The address of the sponsored contract
      * @param user The address of contract user
      */
-    function is_whitelisted(address contract, address user) public returns (bool) {}
+    function isWhitelisted(address contract, address user) public returns (bool) {}
 		
     /**
      * @dev check if all users are in a contract's whitelist 
      * @param contract The address of the sponsored contract
      */
-    function is_all_whitelisted(address contract) public returns (bool) {}
+    function isAllWhitelisted(address contract) public returns (bool) {}
 
     /*** for contract admin only **/
     /**
@@ -85,35 +85,35 @@ contract SponsorWhitelistControl {
      * @param contract The address of the sponsored contract
      * @param address[] The user address array
      */
-    function add_privilege_by_admin(address contract, address[] memory) public {}
+    function addPrivilegebyAdmin(address contract, address[] memory) public {}
 		
     /**
      * @dev contract admin remove user from whitelist 
      * @param contract The address of the sponsored contract
      * @param address[] The user address array
      */
-    function remove_privilege_by_admin(address contract, address[] memory) public {}
+    function removePrivilegeByAdmin(address contract, address[] memory) public {}
 
     // ------------------------------------------------------------------------
     // Someone will sponsor the gas cost for contract `contract_addr` with an
     // `upper_bound` for a single transaction.
     // ------------------------------------------------------------------------
-    function set_sponsor_for_gas(address contract_addr, uint upper_bound) public payable {}
+    function setSponsorforGas(address contract_addr, uint upper_bound) public payable {}
 
     // ------------------------------------------------------------------------
     // Someone will sponsor the storage collateral for contract `contract_addr`.
     // ------------------------------------------------------------------------
-    function set_sponsor_for_collateral(address contract_addr) public payable {}
+    function setSponsorForCollateral(address contract_addr) public payable {}
 
     // ------------------------------------------------------------------------
     // Add commission privilege for address `user` to some contract.
     // ------------------------------------------------------------------------
-    function add_privilege(address[] memory) public {}
+    function addPrivilege(address[] memory) public {}
 
     // ------------------------------------------------------------------------
     // Remove commission privilege for address `user` from some contract.
     // ------------------------------------------------------------------------
-    function remove_privilege(address[] memory) public {}
+    function removePrivilege(address[] memory) public {}
 }
 ```
 ### 2 Admin Management
@@ -126,9 +126,9 @@ contract AdminControl {
      * @dev get admin of specific contract 
      * @param contract The address of specific contract
      */
-    function get_admin(address contract) public returns (address) {}
+    function getAdmin(address contract) public returns (address) {}
 
-    function set_admin(address, address) public {}
+    function setAdmin(address, address) public {}
     function destroy(address) public {}
 }
 ```
@@ -142,25 +142,20 @@ contract Staking {
      * @dev get user's staking balance 
      * @param user The address of specific user
      */
-    function get_staking_balance(address user) public returns (uint) {}
+    function getStakingBalance(address user) public returns (uint) {}
 		
     /**
-     * @dev get user's locked vote
-     * @param uesr The address of specific user
-     */
-    function get_vote_locked(address user) public returns (uint) {}
-		
-    /**
-     * @dev get user's vote unlocked BlockNumbers in array 
+     * @dev get user's locked votes by blockNumber 
      * @param user The address of specific user
+     * @param blockNumber The blockNumber as index
      */
-    function get_vote_unlock_block_numbers(address user) public returns (uint[] memory) {}
+    function getVoteLocked(address user, uint blockNumber) public returns (uint);
   
     function deposit(uint amount) external {}
 
     function withdraw(uint amount) external {}
 
-    function vote_lock(uint amount, uint unlock_block_number) external {}
+    function voteLock(uint amount, uint unlock_block_number) external {}
 }
 ```
 
