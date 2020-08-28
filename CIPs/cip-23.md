@@ -37,11 +37,11 @@ This CIP aims to provide a method for off-chain message signing which is compati
 
 ### Summary for difference with EIP-712
 
-The specification is derived from [EIP-712](https://github.com/ethereum/EIPs/blob/3194278525e4ffec192dd75d3e18bf648e28524e/EIPS/eip-712.md). Conflux has the following differences with EIP-712. 
+The specification is derived from [EIP-712](https://github.com/ethereum/EIPs/blob/3194278525e4ffec192dd75d3e18bf648e28524e/EIPS/eip-712.md). Conflux has the following differences compared to EIP-712. 
 
-- When encoding a bytestring `message ∈ 𝔹⁸ⁿ`, Conflux add a prefix `\x19Conflux Signed Message:\n` instead of `\x19Ethereum Signed Message:\n`.
+- When encoding a bytestring `message ∈ 𝔹⁸ⁿ`, Conflux adds a prefix `\x19Conflux Signed Message:\n` instead of `\x19Ethereum Signed Message:\n`.
 - Rename `EIP712domain` to `CIP23domain`
-- In `CIP23domain`, the `chainId` field must be included.
+- In `CIP23domain`, the `chainId` field must be included. The user-agent should refuse to sign a typed data whose `CIP23domain` does not include `chainId` field.
 
 ### Encoding method
 
@@ -77,7 +77,7 @@ struct Mail {
 
 **Definition**: The set of structured typed data `𝕊` contains all the instances of all the struct types.
 
-### Definition of `hashStruct`
+#### Definition of `hashStruct`
 
 The `hashStruct` function is defined as
 
@@ -130,31 +130,53 @@ Typed data is a JSON object containing type information, domain separator parame
 
 ```JavaScript
 {
-  type: 'object',
-  properties: {
-    types: {
-      type: 'object',
-      properties: {
-        CIP23Domain: {type: 'array'},
-      },
-      additionalProperties: {
-        type: 'array',
-        items: {
-          type: 'object',
-          properties: {
-            name: {type: 'string'},
-            type: {type: 'string'}
-          },
-          required: ['name', 'type']
+    "type": "object",
+    "properties": {
+        "types": {
+            "type": "object",
+            "properties": {
+                "CIP23Domain": {
+                    "type": "array"
+                },
+            },
+            "additionalProperties": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "name": {
+                            "type": "string"
+                        },
+                        "type": {
+                            "type": "string"
+                        }
+                    },
+                    "required": [
+                        "name",
+                        "type"
+                    ]
+                }
+            },
+            "required": [
+                "CIP23Domain"
+            ]
+        },
+        "primaryType": {
+            "type": "string"
+        },
+        "domain": {
+            "type": "object"
+        },
+        "message": {
+            "type": "object"
         }
-      },
-      required: ['CIP23Domain']
     },
-    primaryType: {type: 'string'},
-    domain: {type: 'object'},
-    message: {type: 'object'}
-  },
-  required: ['types', 'primaryType', 'domain', 'message']
+    "required": [
+        "types",
+        "primaryType",
+        "domain",
+        "message"
+    ]
 }
 ```
 
