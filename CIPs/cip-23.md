@@ -120,6 +120,116 @@ where the type of `cip23Domain` is a struct named `CIP23Domain` with one or more
 
 Future extensions to this standard can add new fields with new user-agent behaviour constraints. User-agents are free to use the provided information to inform/warn users or refuse signing.
 
+### APIs for signing method
+
+#### Typed data
+
+Typed data is a JSON object containing type information, domain separator parameters and the message object. Below is the [json-schema][jsons] definition for `TypedData` param.
+
+[jsons]: https://json-schema.org/
+
+```JavaScript
+{
+  type: 'object',
+  properties: {
+    types: {
+      type: 'object',
+      properties: {
+        CIP23Domain: {type: 'array'},
+      },
+      additionalProperties: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            name: {type: 'string'},
+            type: {type: 'string'}
+          },
+          required: ['name', 'type']
+        }
+      },
+      required: ['CIP23Domain']
+    },
+    primaryType: {type: 'string'},
+    domain: {type: 'object'},
+    message: {type: 'object'}
+  },
+  required: ['types', 'primaryType', 'domain', 'message']
+}
+```
+
+Here is a valid typed data object. 
+
+```Javascript
+{
+    "types": {
+        "CIP23Domain": [
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "version",
+                "type": "string"
+            },
+            {
+                "name": "chainId",
+                "type": "uint256"
+            },
+            {
+                "name": "verifyingContract",
+                "type": "address"
+            }
+        ],
+        "Person": [
+            {
+                "name": "name",
+                "type": "string"
+            },
+            {
+                "name": "wallet",
+                "type": "address"
+            }
+        ],
+        "Mail": [
+            {
+                "name": "from",
+                "type": "Person"
+            },
+            {
+                "name": "to",
+                "type": "Person"
+            },
+            {
+                "name": "contents",
+                "type": "string"
+            }
+        ]
+    },
+    "primaryType": "Mail",
+    "domain": {
+        "name": "Ether Mail",
+        "version": "1",
+        "chainId": 1,
+        "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+    },
+    "message": {
+        "from": {
+            "name": "Cow",
+            "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+        },
+        "to": {
+            "name": "Bob",
+            "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+        },
+        "contents": "Hello, Bob!"
+    }
+}
+```
+
+#### APIs for wallet and js-sdk
+
+TBA.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
