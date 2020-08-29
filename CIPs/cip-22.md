@@ -1,7 +1,7 @@
 ---
-cip: <to be assigned>
+cip: 22
 title:  Add interfaces for Internal contracts 
-author: Yu Xiong <@oo7ww> 
+author: Yu Xiong <@oo7ww>, Chenxing Li<chenxing@conflux-chain.org>
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1784
 status: Draft
 type: Spec Breaking
@@ -145,11 +145,27 @@ contract Staking {
     function getStakingBalance(address user) public returns (uint) {}
 		
     /**
-     * @dev get user's locked votes by blockNumber 
+     * @dev get user's locked staking balance at given blockNumber 
      * @param user The address of specific user
-     * @param blockNumber The blockNumber as index
+     * @param blockNumber The blockNumber as index. 
      */
-    function getVoteLocked(address user, uint blockNumber) public returns (uint);
+    // ------------------------------------------------------------------------
+    // Note: if the blockNumber is less than the current block number, function 
+       will return current locked staking balance. 
+    // ------------------------------------------------------------------------
+    function getLockedStakingBalance(address user, uint blockNumber) public returns (uint);
+
+
+    /**
+     * @dev get user's vote power staking balance at given blockNumber 
+     * @param user The address of specific user
+     * @param blockNumber The blockNumber as index. 
+     */
+    // ------------------------------------------------------------------------
+    // Note: if the blockNumber is less than the current block number, function 
+       will return current vote power. 
+    // ------------------------------------------------------------------------
+    function getVotePower(address user, uint blockNumber) public returns (uint);
   
     function deposit(uint amount) external {}
 
@@ -158,6 +174,10 @@ contract Staking {
     function voteLock(uint amount, uint unlock_block_number) external {}
 }
 ```
+
+### Gas used for internal contracts
+
+TBA.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
@@ -178,7 +198,7 @@ TBA.
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
 
-See the Specification.
+TBA.
 
 ## Security Considerations
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
