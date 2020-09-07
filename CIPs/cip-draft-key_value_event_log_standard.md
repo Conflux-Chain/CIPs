@@ -4,7 +4,7 @@ title: Key value EventLog Standard
 author: Haizhou Wang <Haizhou@conflux-chain.org>
 discussions-to: <URL>
 status: Draft
-type: Protocol Breaking
+type: backward compatible
 created: 2020-08-10
 ---
 
@@ -13,21 +13,21 @@ created: 2020-08-10
 ## Simple Summary
 <!--"If you can't explain it simply, you don't understand it well enough." Provide a simplified and layman-accessible explanation of the CIP.-->
 
-一种 KV EventLog 的格式标准
+A key value event log standard.
 
 ## Abstract
 <!--A short (~200 word) description of the technical issue being addressed.-->
 
-该标准规定一种 KV 格式的 EventLog. 通过该格式可以描述谁(announcer) 在什么地方(address) 就某一主题(key) 发表什么内容(value).
-该标准让使用者方便的利用区块链的共识机制, 解决信息发布者身份和内容验证的问题.
+The following standard specifies a key value format event log which include "announcer", "address", "key", "value" fields.
+The standard makes it easy for users to use the blockchain consensus mechanism to solve the identity and content verification problems of information publishers.
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
 
-虽然智能合约提供了`内存`机制, 利用区块链同时解决了信息的**分发**,**验证**和**存储**三个功能, 使得数据"上链", 
-但部分应用对**存储**的功能要求不严, 使用`内存`存储数据价格昂贵且功能过剩.
-此类应用可以通过智能合约的`Event`机制, 利用区块链解决信息的**分发**,**验证**问题, 应用对信息不作存储或自己解决**存储**功能, 即数据"过链".
-为此提出该标准以规范这类信息在 EventLog 中的格式.
+Although smart contract provides `memory`, using block chain solves information distribution, validation and storage at the same time.
+But for some DApp, storage are not strict requirements, using `memory` to store data is expensive.
+These DApp could use block chain to solves information distribution and validation, and storage them self.
+This standard is proposed to standardize the format of such information in EventLog.
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
@@ -36,25 +36,19 @@ created: 2020-08-10
 event Announce(address indexed announcer, bytes indexed keyHash, bytes key, bytes value);
 ```
 
-- 1.Event 格式必须为 `Announce(address,bytes,bytes,bytes)` 即签名必须为 `0x14cb751d0950ff2788201931c45f715f7472443bc197311d9e3a7a0ba566b7e6`
-- 2.Event 必须为非匿名
-- 3.Event 的 announcer 和 keyHash 字段必须为索引项 `indexed`, key 和 value 字段必须为非索引项.
-- 4.Event 的 keyHash 必须为 key 字段的 `keccak256` 哈希值
+- 1.Event MUST be `Announce(address,bytes,bytes,bytes)` , which signature MUST be `0x14cb751d0950ff2788201931c45f715f7472443bc197311d9e3a7a0ba566b7e6`
+- 2.Event MUST NOT be `anonymous`
+- 3.Event `announcer` and `keyHash` MUST be `indexed`, `key` and `value` MUST NOT be `indexed`
+- 4.Event `keyHash` MUST be `keccak256` hash of `key`
 
-备注: 该标准只规定了 Event 的格式, 对其具体实现方式不作要求.
+Note: The standard only specifies the format, but not the specific implementation method.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
 
-* 设计思路
+* Data structure
 
-标准将信息分为 主题(key) 和 内容(value) 两个部分, 
-对 key 和 value 类型规定均为 bytes 以兼容二进制数据的应用场景, 
-为了便于通过 RPC 搜索相应主题(key) 标准要求对主题(key) 进行索引(keyHash)
-
-* 数据结构
-
-该标准产生 EventLog 形如:
+`Announce` event log:
 
 ```json
 {
@@ -74,23 +68,26 @@ event Announce(address indexed announcer, bytes indexed keyHash, bytes key, byte
 }
 ``` 
 
-解析其中信息可知:
+explanation:
+
 ```
-address 为产生 event 的合约地址
-topics[0] 表示这是一个 Announce 的 EventLog
-topics[1] 为发布 Announce 的用户(announcer)
-topics[2] 为 Announce 主题(key) 的哈希值
-data 包含 主题(key) 和 内容(value) 信息, 解析后为 key:0x6b6579, value:0x76616c7565 即 utf8 编码的 key:"key", value:"value"
+address: smart contract address
+topics[0]: event log signature
+topics[1]: address of announcer
+topics[2]: keccak256 hash of key field
+data: encode of key and value data, decoded as {key:0x6b6579, value:0x76616c7565}, which is {key:"key", value:"value"} in utf8 code.
 ```
 
-* 时效与费用
+* Gas cost
 
-EventLog 只在节点中保留一段时间, 超时的信息将无法在 FullNode 中查到, 同时也不会无限时占用节点存储资源.
-标准不需占用 storageCollateralized, 交易费用最低可仅包含 gas 部分.
+EventLog only stays in the fullnode for a period of time, and the timeout information will not be found, nor will it occupy the node's storage resources indefinitely.
+This standard does not need to occupy `storageCollateralized` and the transaction costs can be minimized to include only the `gas` portion.
 
-* 应用场景
+* Application scenarios
 
-解决信息认证问题, 用户可以基于此开发如及时聊天软件, 新闻甚至流媒体.
+Information distribution and validation for DApp.
+Real time chat application.
+News or stream media.
 
 ## Backwards Compatibility
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
@@ -103,7 +100,7 @@ TBD
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
 
-* 以下为 Announce 的一种最简实现方式:
+* mini implement of Announce:
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -118,9 +115,9 @@ contract Announcement {
 }
 ```
 
-通过调用 `announce()` 方法传递 key, value. 合约会将交易的发送者设为 announcer.
+call `announce()` with `key`, `value` and contract set `msg.sender` to `announcer`
 
-* 标准允许一条交易产生多个 Announce EventLog, 可以对合约扩展如下以同时产生多个 EventLog 以减少交易发送次数.
+* The standard allows multiple `Announce` event log from one transaction, contract could generate multiple `Announce` to reduce transaction as follows.
 
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -143,14 +140,13 @@ contract Announcement {
 }
 ```
 
-* 标准可以嵌入其他合约中使用, 也可对标准进行扩展, 如约束产生 Announce 条件和内容.
+* Standard can be embedded in other contracts, also can be extended,
 
 ## Security Considerations
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
 
-* Conflux 对 Block 的大小有所限制, 过大的 key 或 value 可能会导致交易执行失败
-* 标准要求 keyHash 字段必须为 key 的 `keccak256` 哈希值, 因此存在哈希冲突的可能
-* 标准对实现方式不作要求, 各个字段值准确含义需参考具体实现 (如 announcer 不一定是交易发送者) 
+* Conflux Transaction data length is limited, large key and value may cause the transaction fail.
+* Standard not require `announcer` must be `msg.sender`.
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
