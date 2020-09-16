@@ -1,5 +1,5 @@
 ---
-cip: 2
+cip: 26
 title: Use timestamp from pivot block as TIMESTAMP (opcode 42)
 author: Yanpei Liu(@resodo)
 discussions-to: <URL>
