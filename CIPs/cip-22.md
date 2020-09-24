@@ -38,61 +38,61 @@ contract SponsorWhitelistControl {
     /*** Query Functions ***/
     /**
      * @dev get gas sponsor address of specific contract
-     * @param contract The address of the sponsored contract
+     * @param contract_addr The address of the sponsored contract
      */
-    function getSponsorforGas(address contract) public returns (address) {}
-  	
+    function getSponsorforGas(address contract_addr) public returns (address) {}
+
     /**
      * @dev get current Sponsored Balance for gas
-     * @param contract The address of the sponsored contract
+     * @param contract_addr The address of the sponsored contract
      */
-    function getSponsoredBalanceforGas(address contract) public returns (uint) {}
-  	
+    function getSponsoredBalanceforGas(address contract_addr) public returns (uint) {}
+
     /**
      * @dev get current Sponsored Gas fee upper bound
-     * @param contract The address of the sponsored contract
+     * @param contract_addr The address of the sponsored contract
      */
-    function getSponsoredGasFeeUpperbound(address contract) public returns (uint) {}
-		 
+    function getSponsoredGasFeeUpperbound(address contract_addr) public returns (uint) {}
+
     /**
      * @dev get collateral sponsor address
-     * @param contract The address of the sponsored contract
+     * @param contract_addr The address of the sponsored contract
      */
-    function getSponsorforCollateral(address contract) public returns (address) {}
-		
+    function getSponsorforCollateral(address contract_addr) public returns (address) {}
+
     /**
      * @dev get current Sponsored Balance for collateral
-     * @param contract The address of the sponsored contract
+     * @param contract_addr The address of the sponsored contract
      */
-    function getSponsoredBalanceforCollateral(address contract) public returns (uint) {}
-    
+    function getSponsoredBalanceforCollateral(address contract_addr) public returns (uint) {}
+
     /**
      * @dev check if a user is in a contract's whitelist
-     * @param contract The address of the sponsored contract
+     * @param contract_addr The address of the sponsored contract
      * @param user The address of contract user
      */
-    function isWhitelisted(address contract, address user) public returns (bool) {}
-		
+    function isWhitelisted(address contract_addr, address user) public returns (bool) {}
+
     /**
-     * @dev check if all users are in a contract's whitelist 
-     * @param contract The address of the sponsored contract
+     * @dev check if all users are in a contract's whitelist
+     * @param contract_addr The address of the sponsored contract
      */
-    function isAllWhitelisted(address contract) public returns (bool) {}
+    function isAllWhitelisted(address contract_addr) public returns (bool) {}
 
     /*** for contract admin only **/
     /**
-     * @dev contract admin add user to whitelist 
-     * @param contract The address of the sponsored contract
-     * @param address[] The user address array
+     * @dev contract admin add user to whitelist
+     * @param contract_addr The address of the sponsored contract
+     * @param addresses The user address array
      */
-    function addPrivilegebyAdmin(address contract, address[] memory) public {}
-		
+    function addPrivilegebyAdmin(address contract_addr, address[] memory addresses) public {}
+
     /**
-     * @dev contract admin remove user from whitelist 
-     * @param contract The address of the sponsored contract
-     * @param address[] The user address array
+     * @dev contract admin remove user from whitelist
+     * @param contract_addr The address of the sponsored contract
+     * @param addresses The user address array
      */
-    function removePrivilegeByAdmin(address contract, address[] memory) public {}
+    function removePrivilegeByAdmin(address contract_addr, address[] memory addresses) public {}
 
     // ------------------------------------------------------------------------
     // Someone will sponsor the gas cost for contract `contract_addr` with an
@@ -123,10 +123,10 @@ pragma solidity >=0.4.15;
 contract AdminControl {
     /*** Query Functions ***/
     /**
-     * @dev get admin of specific contract 
-     * @param contract The address of specific contract
+     * @dev get admin of specific contract
+     * @param contract_addr The address of specific contract
      */
-    function getAdmin(address contract) public returns (address) {}
+    function getAdmin(address contract_addr) public returns (address) {}
 
     function setAdmin(address, address) public {}
     function destroy(address) public {}
@@ -139,34 +139,34 @@ pragma solidity >=0.4.15;
 contract Staking {
     /*** Query Functions ***/
     /**
-     * @dev get user's staking balance 
+     * @dev get user's staking balance
      * @param user The address of specific user
      */
     function getStakingBalance(address user) public returns (uint) {}
-		
+
     /**
-     * @dev get user's locked staking balance at given blockNumber 
+     * @dev get user's locked staking balance at given blockNumber
      * @param user The address of specific user
-     * @param blockNumber The blockNumber as index. 
+     * @param blockNumber The blockNumber as index.
      */
     // ------------------------------------------------------------------------
-    // Note: if the blockNumber is less than the current block number, function 
-       will return current locked staking balance. 
+    // Note: if the blockNumber is less than the current block number, function
+    // will return current locked staking balance.
     // ------------------------------------------------------------------------
-    function getLockedStakingBalance(address user, uint blockNumber) public returns (uint);
+    function getLockedStakingBalance(address user, uint blockNumber) public returns (uint) {}
 
 
     /**
-     * @dev get user's vote power staking balance at given blockNumber 
+     * @dev get user's vote power staking balance at given blockNumber
      * @param user The address of specific user
-     * @param blockNumber The blockNumber as index. 
+     * @param blockNumber The blockNumber as index.
      */
     // ------------------------------------------------------------------------
-    // Note: if the blockNumber is less than the current block number, function 
-       will return current vote power. 
+    // Note: if the blockNumber is less than the current block number, function
+    // will return current vote power.
     // ------------------------------------------------------------------------
-    function getVotePower(address user, uint blockNumber) public returns (uint);
-  
+    function getVotePower(address user, uint blockNumber) public returns (uint) {}
+
     function deposit(uint amount) external {}
 
     function withdraw(uint amount) external {}
@@ -175,9 +175,20 @@ contract Staking {
 }
 ```
 
-### Gas used for internal contracts
+### Gas consumption for internal contracts
 
-TBA.
+For all the query interfaces (the name started with `get`), the gas consumption is `400 + ceil(return_length/32) * 3`, except the following two interfaces. 
+- `getLockedStakingBalance`: `200 * (vote_stake_list_len + 1) + ceil(return_length / 32) * 3`
+- `getVotePower`: `200 * (vote_stake_list_len + 1) + ceil(return_length / 32) * 3`
+
+Here the `return_length` refers the number of bytes of abi encoded return value.
+
+The gas requirement for the other new interfaces are list as follows.
+- `isWhitelisted`:  `200 + ceil(return_length/32) * 3`
+- `isAllWhitelisted`: `200 + ceil(return_length/32) * 3`
+- `addPrivilegebyAdmin`: same as `addPrivilege`
+- `removePrivilegebyAdmin`: same as `removePrivilege`
+
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
