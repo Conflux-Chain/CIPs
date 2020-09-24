@@ -38,72 +38,72 @@ contract SponsorWhitelistControl {
     /*** Query Functions ***/
     /**
      * @dev get gas sponsor address of specific contract
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      */
-    function getSponsorforGas(address contract_addr) public returns (address) {}
+    function getSponsorForGas(address contractAddr) public returns (address) {}
 
     /**
      * @dev get current Sponsored Balance for gas
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      */
-    function getSponsoredBalanceforGas(address contract_addr) public returns (uint) {}
+    function getSponsoredBalanceForGas(address contractAddr) public returns (uint) {}
 
     /**
      * @dev get current Sponsored Gas fee upper bound
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      */
-    function getSponsoredGasFeeUpperbound(address contract_addr) public returns (uint) {}
+    function getSponsoredGasFeeUpperBound(address contractAddr) public returns (uint) {}
 
     /**
      * @dev get collateral sponsor address
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      */
-    function getSponsorforCollateral(address contract_addr) public returns (address) {}
+    function getSponsorForCollateral(address contractAddr) public returns (address) {}
 
     /**
      * @dev get current Sponsored Balance for collateral
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      */
-    function getSponsoredBalanceforCollateral(address contract_addr) public returns (uint) {}
+    function getSponsoredBalanceForCollateral(address contractAddr) public returns (uint) {}
 
     /**
      * @dev check if a user is in a contract's whitelist
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      * @param user The address of contract user
      */
-    function isWhitelisted(address contract_addr, address user) public returns (bool) {}
+    function isWhitelisted(address contractAddr, address user) public returns (bool) {}
 
     /**
      * @dev check if all users are in a contract's whitelist
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      */
-    function isAllWhitelisted(address contract_addr) public returns (bool) {}
+    function isAllWhitelisted(address contractAddr) public returns (bool) {}
 
     /*** for contract admin only **/
     /**
      * @dev contract admin add user to whitelist
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      * @param addresses The user address array
      */
-    function addPrivilegebyAdmin(address contract_addr, address[] memory addresses) public {}
+    function addPrivilegeByAdmin(address contractAddr, address[] memory addresses) public {}
 
     /**
      * @dev contract admin remove user from whitelist
-     * @param contract_addr The address of the sponsored contract
+     * @param contractAddr The address of the sponsored contract
      * @param addresses The user address array
      */
-    function removePrivilegeByAdmin(address contract_addr, address[] memory addresses) public {}
+    function removePrivilegeByAdmin(address contractAddr, address[] memory addresses) public {}
 
     // ------------------------------------------------------------------------
-    // Someone will sponsor the gas cost for contract `contract_addr` with an
+    // Someone will sponsor the gas cost for contract `contractAddr` with an
     // `upper_bound` for a single transaction.
     // ------------------------------------------------------------------------
-    function setSponsorforGas(address contract_addr, uint upper_bound) public payable {}
+    function setSponsorForGas(address contractAddr, uint upper_bound) public payable {}
 
     // ------------------------------------------------------------------------
-    // Someone will sponsor the storage collateral for contract `contract_addr`.
+    // Someone will sponsor the storage collateral for contract `contractAddr`.
     // ------------------------------------------------------------------------
-    function setSponsorForCollateral(address contract_addr) public payable {}
+    function setSponsorForCollateral(address contractAddr) public payable {}
 
     // ------------------------------------------------------------------------
     // Add commission privilege for address `user` to some contract.
@@ -124,9 +124,9 @@ contract AdminControl {
     /*** Query Functions ***/
     /**
      * @dev get admin of specific contract
-     * @param contract_addr The address of specific contract
+     * @param contractAddr The address of specific contract
      */
-    function getAdmin(address contract_addr) public returns (address) {}
+    function getAdmin(address contractAddr) public returns (address) {}
 
     function setAdmin(address, address) public {}
     function destroy(address) public {}
@@ -186,8 +186,8 @@ Here the `return_length` refers the number of bytes of abi encoded return value.
 The gas requirement for the other new interfaces are list as follows.
 - `isWhitelisted`:  `200 + ceil(return_length/32) * 3`
 - `isAllWhitelisted`: `200 + ceil(return_length/32) * 3`
-- `addPrivilegebyAdmin`: same as `addPrivilege`
-- `removePrivilegebyAdmin`: same as `removePrivilege`
+- `addPrivilegeByAdmin`: same as `addPrivilege`
+- `removePrivilegeByAdmin`: same as `removePrivilege`
 
 
 ## Rationale
