@@ -1,6 +1,6 @@
 ---
 cip: 31
-title: New internal contract: Create2Factory
+title: New contract in genesis block: Create2Factory
 author: Fan Wang(@posaggen)
 discussions-to: <URL>
 status: Draft
@@ -12,11 +12,11 @@ created: 2020-10-10
 
 ## Simple Summary
 <!--"If you can't explain it simply, you don't understand it well enough." Provide a simplified and layman-accessible explanation of the CIP.-->
-Add a new internal contract Create2Factory in the genesis block, which is used to deploy smart contracts with create2 op code.
+Add a new contract Create2Factory in the genesis block, which is used to deploy smart contracts with create2 op code.
 
 ## Abstract
 <!--A short (~200 word) description of the technical issue being addressed.-->
-Create a new internal contract Create2Factory in genesis block with a fixed private key and fixed nonce.
+Create a new contract Create2Factory in genesis block with a fixed private key and fixed nonce.
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
@@ -68,7 +68,7 @@ TBD
 
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
-Put a fixed transaction in genesis block to create a new internal contract Create2Factory.
+Put a fixed transaction in genesis block to create contract Create2Factory.
 
 
 ## Security Considerations
