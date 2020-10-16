@@ -7,31 +7,27 @@ status: Draft
 type: <Backward Compatible | Database/RPC Breaking | Protocol Breaking | Spec Breaking>
 created: 2020-10-15
 ---
-
-<!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->
-This is the suggested template for new CIPs.
-
-Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`.
-
-The title should be 44 characters or less.
-
+  
 ## Simple Summary
 A transaction pricing mechansim that includes algorithmically-determined per-block base network fee to be burned.
 
 ## Abstract
 This is inspired by EIP-1559. 
 
-In the same block, the base network fee per gas is a fixed number, and is burned instead of received by miners.
-Between blocks, the base network fee per gas is determined solely based on the gas used in parent block and gas target of parent block. The algorithm should behaves in the way that increases the fee when blocks surge above the gas target, nad decreases when blocks drop below the gas target.
+In each block, base network fee per gas (base fee) is a fixed number, and is burned instead of received by miners.
 
-Transactions should specify the maximum fee per gas (fee cap), and the maximum fee per gas for incentivizing miners (miner bribe).
-Transactions always pay the base fee per gas of the block it is included in, and they will pay the bribe per gas set in the transaction, as long as the combined amount of the two fees doesn’t exceed the transaction’s maximum fee per gas.
+Between blocks, base fee is determined solely based on the gas used in parent block and gas target of parent block. The algorithm should behaves in the way that increases the fee when blocks surge above the gas target, and decreases when blocks drop below the gas target.
+
+Transactions should specify the maximum fee per gas (fee cap), and the maximum fee per gas for incentivizing miners (miner gratuity).
+Transactions always pay the base fee of the block it is included in, and then pay the miner gratuity, as long as the combined amount of the two fees does not exceed the fee cap.
 
 ## Motivation
-Current pricing model is largely based on auction. Prices proposed by users,
+Current pricing model is largely derived from First Price Auctions. This causes three major issues:
+1. Inefficiency and unpredicability in price offering
+2. High incentive for miners to manipulate transaction fees, such as selfish mining attacks and more
+3. Inflation due to ever increasing supply in circulation
 
 ## Specification
-<!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platform ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).
 
 ## Rationale
@@ -52,7 +48,16 @@ The implementations must be completed before any CIP is given status "Final", bu
 
 ## Security Considerations
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
-All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.
+### Transaction Ordering
+Instead of auctioning on miner fees to get included, the transactions with the same miner gratuity should be sorted by time the transaction was received, forming a default execution order; this also protects the network from spamming attacks where the attacker throws transactions into the pending pool to occupy a favorable position. The strategy of the miners should still prefer transactions with higher gratuity, only for better earnings instead of active biddings.
+
+### Mining Empty Blocks
+It is possible that miners will mine empty blocks until the base fee is very low and then proceed to mine half full blocks, reverting the pricing mechansim to sorting transactions by the miner gratuity. While this attack is possible, it is not a particularly stable equilibrium as long as mining is decentralized. Any defector from this strategy will be more profitable than a miner participating in the attack for as long as the attack continues (even after the base fee reached 0). Since any miner can anonymously defect from a cartel, and there is no way to prove that a particular miner defected, the only feasible way to execute this attack would be to control 50% or more of hashing power. If an attacker had exectly 50% of hashing power, they would make no money from miner bribe while defectors would make double the money from bribes. For an attacker to turn a profit, they need to have some amount over 50% hashing power, which means they can alternatively execute double spend attacks or simply ignore any other miners which is a far more profitable strategy.
+
+Should a miner attempt to execute this attack, we can simply increase the elasticity multiplier (currently 2x) which requires they have even more hashing power available before the attack can even be theoretically profitable against defectors.
+
+### CFX Burn Precludes Fixed Supply
+By burning the base fee, we can no longer guarantee a fixed token supply. This could result in economic instabality as the long term supply of CFX will no longer be constant over time. While a valid concern, it is difficult to quantify how much of an impact this will have. If more is burned on base fee than is generated in mining rewards then CFX will be deflationary and if more is generated in mining rewards than is burned then CFX will be inflationary. Since we cannot control user demand for block space, we cannot assert at the moment whether CFX will end up inflationary or deflationary, so this change causes the core developers to lose some control over Conflux’s long term monetary policy.
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
