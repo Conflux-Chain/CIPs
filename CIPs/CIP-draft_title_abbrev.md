@@ -14,7 +14,7 @@ A transaction fee pricing mechanism with algorithmically-determined per-block ba
 ## Abstract
 In each block, the base network fee per gas (base fee) is a fixed number and is burned instead of received by miners.
 
-Between blocks, the base fee is determined solely based on the gas used in the parent block and gas target of the parent block. The algorithm should behave in a way that increases the fee when blocks surge above the gas target and decrease when blocks drop below the gas target.
+Between blocks, the base fee is adjusted solely based on the gas used in the parent block and gas target of the parent block. The algorithm should behave in a way that increases the fee when blocks surge above the gas target and decrease when blocks drop below the gas target.
 
 Transactions should specify the maximum fee per gas (fee cap), and the maximum fee per gas for incentivizing miners (miner gratuity).
 
@@ -26,8 +26,13 @@ The current pricing model is largely derived from First Price Auctions. This cau
 2. High incentive for miners to manipulate transaction fees, such as selfish mining attacks and more
 3. Inflation due to ever-increasing supply in circulation
 
+From miner's perspective, the new implementation changes their income structure from gas fee to miner gratuity plus block rewards. When base fee is burned, it allows CFX to directly harvest the liquidity and storage in transactions.
+
+From user's perspective, since the base fee changes are preditable and universal, this allows wallets to auto-set the gas fees (base fee + small gratuity) for most users that guarantee tansaction confirmation even when network is congested.
+
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platform ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
+See reference implementation in [EIP-1559](https://eips.ethereum.org/EIPS/eip-1559). Need localization for Conflux core.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
@@ -43,6 +48,7 @@ Besides all the reasons stated in 1559, we've also observed fanatic discussions 
 
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
+See Go-Ethereum implementation in [Vulcanize implementation](https://github.com/vulcanize/go-ethereum-EIP1559). Need localization for Conflux core.
 
 ## Security Considerations
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
