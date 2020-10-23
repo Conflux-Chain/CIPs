@@ -79,7 +79,7 @@ TBD
 
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
-Put a fixed transaction in genesis block to create contract Create2Factory.
+Put a fixed transaction in genesis block to create contract Create2Factory. The implementation is https://github.com/Conflux-Chain/conflux-rust/pull/1890, address of Create2factory is 0x8a3a92281df6497105513b18543fd3b60c778e40.
 
 
 ## Security Considerations
