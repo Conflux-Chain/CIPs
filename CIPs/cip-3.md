@@ -43,13 +43,13 @@ memory.
 older generations, ideally proportional to its cost difference.
 
 3. We should strike a balance between having enough computation power to secure
-the network after its launch and allowing mining farms (mostly right now for 
+the network after its launch and preventing mining farms (mostly right now for 
 Ethereum mining) to gain too much advantages over community miners. 
 
 4. To address the above trade-off, we will set the minimum memory requirement of 
 participating mining to 6G at the begining of Conflux Tethys. In the future hard-fork
 update, we will change the PoW once to raise the memory requirement bar to exclude 
-6G mining GPUs like P106.
+6GB mining GPUs like P106.
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
@@ -59,11 +59,11 @@ TBD with a PR to Conflux-Spec.
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
 The rationales of the proposed Octopus algorihtm change are:
 
-1. Introduce an appropriate ammount multiplication and reminder computations that give new GPUs advantages over old GPUs.
+1. Introduce an appropriate amount multiplication and remainder computations that give new GPUs advantages over old GPUs.
 
 2. The verification of the PoW is still as lightweight as verifying ETHASH.
 
-3. Set the memory requirement for mining PoW at roughtly 4.5G-5G. 
+3. Set the memory requirement for mining PoW at roughtly 4.5GB-5GB. 
 
 4. The data connection between the computation and the memory-hard part is strong so that it is not plausible to speed up the computation with special hardware.
 
@@ -77,7 +77,7 @@ The rationales of the proposed Octopus algorihtm change are:
 - P104: ~1.3M/s
 - P106: ~0.9M/s
 
-Note that driven by profit, we expect that proprietary mining software developers will work on Conflux to optimize the miner implementation further. The mining speed therefore may improve further. 
+Note that driven by profit, we expect that proprietary mining software developers will work on Conflux to optimize the miner implementation further. The mining speed therefore may improve in the future. 
 
 ## Backwards Compatibility
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
