@@ -2,7 +2,7 @@
 CIP No.: 1
 Title: CIP Purpose and Guidelines
 Status: Active
-Type: Meta
+Type: Backward Compatible
 Author: Guang Yang
 Created: 2020-07-06
 Updated: 
@@ -18,23 +18,37 @@ For Conflux implementers, CIPs are a convenient way to track the progress of the
 
 ## CIP Types
 
-There are three types of CIP:
+There are four types of CIPs:
 
-- A **Standard Track CIP** describes any change that affects most or all Conflux implementations, such as a change to the network protocol, a change in block or transaction validity rules, proposed application standards/conventions, or any change or addition that affects the interoperability of applications using Conflux. Furthermore Standard CIPs can be broken down into the following categories. Standards Track CIPs consist of three parts, a design document, implementation, and finally if warranted an update to the [formal specification].
-  - **Core** - improvements requiring a consensus fork, as well as changes that are not necessarily consensus critical but may be relevant to “core dev” discussions.
-  - **Networking** - includes improvements to network protocol specifications.
-  - **Interface** - includes improvements around client [API/RPC] specifications and standards, and also certain language-level standards like method names and contract ABIs.
-  - **CRC** - application-level standards and conventions, including contract standards such as token standards, name registries, URI schemes, library/package formats, and wallet formats.
-- A **Meta CIP**, a.k.a. a  **Process CIP**, describes a process surrounding Conflux or proposes a change to (or an event in) a process. Process CIPs are like Standards Track CIPs but apply to areas other than the Conflux protocol itself. They may propose an implementation, but not to Conflux's codebase; they often require community consensus; unlike Informational CIPs, they are more than recommendations, and users are typically not free to ignore them. 
-- An **Informational CIP** describes a Conflux design issue, or provides general guidelines or information to the Conflux community, but does not propose a new feature. Informational CIPs do not necessarily represent Conflux community consensus or a recommendation, so users and implementers are free to ignore Informational CIPs or follow their advice.
+- **Backward Compatible Changes:** The updated client under this CIP will be fully compatible with older versions. Such changes may introduce additional RPC APIs or other new features. To submit a backward compatible change, please follow this process:
+  - Fork the conflux-rust repository and submit a pull request.
+  - If it is a complicated change, please submit an [issue](https://github.com/Conflux-Chain/conflux-rust/issues) to communicate with the core developer team first.
+
+- **Database/RPC Breaking Changes:** The updated client will be able to co-exist with previous versions, but it updates the interface/behavior of an existing RPC or it changes the blockchain database format. This would require modifications for applications depending on these RPCs and/or clean up the database to sync from the scratch. To submit a Database/RPC breaking change, you can follow the above process but you must submit an issue first.
+- **Protocol Breaking Changes:** These changes do not touch the specification of the Conflux Protocol, but require an update to the P2P network protocol in Conflux/Conflux-Rust. It is possible to enable the change without a hard-fork but it would require special protocol version handling and compatibility testing. To submit a protocol breaking change, please follow this process:
+  - Submit a Conflux Improvement Proposal ([CIP](https://github.com/Conflux-Chain/CIPs)) draft.
+  - Discuss the CIP until it is **Accepted**. Note that in the CIP, it is important to specify how the implementation can maintain compatibility with previous protocol versions (via versioning or other techniques). If this cannot be done, the change should be classified and treated as a spec breaking change instead.
+  - Create an issue in [Conflux-Rust](https://github.com/Conflux-Chain/conflux-rust) corresponding to the CIP.
+  - Submit a pull request implementing the CIP.
+  - Audit, test, and/or verify the implementation. The PR will be merged into the master branch. The core developer team may choose to also merge the PR to other branches for Conflux-Rust client releases.
+  - Once a release enables the change, update the CIP status to **Final**.
+- **Spec Breaking Changes:** These changes require an update to the specification of the Conflux protocol. It would require a hard-fork to enable the change. It has no backward compatibility at all. The general process for making spec breaking changes is as follows:
+  - Submit a Conflux Improvement Proposal ([CIP](https://github.com/Conflux-Chain/CIPs)) draft. The draft should discuss how to enable this change in a hard-fork.
+  - Discuss the CIP until it is **Accepted**.
+  - Create an issue in the Conflux-Protocol repo corresponding to the CIP.
+  - Submit a pull request to the Conflux-Protocol repo to change the spec according to the CIP.
+  - Create an issue in the Conflux-Rust repo corresponding to the CIP.
+  - Submit a pull request implementing the CIP.
+  - Audit, test, and/or verify the implementation. The PR will be merged into the master branch.
+  - Wait for a hard-fork to enable the change. Change the CIP status to **Final**.
+
+*NOTE*: Currently **light client modes** in Conflux-Rust are considered experimental. All changes that only affecting light clients will be considered as Backward Compatible for now.
 
 It is highly recommended that a single CIP contains a single key proposal or new idea. The more focused the CIP is, the more successful it tends to be. A change to one client doesn't require a CIP; a change that affects multiple clients, or defines a standard for multiple apps to use, does.
 
 A successful CIP must meet certain minimum criteria. It must be a clear and complete description of the proposed enhancement. The enhancement must represent a net improvement. The proposed implementation, if applicable, must be solid and must not complicate the protocol unduly.
 
-### Special requirements for Core CIPs
-
-If a **Core** CIP mentions or proposes changes to the Virtual Machine, it should refer to the instructions by their mnemonics and define the opcodes of those mnemonics at least once. A preferred way is the following:
+If a CIP mentions or proposes changes to the Virtual Machine, it should refer to the instructions by their mnemonics and define the opcodes of those mnemonics at least once. A preferred way is the following:
 ```
 REVERT (0xfe)
 ```
@@ -43,27 +57,19 @@ REVERT (0xfe)
 
 ### Shepherding a CIP
 
-Parties involved in the process are you, the champion or *CIP author*, the [*CIP editors*](#cip-editors), and the [*Conflux Core Developers*].
+Parties involved in the process are you, the champion or *CIP author*, the [*CIP editors*](#cip-editors), and the *Conflux Core Developers*.
 
 Before you begin writing a formal CIP, you should vet your idea. Ask the Conflux community first if an idea is original to avoid wasting time on something that will be rejected based on prior research. It is thus recommended to open a discussion thread in [the Issues section of this repository]. 
 
-In addition to making sure your idea is original, it will be your role as the author to make your idea clear to reviewers and interested parties, as well as inviting editors, developers and community to give feedback on the aforementioned channels. You should try and gauge whether the interest in your CIP is commensurate with both the work involved in implementing it and how many parties will have to conform to it. For example, the work required for implementing a Core CIP will be much greater than for a CRC and the CIP will need sufficient interest from the Conflux client teams. Negative community feedback will be taken into consideration and may prevent your CIP from moving past the Draft stage.
+In addition to making sure your idea is original, it will be your role as the author to make your idea clear to reviewers and interested parties, as well as inviting editors, developers and community to give feedback on the aforementioned channels. You should try and gauge whether the interest in your CIP is commensurate with both the work involved in implementing it and how many parties will have to conform to it. For example, the work required for implementing a Spec Breaking CIP will be much greater than for a Backward Compatible CRC and the CIP will need sufficient interest from the Conflux client team(s). Negative community feedback will be taken into consideration and may prevent your CIP from moving past the Draft stage.
 
-### Core CIPs
-
-For Core CIPs, given that they require client implementations to be considered **Final** (see "CIPs Process" below), you will need to either provide an implementation for clients or convince clients to implement your CIP.
+Given that CIPs require client implementations to be considered **Final** (see "CIPs Process" below), you will need to either provide an implementation for clients or convince clients to implement your CIP.
 
 *In short, your role as the champion is to write the CIP using the style and format described below, shepherd the discussions in the appropriate forums, and build community consensus around the idea.* 
 
 ### CIP Process 
 
-Following is the process that a successful non-Core CIP will move along:
-
-```
-[ WIP ] -> [ DRAFT ] -> [ LAST CALL ] -> [ FINAL ]
-```
-
-Following is the process that a successful Core CIP will move along:
+Following is the process that a successful CIP will move along:
 
 ```
 [ IDEA ] -> [ DRAFT ] -> [ LAST CALL ] -> [ ACCEPTED ] -> [ FINAL ]
@@ -74,26 +80,25 @@ Each status change is requested by the CIP author and reviewed by the CIP editor
 * **Idea** -- Once the champion has asked the Conflux community whether an idea has any chance of support, they will write a draft CIP as a pull request. Consider including an implementation if this will aid people in studying the CIP.
   * :arrow_right: Draft -- If agreeable, CIP editor will assign the CIP a number (generally the issue or PR number related to the CIP) and merge your pull request. The CIP editor will not unreasonably deny a CIP.
   * :x: Draft -- Reasons for denying draft status include being too unfocused, too broad, duplication of effort, being technically unsound, not providing proper motivation or addressing backwards compatibility, or not in keeping with the Conflux philosophy.
-* **Draft** -- Once the first draft has been merged, you may submit follow-up pull requests with further changes to your draft until such point as you believe the CIP to be mature and ready to proceed to the next status. A CIP in draft status must be implemented to be considered for promotion to the next status (ignore this requirement for core CIPs).
+* **Draft** -- Once the first draft has been merged, you may submit follow-up pull requests with further changes to your draft until such point as you believe the CIP to be mature and ready to proceed to the next status.
   * :arrow_right: Last Call -- If agreeable, the CIP editor will assign Last Call status and set a review end date (`review-period-end`), normally 14 days later.
   * :x: Last Call -- A request for Last Call status will be denied if material changes are still expected to be made to the draft. We hope that CIPs only enter Last Call once.
 * **Last Call** -- This CIP will be listed prominently on the website.
   * :x: -- A Last Call which results in material changes or substantial unaddressed technical complaints will cause the CIP to revert to Draft.
-  * :arrow_right: Accepted (Core CIPs only) -- A successful Last Call without material changes or unaddressed technical complaints will become Accepted.
-  * :arrow_right: Final (Non-Core CIPs) -- A successful Last Call without material changes or unaddressed technical complaints will become Final.
-* **Accepted (Core CIPs only)** -- This status signals that material changes are unlikely and Conflux client developers should consider this CIP for inclusion. Their process for deciding whether to encode it into their clients as part of a hard fork is not part of the CIP process.
+  * :arrow_right: Accepted -- A successful Last Call without material changes or unaddressed technical complaints will become Accepted.
+* **Accepted** -- This status signals that material changes are unlikely and Conflux client developers should consider this CIP for inclusion. Their process for deciding whether to encode it into their clients as part of a hard fork is not part of the CIP process.
   * :arrow_right: Draft -- The Core Devs can decide to move this CIP back to the Draft status at their discretion. E.g. a major, but correctable, flaw was found in the CIP.
   * :arrow_right: Rejected -- The Core Devs can decide to mark this CIP as Rejected at their discretion. E.g. a major, but uncorrectable, flaw was found in the CIP.
-  * :arrow_right: Final -- Standards Track Core CIPs must be implemented before it can be considered Final. When the implementation is complete and adopted by the community, the status will be changed to “Final”.
+  * :arrow_right: Final -- CIPs must be implemented before it can be considered Final. When the implementation is complete and adopted by the community, the status will be changed to “Final”.
 * **Final** -- This CIP represents the current state-of-the-art. A **Final CIP** should only be updated to correct errata.
 
 Other exceptional statuses include:
 
-* **Active** -- Some Informational and Process CIPs may also have a status of “Active” if they are never meant to be completed. E.g. CIP-1 (this CIP).
+* **Active** -- Some CIPs may also have a status of “Active” if they are never meant to be completed. E.g. CIP-1 (this CIP).
 * **Abandoned** -- This CIP is no longer pursued by the original authors or it may not be a (technically) preferred option anymore.
   * :arrow_right: Draft -- Authors or new champions wishing to pursue this CIP can ask for changing it to Draft status.
-* **Rejected** -- A CIP that is fundamentally broken or a Core CIP that was rejected by the Core Devs and will not be implemented. A CIP cannot move on from this state.
-* **Superseded** -- A CIP which was previously Final but is no longer considered state-of-the-art. Another CIP will be in Final status and reference the Superseded CIP. A CIP cannot move on from this state.
+* **Rejected** -- A CIP that is fundamentally broken or rejected by the Core Devs and will not be implemented. A CIP cannot move on from this state.
+* **Superseded** -- A CIP which was previously **Final** but is no longer considered state-of-the-art. Another CIP will be in Final status and reference the Superseded CIP. A CIP cannot move on from this state.
 
 ## What belongs in a successful CIP?
 
@@ -131,9 +136,7 @@ Each CIP must begin with an [RFC 822](https://www.ietf.org/rfc/rfc822.txt) style
 
 `* review-period-end:` *date review period ends*
 
-` type:` *Standards Track | Informational | Meta*
-
-` * category:` *Core | Networking | Interface | CRC* (Standards Track CIPs only)
+` type:` *Backward Compatible | Database/RPC Breaking | Protocol Breaking | Spec Breaking*
 
 ` created:` *date created on*
 
@@ -169,7 +172,7 @@ if the email address is not given.
 
 #### `resolution` header
 
-The `resolution` header is required for Standards Track CIPs only. It contains a URL that should point to an email message or other web resource where the pronouncement about the CIP is made.
+The `resolution` header contains a URL that should point to an email message or other web resource where the pronouncement about the CIP is made.
 
 #### `discussions-to` header
 
@@ -179,11 +182,7 @@ As a single exception, `discussions-to` cannot point to GitHub pull requests.
 
 #### `type` header
 
-The `type` header specifies the type of CIP: Standards Track, Meta, or Informational. If the track is Standards please include the subcategory (core, networking, interface, or CRC).
-
-#### `category` header
-
-The `category` header specifies the CIP's category. This is required for standards-track CIPs only.
+The `type` header specifies the type of CIP: Backward Compatible, Database/RPC Breaking, Protocol Breaking, Spec Breaking.
 
 #### `created` header
 
@@ -249,7 +248,7 @@ The editors don't pass judgment on CIPs. We merely do the administrative & edito
 
 ## History
 
-This document was derived heavily from [Ethereum's EIP-1](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1.md) written by Martin Becze, Hudson Jameson et al. and [Bitcoin's BIP-0001](https://github.com/bitcoin/bips) written by Amir Taaki which in turn were derived from [Python's PEP-0001](https://www.python.org/dev/peps/) written by Barry Warsaw, Jeremy Hylton, and David Goodger. Although in many places text was simply copied and modified from previous works, their authors are not responsible for its use in the Conflux Improvement Process, and should not be bothered with technical questions specific to Conflux or the CIP. Please direct all comments to the CIP editors.
+This document was derived heavily from [Ethereum's EIP-1](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-1.md) written by Martin Becze, Hudson Jameson et al. and [Bitcoin's BIP-0001](https://github.com/bitcoin/bips) written by Amir Taaki which in turn were derived from [Python's PEP-0001](https://www.python.org/dev/peps/) written by Barry Warsaw, Jeremy Hylton, and David Goodger. Although in many places text was simply copied and modified from previous works, their authors are not responsible for its use in the Conflux Improvement Proposal, and should not be bothered with technical questions specific to Conflux or the CIP. Please direct all comments to the CIP editors.
 
 ### Bibliography
 
