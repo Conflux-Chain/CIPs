@@ -17,10 +17,11 @@ This specifies the changes included in the hard fork named Tanzanite.
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
+
 * Codename: Tanzanite
 * Assigned version (first element in `custom`): `[1]`
 * Activation: 
-    * Block height >= XXX on Mainnet
+    * Block height >= 3,615,000 on Mainnet
     * Block height >= 4,990,000 on Testnet
     * Block height >= 0 on future testnets
 * Included CIPs:
