@@ -2,7 +2,7 @@
 cip: 40
 title: Reduce block base reward to 2 CFX.
 author: Peilun (@peilun-conflux)
-discussions-to: https://forum.conflux.fun/t/topic/4249/68
+discussions-to: https://forum.conflux.fun/t/topic/4249
 status: Final
 type: Spec Breaking
 created: 2020-12-08
