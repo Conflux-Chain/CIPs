@@ -1,9 +1,9 @@
 ---
-cip: <to be assigned>
+cip: 39
 title: Use the custom field for incompatible upgrade.
 author: Peilun (@peilun-conflux)
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/pull/1978
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2020-12-08
 ---
