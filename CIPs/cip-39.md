@@ -28,7 +28,7 @@ Although blamed blocks will not affect the system security, they do introduce ex
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
-From the block height XXX, blocks are required to set the first element of the `custom` field in the header to `[1]`. Blocks failing to satisfy this requirement will be regarded as invalid in the syncronization graph. 
+From the block height 3,615,000, blocks are required to set the first element of the `custom` field in the header to `[1]`. Blocks failing to satisfy this requirement will be regarded as invalid in the syncronization graph. 
 
 Note: The validation rule will also mark all blocks referring to invalid blocks as invalid. Invalid blocks will not be considered in the consensus algorithm and will not be executed.
 
