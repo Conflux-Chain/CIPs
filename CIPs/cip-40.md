@@ -24,7 +24,7 @@ This is discussed in the forum https://forum.conflux.fun/t/topic/4249.
 
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
-From the epoch number XXX, change the block base reward from 7 CFX to 2 CFX.
+From the epoch number 3,615,000, change the block base reward from 7 CFX to 2 CFX.
 
 Reminder: the reward of a block at some epoch number is effective when the epoch after REWARD_EPOCH_COUNT (12) epochs is executed.
 
