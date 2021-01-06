@@ -1,5 +1,5 @@
 ---
-cip: TBD
+cip: 43
 title: Introduce Finality via Voting Among Staked
 author: Fan Long <longfan@conflux-chain.org>
 discussions-to: XXX
