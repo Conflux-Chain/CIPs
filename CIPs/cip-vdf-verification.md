@@ -1,5 +1,5 @@
 ---
-cip: TBD
+cip: 44
 title: Introduce VDF Verification Builtin
 author: Fan Long <longfan@conflux-chain.com>
 discussions-to: XXX
