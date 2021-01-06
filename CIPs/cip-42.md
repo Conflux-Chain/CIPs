@@ -1,11 +1,11 @@
 ---
-cip: XXX
+cip: 42
 title: Support Event Driven Execution Model
 author: Fan Long <longfan@conflux-chain.com>
 discussions-to: XXX
 status: Draft
 type: Spec Breaking
-created: 2020-08-15
+created: 2021-01-05
 requires (*optional): <CIP number(s)>
 replaces (*optional): <CIP number(s)>
 resolution (*optional): <URL>
