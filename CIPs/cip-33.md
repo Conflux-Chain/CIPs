@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 33
 title: Transaction fee pricing mechanism for Tephys
 author: Justin Pan (@zimengpan)
 discussions-to: <URL>
