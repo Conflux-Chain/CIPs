@@ -18,7 +18,7 @@ This CIP introduces flexible account authorization methods in Conflux. This is t
 
 Advanced and flexible authorization rules are important for better management of accounts. 
 
-For example, BLS signature with curve BLS12-381 (as specified in https://tools.ietf.org/html/draft-irtf-cfrg-bls-signature-04, also included in eth2.0-specs) supports efficient implementation of threshold-signature (m-of-n multisig) and aggreatation of signatures, and DKIM (Domain Key Identified Mail) lowers the barrier to own a blockchain account by binding the account to an email address. 
+For example, BLS signature with curve BLS12-381 (as specified in https://tools.ietf.org/html/draft-irtf-cfrg-bls-signature-04, also included in eth2.0-specs) supports efficient implementation of threshold-signature (m-of-n multisig) and aggregation of signatures, and DKIM (Domain Key Identified Mail) lowers the barrier to own a blockchain account by binding the account to an email address. 
 
 ## Motivation
 
