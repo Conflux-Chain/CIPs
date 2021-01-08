@@ -12,11 +12,12 @@ created: 2021-01-09
 
 ## Simple Summary
 
+
 This draft CIP proposes to add SM-2/3 verification functions as internal contracts.
 
 ## Abstract
 
-This draft CIP proposes to add SM-2/3 verification functions as internal contracts. This will enable more efficient implementation of on-chain applications using SM-2 signature scheme and SM-3 hash function instead of ECDSA and SHA-2/3. 
+This draft CIP proposes to add SM-2/3 verification functions as internal contracts. This will enable more efficient implementation of on-chain applications using SM-2 signature scheme and SM-3 hash function instead of ECDSA and SHA-2/3.
 
 ## Motivation
 
