@@ -38,32 +38,32 @@ This section defines conversion between the following address types:
 
 - **conflux-hex-address**: a valid, 20-byte, type-prefixed Conflux hex address, e.g. `0x106d49f8505410eb4e671d51f7d96d2c87807b09`. The way this address is derived from public keys is defined by Equation (1) of the protocol [spec](https://confluxnetwork.org/files/Conflux_Protocol_Specification_20201020.pdf). The string representation of this address can optionally use *mixed-case checksum address encoding* ([EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)).
 
-- **conflux-base32-address**: a chain-prefixed Conflux base32-checksum address. The address consists of a chain-prefix indicating the network on which this address is valid, an optional address type, and a base32-encoded payload indicating the destination of the address and containing a checksum, all separated by `":"`. Examples: `cfx:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`, `cfx:user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`
+- **conflux-base32-address**: a network-prefixed Conflux base32-checksum address. The address consists of a network-prefix indicating the network on which this address is valid, a colon (`":"`), and a base32-encoded payload indicating the destination of the address and containing a checksum, e.g. `cfx:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`. Optionally, the address can contain a list of key value pairs in the format `key=value` between the network-prefix and the payload, separated by colons, e.g. `cfx:type=user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`
 
 <!-------------------->
 
 ### Encoding
 
-INPUT: an `addr` (20-byte conflux-hex-address), a `chain-id` (4 bytes), and a `verbose` flag (bool)
+INPUT: an `addr` (20-byte conflux-hex-address), a `network-id` (4 bytes)
 
 OUTPUT: a conflux-base32-address
 
-1. Derive the **chain-prefix**:
+1. **Network-prefix**:
 
 ```
-    match chain-id:
-        case 1029: "cfx"     // might be revised if mainnet chain-id changes
+    match network-id:
+        case 1029: "cfx"
         case 1:    "cfxtest"
-        case n:    "cfx[n]"
+        case n:    "net[n]"
 ```
 
-Examples of valid chain-prefixes: `"cfx"`, `"cfxtest"`, `"cfx17"`
+Examples of valid network-prefixes: `"cfx"`, `"cfxtest"`, `"net17"`
 
-Examples of invalid chain-prefixes: `"bch"`, `"conflux"`, `"cfx1"`, `"cfx1029"`
+Examples of invalid network-prefixes: `"bch"`, `"conflux"`, `"net1"`, `"net1029"`
 
 When presented to users, the prefix may be omitted as it is part of the checksum computation. The checksum ensures that addresses on different networks will remain incompatible, even in the absence of an explicit prefix.
 
-2. Derive the **address-type**:
+2. [OPTIONAL] **Address-type**:
 
 ```
     match addr[0] & 0xf0
@@ -76,9 +76,30 @@ Examples of valid address-types: `"builtin"`, `"user"`, `"contract"`
 
 Examples of invalid address-types: `"internal"`
 
-3. Derive the **version-byte**: `0x00`
+3. **Version-byte**:
 
-4. Base32-encode payload:
+The version byte's most signficant bit is reserved and must be 0. The 4 next bits indicate the type of address and the 3 least significant bits indicate the size of the hash.
+
+| Type bits |      Meaning      | Version byte value |
+| --------: | :---------------: | -----------------: |
+|         0 |      Conflux      |                  0 |
+
+Further types might be added as new features are added.
+
+| Size bits | Hash size in bits |
+| --------: | ----------------: |
+|         0 |               160 |
+|         1 |               192 |
+|         2 |               224 |
+|         3 |               256 |
+|         4 |               320 |
+|         5 |               384 |
+|         6 |               448 |
+|         7 |               512 |
+
+By encoding the size of the hash in the version field, we ensure that it is possible to check that the length of the address is correct.
+
+4. Base32-encode address:
 
 To create the payload, first, concatenate the `version-byte` with `addr` to get a 21-byte array. Then, encode it left-to-right, mapping each 5-bit sequence to the corresponding ASCII character (see alphabet below). Pad to the right with zero bits to complete any unfinished chunk at the end. In our case, 21-byte payload + 2 bit 0-padding will result in a 34-byte base32-encoded string.
 
@@ -126,9 +147,7 @@ Importantly, the optional `address-type` is **NOT** part of the checksum computa
 The 40-bit number returned by PolyMod is split into eight 5-bit numbers (msb first).
 The payload and the checksum are then encoded according to the base32 character table.
 
-5. Concatenate the following parts to get the final address:
-    - If `verbose` is `false`: `[chain-prefix]`, `":"`, `[payload]`, `[checksum]`
-    - If `verbose` is `true`: `[chain-prefix]`, `":"`, `[address-type]`, `":"`, `[payload]`, `[checksum]`
+5. Concatenate the following parts to get the final address: `[network-prefix]`, `":"`, `[payload]`, `[checksum]`
 
 <!-------------------->
 
@@ -136,15 +155,15 @@ The payload and the checksum are then encoded according to the base32 character 
 
 INPUT: a conflux-base32-address
 
-OUTPUT: a conflux-hex-address (20 bytes) and a chain-id (4 bytes)
+OUTPUT: a conflux-hex-address (20 bytes) and a network-id (4 bytes)
 
-1. Treating the address as an ASCII-string, split at `":"`. If the resulting array has 2 items, treat them as `chain-prefix-raw` and `payload-raw`. If the resulting array has 3 items, treat them as `chain-prefix-raw`, `type-prefix`, and `payload-raw`. Otherwise, reject.
+1. Treating the address as an ASCII-string, split at `":"`. If the resulting array has less than 2 items, reject. We treat the first item as `network-prefix-raw`, and the last item as `payload-raw`. Any other items in-between are treated as optional key-value pairs.
 
-2. Parse **chain-id**:
+2. Parse **network-id**:
 
 ```
-    match chain-prefix-raw
-        case "cfx":     1029    // might be revised if mainnet chain-id changes
+    match network-prefix-raw
+        case "cfx":     1029
         case "cfxtest": 1
         case "cfx1029": reject
         case "cfx1":    reject
@@ -152,17 +171,13 @@ OUTPUT: a conflux-hex-address (20 bytes) and a chain-id (4 bytes)
         otherwise:      reject
 ```
 
-3. Parse **type-prefix** (if provided):
-
-    - If `type-prefix` is NOT one of `"builtin"`, `"user"`, `"contract"`, reject.
-
-4. Validate payload:
+3. Validate payload:
 
     - If the length of `payload-raw` is not `42`, reject.
     - If `payload-raw` contains both lowercase and uppercase characters, reject.
     - If `payload-raw` contains invalid characters (not in the alphabet), reject.
 
-5. Validate checksum.
+4. Validate checksum.
 
 To verify a base32-formatted address, the input data (list of integers) for the PolyMod function is assembled from these parts:
 - The lower 5 bits of each character of the prefix.
@@ -171,19 +186,19 @@ To verify a base32-formatted address, the input data (list of integers) for the 
 
 If PolyMod returns non-zero, then the address was broken, reject.
 
-6. Convert `payload-raw` into 8-bit array, split into `version-byte` and `payload`.
+5. Convert `payload-raw` into 8-bit array, split into `version-byte` and `payload`.
 
-7. Validate `version-byte`: If `version-byte` is **NOT** `0x00`, reject.
+6. Validate `version-byte`: If `version-byte` is **NOT** `0x00`, reject.
 
-7. Validate **type-prefix**  (if provided):
+7. Validate **address-type**  (if provided):
 
-    - If `payload[0] & 0xf0` is `b00000000` and `type-prefix` is **NOT** `"builtin"`: reject.
-    - If `payload[0] & 0xf0` is `b00010000` and `type-prefix` is **NOT** `"user"`: reject.
-    - If `payload[0] & 0xf0` is `b10000000` and `type-prefix` is **NOT** `"contract"`: reject.
+    - If `payload[0] & 0xf0` is `b00000000` and `address-type` is **NOT** `"builtin"`: reject.
+    - If `payload[0] & 0xf0` is `b00010000` and `address-type` is **NOT** `"user"`: reject.
+    - If `payload[0] & 0xf0` is `b10000000` and `address-type` is **NOT** `"contract"`: reject.
 
-Return `(payload, chain-id)`.
+Return `(payload, network-id)`.
 
-*(Note: Conflux nodes are expected to validate `chain-id` against their local chain id and reject addresses that do not match. This check is not part of this specification.)*
+*(Note: Conflux nodes are expected to validate `network-id` against their local chain id and reject addresses that do not match. This check is not part of this specification.)*
 
 <!-------------------->
 
@@ -192,7 +207,7 @@ Return `(payload, chain-id)`.
 ```
 encode(0x106d49f8505410eb4e671d51f7d96d2c87807b09, 1029, true)
 
-1. chain-prefix: 1029 => "cfx"
+1. network-prefix: 1029 => "cfx"
 2. address-type: "user"
 3. version-byte: 0x00
 4. payload: [0x00, 0x10, 0x6d, 0x49, 0xf8, 0x50, 0x54, 0x10, 0xeb, 0x4e, 0x67, 0x1d, 0x51, 0xf7, 0xd9, 0x6d, 0x2c, 0x87, 0x80, 0x7b, 0x09]
@@ -206,7 +221,7 @@ encode(0x106d49f8505410eb4e671d51f7d96d2c87807b09, 1029, true)
 
 ## Rationale
 
-**Chain-prefix**: We chose an easy-to-recognize chain-prefix (`cfx`) so that users can simply tell Conflux addresses from addresses on other blockchains. We also differentiate between addresses based on the Conflux chain they are expected to be used on (e.g. mainnet vs testnet). This way, we can make it harder for users to accidentally submit testnet or private chain transactions on the mainnet.
+**network-prefix**: We chose an easy-to-recognize network-prefix (`cfx`) so that users can simply tell Conflux addresses from addresses on other blockchains. We also differentiate between addresses based on the Conflux chain they are expected to be used on (e.g. mainnet vs testnet). This way, we can make it harder for users to accidentally submit testnet or private chain transactions on the mainnet.
 
 **Address-type**: Conflux-hex-addresses have the desirable property that users can tell whether an address is an externally owned account (`0x1`) or a contract account (`0x8`) just by looking at the address. While this information is present in base32-encoded addresses, it is not so obvious. To keep this property, we allow for an optional human-readable address-type to be included in base32 addresses.
 
