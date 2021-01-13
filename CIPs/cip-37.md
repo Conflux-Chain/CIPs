@@ -146,6 +146,8 @@ OUTPUT: a conflux-hex-address (20 bytes) and a chain-id (4 bytes)
     match chain-prefix-raw
         case "cfx":     1029    // might be revised if mainnet chain-id changes
         case "cfxtest": 1
+        case "cfx1029": reject
+        case "cfx1":    reject
         case "cfx[n]":  n if n fits into 4 bytes
         otherwise:      reject
 ```
