@@ -154,7 +154,7 @@ INPUT: a conflux-base32-address
 
 OUTPUT: a conflux-hex-address (20 bytes) and a network-id (4 bytes)
 
-1. Treat the address as an ASCII-string. If it is mixed case (contains both lowercase and uppercase letters), reject. Split at `":"`. If the resulting array has less than 2 items, reject. Treat the first item as `network-prefix-raw`, and the last item as `payload-raw`. Any other items in-between should be treated as optional key-value pairs.
+1. Treat the address as an ASCII-string. If it is mixed case (contains both lowercase and uppercase letters), reject. Convert address to lowercase. Split at `":"`. If the resulting array has less than 2 items, reject. Treat the first item as `network-prefix-raw`, and the last item as `payload-raw`. Any other items in-between should be treated as optional key-value pairs.
 
 2. Parse **network-id**:
 
