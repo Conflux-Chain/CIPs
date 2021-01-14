@@ -3,7 +3,7 @@ cip: 37
 title: Introduce Base32 Checksum Addresses
 author: bytelaw, Péter Garamvölgyi <peter@conflux-chain.com>
 discussions-to: https://github.com/Conflux-Chain/CIPs/issues/37
-status: Last Call
+status: Final
 type: Database/RPC Breaking
 created: 2021-01-07
 ---
