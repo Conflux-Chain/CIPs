@@ -61,8 +61,6 @@ Examples of valid network-prefixes: `"cfx"`, `"cfxtest"`, `"net17"`
 
 Examples of invalid network-prefixes: `"bch"`, `"conflux"`, `"net1"`, `"net1029"`
 
-When presented to users, the prefix may be omitted as it is part of the checksum computation. The checksum ensures that addresses on different networks will remain incompatible, even in the absence of an explicit prefix.
-
 2. [OPTIONAL] **Address-type**:
 
 ```
@@ -272,21 +270,15 @@ This address scheme has been implemented in [conflux-chain#2034](https://github.
 
 ## Security Considerations
 
-TBD
+This proposal has no obvious security implications.
 
 <!-------------------->
 
 ## References
 
-Bitcoin Wiki: Base58Check encoding \[[link](https://en.bitcoin.it/wiki/Base58Check_encoding)\]
-
-IETF: The Base58 Encoding Scheme \[[link](https://tools.ietf.org/id/draft-msporny-base58-01.html)\]
+Bitcoin Cash Specification \[[link](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/cashaddr.md)\]
 
 EIPs #77: Safer Ethereum Address Format \[[link](https://github.com/ethereum/eips/issues/77)\]
-
-Tron Documentation: 3.4 Address Format \[[link](https://developers.tron.network/docs/account#address-format)\]
-
-Tezos Base58 Encoding with Prefix (eztz codebase) \[[link](https://github.com/TezTech/eztz/blob/master/src/main.js#L15)\]
 
 ## Copyright
 
