@@ -38,7 +38,7 @@ This section defines conversion between the following address types:
 
 - **conflux-hex-address**: a valid, 20-byte, type-prefixed Conflux hex address, e.g. `0x106d49f8505410eb4e671d51f7d96d2c87807b09`. The way this address is derived from public keys is defined by Equation (1) of the protocol [spec](https://confluxnetwork.org/files/Conflux_Protocol_Specification_20201020.pdf). The string representation of this address can optionally use *mixed-case checksum address encoding* ([EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)).
 
-- **conflux-base32-address**: a network-prefixed Conflux base32-checksum address. The address consists of a network-prefix indicating the network on which this address is valid, a colon (`":"`), and a base32-encoded payload indicating the destination of the address and containing a checksum, e.g. `cfx:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`. Optionally, the address can contain a list of key value pairs in the format `key=value` between the network-prefix and the payload, separated by colons, e.g. `cfx:type=user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`
+- **conflux-base32-address**: a network-prefixed Conflux base32-checksum address. The address consists of a network-prefix indicating the network on which this address is valid, a colon (`":"`), and a base32-encoded payload indicating the destination of the address and containing a checksum, e.g. `cfx:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`. Optionally, the address can contain a list of key value pairs in the format `key.value` between the network-prefix and the payload, separated by colons, e.g. `cfx:type.user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`
 
 <!-------------------->
 
@@ -65,12 +65,12 @@ Examples of invalid network-prefixes: `"bch"`, `"conflux"`, `"net1"`, `"net1029"
 
 ```
     match addr[0] & 0xf0
-        case b00000000: "type=builtin"
-        case b00010000: "type=user"
-        case b10000000: "type=contract"
+        case b00000000: "type.builtin"
+        case b00010000: "type.user"
+        case b10000000: "type.contract"
 ```
 
-Implementations can choose to use `"type=null"` for the null address (`0x0000000000000000000000000000000000000000`).
+Implementations can choose to use `"type.null"` for the null address (`0x0000000000000000000000000000000000000000`).
 
 3. **Version-byte**:
 
@@ -184,8 +184,8 @@ If PolyMod returns non-zero, then the address was broken, reject.
 5. Verify the type and size bits in the `version-byte`. Unknown versions should be rejected.
 
 6. Verify optional fields:
-    - If the optional fields contain `type=*`: Verify the address-type according to the specification above.
-    - Unknown options (options other than `type=*`) should be ignored.
+    - If the optional fields contain `type.*`: Verify the address-type according to the specification above.
+    - Unknown options (options other than `type.*`) should be ignored.
 
 Return `(addr-bytes, network-id)`.
 
@@ -199,7 +199,7 @@ Return `(addr-bytes, network-id)`.
 encode(0x106d49f8505410eb4e671d51f7d96d2c87807b09, 1029, true)
 
 1. network-prefix: 1029 => "cfx"
-2. address-type: "type=user"
+2. address-type: "type.user"
 3. version-byte: 0x00
 4. payload: [0x00, 0x10, 0x6d, 0x49, 0xf8, 0x50, 0x54, 0x10, 0xeb, 0x4e, 0x67, 0x1d, 0x51, 0xf7, 0xd9, 0x6d, 0x2c, 0x87, 0x80, 0x7b, 0x09]
    5-bit parts: [0x00, 0x00, 0x08, 0x06, 0x1a, 0x12, 0x0f, 0x18, 0x0a, 0x01, 0x0a, 0x01, 0x01, 0x1a, 0x1a, 0x0e, 0x0c, 0x1c, 0x0e, 0x15, 0x03, 0x1d, 0x1e, 0x19, 0x0d, 0x14, 0x16, 0x08, 0x0f, 0x00, 0x03, 0x1b, 0x01, 0x04]
@@ -207,7 +207,7 @@ encode(0x106d49f8505410eb4e671d51f7d96d2c87807b09, 1029, true)
 5. checksum input: [0x03, 0x06, 0x18, 0x00, 0x00, 0x00, 0x08, 0x06, 0x1a, 0x12, 0x0f, 0x18, 0x0a, 0x01, 0x0a, 0x01, 0x01, 0x1a, 0x1a, 0x0e, 0x0c, 0x1c, 0x0e, 0x15, 0x03, 0x1d, 0x1e, 0x19, 0x0d, 0x14, 0x16, 0x08, 0x0f, 0x00, 0x03, 0x1b, 0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
    checksum output: 32970494892
    checksum string: "0ypk3mxc"
-6. concatenated result: "cfx:type=user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc"
+6. concatenated result: "cfx:type.user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc"
 ```
 
 <!-------------------->
@@ -219,6 +219,8 @@ encode(0x106d49f8505410eb4e671d51f7d96d2c87807b09, 1029, true)
 **Address-type**: Conflux-hex-addresses have the desirable property that users can tell whether an address is an externally owned account (`0x1`) or a contract account (`0x8`) just by looking at the address. While this information is present in base32-encoded addresses, it is not so obvious. To keep this property, we allow for an optional human-readable address-type to be included in base32 addresses.
 
 **Version-byte**: The version byte is kept so that Conflux addresses can be processed by existing bch-base32 implementations. The version-byte is currently unused and it is reserved for future extensions. The version-byte is validated during decoding so that we prevent users from generating several (valid) base32-address aliases for the same Conflux address.
+
+**Dot as key-value separator**: For optional parameters, we choose the format `key.value` instead of the more intuitive `key=value` as this way addresses can be efficiently encoded in QR codes using the alphanumeric mode.
 
 <!-------------------->
 
@@ -235,27 +237,27 @@ This change requires updating various tools (wallets, IDEs, SDKs, etc.) and dapp
 ```
 encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, mainnet) = cfx:022xg0j5vg1fba4nh7gz372we6740puptms36cm58c
 encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, testnet) = cfxtest:022xg0j5vg1fba4nh7gz372we6740puptmj8nwjfc6
-encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, testnet) = cfxtest:type=contract:022xg0j5vg1fba4nh7gz372we6740puptmj8nwjfc6
+encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, testnet) = cfxtest:type.contract:022xg0j5vg1fba4nh7gz372we6740puptmj8nwjfc6
 
 encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, mainnet) = cfx:00d2z01m2g4p77n6mddvtaw2k43622daamm1867uk6
 encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, testnet) = cfxtest:00d2z01m2g4p77n6mddvtaw2k43622daamyavp1grc
-encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, testnet) = cfxtest:type=user:00d2z01m2g4p77n6mddvtaw2k43622daamyavp1grc
+encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, testnet) = cfxtest:type.user:00d2z01m2g4p77n6mddvtaw2k43622daamyavp1grc
 
 encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, mainnet) = cfx:00cwegpesgntwkrz7e2cvvedwbusmdrm9wdsdks47x
 encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, testnet) = cfxtest:00cwegpesgntwkrz7e2cvvedwbusmdrm9w7ky3ye3r
-encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, testnet) = cfxtest:type=user:00cwegpesgntwkrz7e2cvvedwbusmdrm9w7ky3ye3r
+encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, testnet) = cfxtest:type.user:00cwegpesgntwkrz7e2cvvedwbusmdrm9w7ky3ye3r
 
 encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, mainnet) = cfx:0229g2mmv57n9b1ka44kjf08t1ka46sv1s1vpcf0wh
 encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, testnet) = cfxtest:0229g2mmv57n9b1ka44kjf08t1ka46sv1sbg5w9asv
-encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, testnet) = cfxtest:type=contract:0229g2mmv57n9b1ka44kjf08t1ka46sv1sbg5w9asv
+encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, testnet) = cfxtest:type.contract:0229g2mmv57n9b1ka44kjf08t1ka46sv1sbg5w9asv
 
 encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, mainnet) = cfx:00edyeb9mgmaem5skctwz4y9cnge5f8ru42rbphk8r
 encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, testnet) = cfxtest:00edyeb9mgmaem5skctwz4y9cnge5f8ru48ws6rtcx
-encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, testnet) = cfxtest:type=user:00edyeb9mgmaem5skctwz4y9cnge5f8ru48ws6rtcx
+encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, testnet) = cfxtest:type.user:00edyeb9mgmaem5skctwz4y9cnge5f8ru48ws6rtcx
 
 encode(0x0888000000000000000000000000000000000002, mainnet) = cfx:0048g00000000000000000000000000008djg2z8b1
 encode(0x0888000000000000000000000000000000000002, testnet) = cfxtest:0048g000000000000000000000000000087t3jt2fb
-encode(0x0888000000000000000000000000000000000002, testnet) = cfxtest:type=builtin:0048g000000000000000000000000000087t3jt2fb
+encode(0x0888000000000000000000000000000000000002, testnet) = cfxtest:type.builtin:0048g000000000000000000000000000087t3jt2fb
 ```
 
 More test cases can be found in [conflux-chain#2034](https://github.com/Conflux-Chain/conflux-rust/pull/2034).
