@@ -44,7 +44,7 @@ This section defines conversion between the following address types:
 
 ### Encoding
 
-INPUT: `addr` (a conflux-hex-address), `network-prefix` (possible values: `"cfx"`, `"cfxtest"`, `"net[n]"` where `n != 0, 1029`)
+INPUT: `addr` (a conflux-hex-address), `network-prefix` (possible values: `"cfx"`, `"cfxtest"`, `"net[n]"` where `n != 1, 1029`)
 
 OUTPUT: a conflux-base32-address
 
