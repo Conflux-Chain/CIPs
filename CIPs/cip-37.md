@@ -44,9 +44,15 @@ This section defines conversion between the following address types:
 
 ### Encoding
 
-INPUT: `addr` (a conflux-hex-address), `network-prefix` (possible values: `"cfx"`, `"cfxtest"`, `"net[n]"` where `n != 1, 1029`)
+INPUT: `addr` (a conflux-hex-address), `network-prefix` (string)
 
 OUTPUT: a conflux-base32-address
+
+`network-prefix` is one of the following values: `"cfx"` (mainnet, corresponds to network-id 1029), `"cfxtest"` (testnet, corresponds to network-id 1), `"net[n]"` where `n != 1, 1029` (private Conflux network)
+
+Examples of valid network-prefixes: `"cfx"`, `"cfxtest"`, `"net17"`
+
+Examples of invalid network-prefixes: `"bch"`, `"conflux"`, `"net1"`, `"net1029"`
 
 1. [OPTIONAL] **Address-type**:
 
@@ -120,7 +126,7 @@ uint64_t PolyMod(const data &v) {
 ```
 
 The checksum is calculated over the following data:
-- The lower 5 bits of each character of the `network-prefix`. - e.g. "bit..." becomes 2,9,20,...
+- The lower 5 bits of each character of the `network-prefix`. - e.g. `"cfx..."` becomes `0x03, 0x06, 0x18, ...`
 - A zero for the separator (5 zero bits).
 - The payload by chunks of 5 bits. If necessary, the payload is padded to the right with zero bits to complete any unfinished chunk at the end.
 - Eight zeros as a "template" for the checksum.
