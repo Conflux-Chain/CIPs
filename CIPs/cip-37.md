@@ -54,7 +54,7 @@ Examples of valid network-prefixes: `"cfx"`, `"cfxtest"`, `"net17"`
 
 Examples of invalid network-prefixes: `"bch"`, `"conflux"`, `"net1"`, `"net1029"`
 
-1. [OPTIONAL] **Address-type**:
+1. [OPTIONAL] **Address-type**: For the null address (`0x0000000000000000000000000000000000000000`), address-type must be `"type.null"`. Otherwise,
 
 ```
     match addr[0] & 0xf0
@@ -62,8 +62,6 @@ Examples of invalid network-prefixes: `"bch"`, `"conflux"`, `"net1"`, `"net1029"
         case b00010000: "type.user"
         case b10000000: "type.contract"
 ```
-
-Implementations can choose to use `"type.null"` for the null address (`0x0000000000000000000000000000000000000000`).
 
 2. **Version-byte**:
 
