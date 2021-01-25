@@ -90,7 +90,7 @@ By encoding the size of the hash in the version field, we ensure that it is poss
 
 To create the payload, first, concatenate the `version-byte` with `addr` to get a 21-byte array. Then, encode it left-to-right, mapping each 5-bit sequence to the corresponding ASCII character (see alphabet below). Pad to the right with zero bits to complete any unfinished chunk at the end. In our case, 21-byte payload + 2 bit 0-padding will result in a 34-byte base32-encoded string.
 
-We use the following alphabet: `0123456789abcdefghjkmnprstuvwxyz` (`o`, `i`, `l`, `q` removed).
+We use the following alphabet: `abcdefghjkmnprstuvwxyz0123456789` (`i`, `l`, `o`, `q` removed).
 
 ```
 0x00 => a    0x08 => j    0x10 => u    0x18 => 2
