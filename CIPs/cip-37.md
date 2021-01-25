@@ -20,7 +20,7 @@ This CIP introduces a new address format to help users distinguish between Confl
 
 Apart from the regular type-prefixed hex addresses Conflux uses today, we introduce a new base32-encoded address format. Addresses of the new format are derived from the hex-address directly. They contain an easy-to-recognize prefix (e.g. `"cfx"`), an optional address type, and a checksum. Using base32check encoding helps us avoid and detect typos and makes it easy to disambiguate between Conflux addresses and addresses on other blockchains, thus reducing the risk of loss of funds.
 
-An example of the new address format: `cfx:00d2z01m2g4p77n6mddvtaw2k43622daamm1867uk6`.
+An example of the new address format: `cfx:aarc9abycue0hhzgyrr53m6cxedgccrmmyybjgh4xg`.
 
 <!-------------------->
 
@@ -38,7 +38,7 @@ This section defines conversion between the following address types:
 
 - **conflux-hex-address**: a valid, 20-byte, type-prefixed Conflux hex address, e.g. `0x106d49f8505410eb4e671d51f7d96d2c87807b09`. The way this address is derived from public keys is defined by Equation (1) of the protocol [spec](https://confluxnetwork.org/files/Conflux_Protocol_Specification_20201020.pdf). The string representation of this address can optionally use *mixed-case checksum address encoding* ([EIP-55](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-55.md)).
 
-- **conflux-base32-address**: a network-prefixed Conflux base32-checksum address. The address consists of a network-prefix indicating the network on which this address is valid, a colon (`":"`), and a base32-encoded payload indicating the destination of the address and containing a checksum, e.g. `cfx:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`. Optionally, the address can contain a list of key value pairs in the format `key.value` between the network-prefix and the payload, separated by colons, e.g. `cfx:type.user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc`
+- **conflux-base32-address**: a network-prefixed Conflux base32-checksum address. The address consists of a network-prefix indicating the network on which this address is valid, a colon (`":"`), and a base32-encoded payload indicating the destination of the address and containing a checksum, e.g. `cfx:aarc9abycue0hhzgyrr53m6cxedgccrmmyybjgh4xg`. Optionally, the address can contain a list of key value pairs in the format `key.value` between the network-prefix and the payload, separated by colons, e.g. `cfx:type.user:aarc9abycue0hhzgyrr53m6cxedgccrmmyybjgh4xg`
 
 <!-------------------->
 
@@ -93,14 +93,14 @@ To create the payload, first, concatenate the `version-byte` with `addr` to get 
 We use the following alphabet: `0123456789abcdefghjkmnprstuvwxyz` (`o`, `i`, `l`, `q` removed).
 
 ```
-0x00 => 0    0x08 => 8    0x10 => g    0x18 => s
-0x01 => 1    0x09 => 9    0x11 => h    0x19 => t
-0x02 => 2    0x0a => a    0x12 => j    0x1a => u
-0x03 => 3    0x0b => b    0x13 => k    0x1b => v
-0x04 => 4    0x0c => c    0x14 => m    0x1c => w
-0x05 => 5    0x0d => d    0x15 => n    0x1d => x
-0x06 => 6    0x0e => e    0x16 => p    0x1e => y
-0x07 => 7    0x0f => f    0x17 => r    0x1f => z
+0x00 => a    0x08 => j    0x10 => u    0x18 => 2
+0x01 => b    0x09 => k    0x11 => v    0x19 => 3
+0x02 => c    0x0a => m    0x12 => w    0x1a => 4
+0x03 => d    0x0b => n    0x13 => x    0x1b => 5
+0x04 => e    0x0c => p    0x14 => y    0x1c => 6
+0x05 => f    0x0d => r    0x15 => z    0x1d => 7
+0x06 => g    0x0e => s    0x16 => 0    0x1e => 8
+0x07 => h    0x0f => t    0x17 => 1    0x1f => 9
 ```
 
 4. **Calculate checksum**: We use the checksum algorithm of Bitcoin Cash, defined [here](https://github.com/bitcoincashorg/bitcoincash.org/blob/master/spec/cashaddr.md#checksum).
@@ -177,17 +177,17 @@ Return `(addr-bytes, network-prefix)`.
 ### Example
 
 ```
-encode(0x106d49f8505410eb4e671d51f7d96d2c87807b09, "cfx")
+encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfx")
 
 1. address-type: "type.user"
 2. version-byte: 0x00
-3. payload: [0x00, 0x10, 0x6d, 0x49, 0xf8, 0x50, 0x54, 0x10, 0xeb, 0x4e, 0x67, 0x1d, 0x51, 0xf7, 0xd9, 0x6d, 0x2c, 0x87, 0x80, 0x7b, 0x09]
-   5-bit parts: [0x00, 0x00, 0x08, 0x06, 0x1a, 0x12, 0x0f, 0x18, 0x0a, 0x01, 0x0a, 0x01, 0x01, 0x1a, 0x1a, 0x0e, 0x0c, 0x1c, 0x0e, 0x15, 0x03, 0x1d, 0x1e, 0x19, 0x0d, 0x14, 0x16, 0x08, 0x0f, 0x00, 0x03, 0x1b, 0x01, 0x04]
-   base32-encoded: "0086ujfsa1a11uuecwen3xytdmp8f03v14"
-4. checksum input: [0x03, 0x06, 0x18, 0x00, 0x00, 0x00, 0x08, 0x06, 0x1a, 0x12, 0x0f, 0x18, 0x0a, 0x01, 0x0a, 0x01, 0x01, 0x1a, 0x1a, 0x0e, 0x0c, 0x1c, 0x0e, 0x15, 0x03, 0x1d, 0x1e, 0x19, 0x0d, 0x14, 0x16, 0x08, 0x0f, 0x00, 0x03, 0x1b, 0x01, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
-   checksum output: 32970494892
-   checksum string: "0ypk3mxc"
-5. concatenated result: "cfx:type.user:0086ujfsa1a11uuecwen3xytdmp8f03v140ypk3mxc"
+3. payload: [0x00, 0x1a, 0x2f, 0x80, 0x34, 0x14, 0x09, 0x63, 0x9e, 0xa6, 0xa3, 0x5b, 0xbc, 0xab, 0x82, 0x99, 0x06, 0x61, 0x09, 0xaa, 0x55]
+   5-bit parts: [0x00, 0x00, 0x0d, 0x02, 0x1f, 0x00, 0x01, 0x14, 0x02, 0x10, 0x04, 0x16, 0x07, 0x07, 0x15, 0x06, 0x14, 0x0d, 0x0d, 0x1b, 0x19, 0x0a, 0x1c, 0x02, 0x13, 0x04, 0x03, 0x06, 0x02, 0x02, 0x0d, 0x0a, 0x0a, 0x14]
+   base32-encoded: "aarc9abycue0hhzgyrr53m6cxedgccrmmy"
+4. checksum input: [0x03, 0x06, 0x18, 0x00, 0x00, 0x00, 0x0d, 0x02, 0x1f, 0x00, 0x01, 0x14, 0x02, 0x10, 0x04, 0x16, 0x07, 0x07, 0x15, 0x06, 0x14, 0x0d, 0x0d, 0x1b, 0x19, 0x0a, 0x1c, 0x02, 0x13, 0x04, 0x03, 0x06, 0x02, 0x02, 0x0d, 0x0a, 0x0a, 0x14, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00]
+   checksum output: 688543492710
+   checksum string: "ybjgh4xg"
+5. concatenated result: "cfx:type.user:aarc9abycue0hhzgyrr53m6cxedgccrmmyybjgh4xg"
 ```
 
 <!-------------------->
@@ -215,29 +215,29 @@ This change requires updating various tools (wallets, IDEs, SDKs, etc.) and dapp
 ## Test Cases
 
 ```
-encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, "cfx") = cfx:022xg0j5vg1fba4nh7gz372we6740puptms36cm58c
-encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, "cfxtest") = cfxtest:022xg0j5vg1fba4nh7gz372we6740puptmj8nwjfc6
-encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, "cfxtest") = cfxtest:type.contract:022xg0j5vg1fba4nh7gz372we6740puptmj8nwjfc6
+encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, "cfx") = cfx:acc7uawf5ubtnmezvhu9dhc6sghea0403y2dgpyfjp
+encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, "cfxtest") = cfxtest:acc7uawf5ubtnmezvhu9dhc6sghea0403ywjz6wtpg
+encode(0x85d80245dc02f5a89589e1f19c5c718e405b56cd, "cfxtest") = cfxtest:type.contract:acc7uawf5ubtnmezvhu9dhc6sghea0403ywjz6wtpg
 
-encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfx") = cfx:00d2z01m2g4p77n6mddvtaw2k43622daamm1867uk6
-encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfxtest") = cfxtest:00d2z01m2g4p77n6mddvtaw2k43622daamyavp1grc
-encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfxtest") = cfxtest:type.user:00d2z01m2g4p77n6mddvtaw2k43622daamyavp1grc
+encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfx") = cfx:aarc9abycue0hhzgyrr53m6cxedgccrmmyybjgh4xg
+encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfxtest") = cfxtest:aarc9abycue0hhzgyrr53m6cxedgccrmmy8m50bu1p
+encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfxtest") = cfxtest:type.user:aarc9abycue0hhzgyrr53m6cxedgccrmmy8m50bu1p
 
-encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, "cfx") = cfx:00cwegpesgntwkrz7e2cvvedwbusmdrm9wdsdks47x
-encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, "cfxtest") = cfxtest:00cwegpesgntwkrz7e2cvvedwbusmdrm9w7ky3ye3r
-encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, "cfxtest") = cfxtest:type.user:00cwegpesgntwkrz7e2cvvedwbusmdrm9w7ky3ye3r
+encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, "cfx") = cfx:aap6su0s2uz36x19hscp55sr6n42yr1yk6r2rx2eh7
+encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, "cfxtest") = cfxtest:aap6su0s2uz36x19hscp55sr6n42yr1yk6hx8d8sd1
+encode(0x19c742cec42b9e4eff3b84cdedcde2f58a36f44f, "cfxtest") = cfxtest:type.user:aap6su0s2uz36x19hscp55sr6n42yr1yk6hx8d8sd1
 
-encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, "cfx") = cfx:0229g2mmv57n9b1ka44kjf08t1ka46sv1s1vpcf0wh
-encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, "cfxtest") = cfxtest:0229g2mmv57n9b1ka44kjf08t1ka46sv1sbg5w9asv
-encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, "cfxtest") = cfxtest:type.contract:0229g2mmv57n9b1ka44kjf08t1ka46sv1sbg5w9asv
+encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, "cfx") = cfx:acckucyy5fhzknbxmeexwtaj3bxmeg25b2b50pta6v
+encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, "cfxtest") = cfxtest:acckucyy5fhzknbxmeexwtaj3bxmeg25b2nuf6km25
+encode(0x84980a94d94f54ac335109393c08c866a21b1b0e, "cfxtest") = cfxtest:type.contract:acckucyy5fhzknbxmeexwtaj3bxmeg25b2nuf6km25
 
-encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, "cfx") = cfx:00edyeb9mgmaem5skctwz4y9cnge5f8ru42rbphk8r
-encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, "cfxtest") = cfxtest:00edyeb9mgmaem5skctwz4y9cnge5f8ru48ws6rtcx
-encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, "cfxtest") = cfxtest:type.user:00edyeb9mgmaem5skctwz4y9cnge5f8ru48ws6rtcx
+encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, "cfx") = cfx:aasr8snkyuymsyf2xp369e8kpzusftj14ec1n0vxj1
+encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, "cfxtest") = cfxtest:aasr8snkyuymsyf2xp369e8kpzusftj14ej62g13p7
+encode(0x1cdf3969a428a750b89b33cf93c96560e2bd17d1, "cfxtest") = cfxtest:type.user:aasr8snkyuymsyf2xp369e8kpzusftj14ej62g13p7
 
-encode(0x0888000000000000000000000000000000000002, "cfx") = cfx:0048g00000000000000000000000000008djg2z8b1
-encode(0x0888000000000000000000000000000000000002, "cfxtest") = cfxtest:0048g000000000000000000000000000087t3jt2fb
-encode(0x0888000000000000000000000000000000000002, "cfxtest") = cfxtest:type.builtin:0048g000000000000000000000000000087t3jt2fb
+encode(0x0888000000000000000000000000000000000002, "cfx") = cfx:aaejuaaaaaaaaaaaaaaaaaaaaaaaaaaaajrwuc9jnb
+encode(0x0888000000000000000000000000000000000002, "cfxtest") = cfxtest:aaejuaaaaaaaaaaaaaaaaaaaaaaaaaaaajh3dw3ctn
+encode(0x0888000000000000000000000000000000000002, "cfxtest") = cfxtest:type.builtin:aaejuaaaaaaaaaaaaaaaaaaaaaaaaaaaajh3dw3ctn
 ```
 
 More test cases can be found in [conflux-chain#2034](https://github.com/Conflux-Chain/conflux-rust/pull/2034).
