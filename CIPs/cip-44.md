@@ -2,7 +2,7 @@
 cip: 44
 title: Introduce VDF Verification Builtin
 author: Fan Long <longfan@conflux-chain.com>
-discussions-to: XXX
+discussions-to: [Additional precompiled functions](https://github.com/Conflux-Chain/CIPs/issues/55)
 status: Draft
 type: Spec Breaking
 created: 2021-01-05

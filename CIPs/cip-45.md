@@ -2,7 +2,7 @@
 cip: 45
 title: Introduce Flexible Account Authorization Methods
 author: Guang Yang (@Regulusyg)
-discussions-to: XXX
+discussions-to: [Customized sponsorship check and account authorization](https://github.com/Conflux-Chain/CIPs/issues/54)
 status: Draft
 type: Spec Breaking
 created: 2021-01-06
