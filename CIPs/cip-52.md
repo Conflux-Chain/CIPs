@@ -2,7 +2,7 @@
 cip: 52
 title: Customized Rule for Eligibility to be Sponsored
 author: Chenxing Li (@ChenxingLi)
-discussions-to: [Customized sponsorship check and account authorization](https://github.com/Conflux-Chain/CIPs/issues/54)
+discussions-to: https://github.com/Conflux-Chain/CIPs/issues/54
 status: Draft
 type: Spec Breaking
 created: 2021-01-12
