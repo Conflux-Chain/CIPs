@@ -1,5 +1,5 @@
 ---
-cip: 50
+cip: 51
 title: Support SM-2/3 verification as internal contracts
 author: Guang Yang (@Regulusyg)
 discussions-to: https://github.com/Conflux-Chain/CIPs/issues/55
