@@ -2,7 +2,7 @@
 cip: 50
 title: Support SM-2/3 verification as internal contracts
 author: Guang Yang (@Regulusyg)
-discussions-to: [Additional precompiled functions](https://github.com/Conflux-Chain/CIPs/issues/55)
+discussions-to: https://github.com/Conflux-Chain/CIPs/issues/55
 status: Draft
 type: Spec Breaking
 created: 2021-01-09
