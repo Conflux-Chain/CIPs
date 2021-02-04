@@ -3,7 +3,7 @@ cip: 12
 title: Tolerate non-existent sponsor for collateral
 author: Chenxing Li(@Chenxing Li)
 discussions-to: <URL>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2020-07-27
 replaces: 2

@@ -3,7 +3,7 @@ cip: 10
 title: Mining Reward Finalization
 author: Fan Long <longfan@conflux-chain.org>
 discussions-to: <URL>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2020-07-24
 ---

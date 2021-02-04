@@ -3,7 +3,7 @@ cip: 22
 title:  Add interfaces for Internal contracts 
 author: Yu Xiong <@oo7ww>, Chenxing Li<chenxing@conflux-chain.org>
 discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1784
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2020-08-17
 ---

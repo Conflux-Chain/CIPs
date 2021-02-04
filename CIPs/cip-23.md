@@ -3,7 +3,7 @@ cip: 23
 title: Typed structured data hashing and signing
 author: Chenxing Li <chenxing@conflux-chain.org>
 discussions-to: <URL>
-status: Draft
+status: Final
 type: Backward Compatible
 created: 2020-08-28
 ---
