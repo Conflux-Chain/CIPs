@@ -19,14 +19,13 @@ A key value event log standard.
 <!--A short (~200 word) description of the technical issue being addressed.-->
 
 The following standard specifies a key value format event log which include "announcer", "address", "key", "value" fields.
-The standard makes it easy for users to use the blockchain consensus mechanism to solve the identity and content verification problems of information publishers.
+The standard makes it easy for users to use the block chain consensus mechanism to solve the identity and content verification problems of information publishers.
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
 
-Although smart contract provides `memory`, using block chain solves information distribution, validation and storage at the same time.
-But for some DApp, storage are not strict requirements, using `memory` to store data is expensive.
-These DApp could use block chain to solves information distribution and validation, and storage them self.
+Although smart contract using block chain solves information distribution, validation and storage at the same time.
+But for some DApp, storage are not strict requirements, using `memory` to store data is very expensive and these DApp could storage them self.
 This standard is proposed to standardize the format of such information in EventLog.
 
 ## Specification
@@ -80,7 +79,7 @@ data: encode of key and value data, decoded as {key:0x6b6579, value:0x76616c7565
 
 * Gas cost
 
-EventLog only stays in the fullnode for a period of time, and the timeout information will not be found, nor will it occupy the node's storage resources indefinitely.
+EventLog only stays in block chain node for a period of time, and the timeout information will not be found, nor will it occupy the node's storage resources indefinitely.
 This standard does not need to occupy `storageCollateralized` and the transaction costs can be minimized to include only the `gas` portion.
 
 * Application scenarios
@@ -121,8 +120,8 @@ call `announce()` with `key`, `value` and contract set `msg.sender` to `announce
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.6.10;
-pragma experimental ABIEncoderV2;
+pragma solidity ^0.8.0;
+pragma abicoder v2;
 
 contract Announcement {
     struct Entry {
@@ -140,7 +139,7 @@ contract Announcement {
 }
 ```
 
-* Standard can be embedded in other contracts, also can be extended,
+* Standard can be embedded in other contracts, also can be extended.
 
 ## Security Considerations
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
