@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 19
 title: Key value EventLog Standard
 author: Haizhou Wang <Haizhou@conflux-chain.org>
 discussions-to: <URL>
