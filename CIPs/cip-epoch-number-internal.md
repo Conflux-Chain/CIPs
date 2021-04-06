@@ -44,16 +44,16 @@ Starting from epoch XXX, a new internal contract is available at the address `0x
 ```solidity
 pragma solidity >=0.4.15;
 
-contract Epochs {
+contract Context {
     /*** Query Functions ***/
     /**
      * @dev get the current epoch number
      */
-    function getCurrentEpochNumber() public view returns (uint64) {}
+    function epochNumber() public view returns (uint64) {}
 }
 ```
 
-When a transaction's execution triggers a call to `getCurrentEpochNumber()`, the internal contract implementation must return the current epoch number from the transaction's execution context.
+When a transaction's execution triggers a call to `epochNumber()`, the internal contract implementation must return the current epoch number from the transaction's execution context.
 
 Analogous to the `NUMBER` opcode, the gas cost of this internal contract call should be `2`.
 
