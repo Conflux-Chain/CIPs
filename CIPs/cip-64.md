@@ -1,8 +1,8 @@
 ---
-cip: X
-title:  Get current epoch number through internal contract
+cip: 64
+title: Get current epoch number through internal contract
 author: Péter Garamvölgyi <@Thegaram>
-discussions-to: TBD
+discussions-to: https://github.com/Conflux-Chain/CIPs/issues/65
 status: Draft
 type: Spec Breaking
 created: 2021-03-08
