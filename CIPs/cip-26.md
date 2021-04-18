@@ -3,7 +3,7 @@ cip: 26
 title: Use timestamp from pivot block as TIMESTAMP (opcode 42)
 author: Yanpei Liu(@resodo)
 discussions-to: <URL>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2020-09-16
 ---

@@ -3,7 +3,7 @@ cip: 8
 title: Put off code collateral settlement.
 author: <Chenxing Li (@ChenxingLi)>
 discussions-to: <URL>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2020-07-23
 requires: 12

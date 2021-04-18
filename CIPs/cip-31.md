@@ -3,7 +3,7 @@ cip: 31
 title: New contract in genesis block: Create2Factory
 author: Fan Wang(@posaggen)
 discussions-to: <URL>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2020-10-10
 ---
