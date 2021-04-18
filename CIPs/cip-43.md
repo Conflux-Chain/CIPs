@@ -48,7 +48,21 @@ TBD
 
 ## Security Considerations
 
-TBD
+We all know that a PoW consensus protocol can provide security when the attacker controls <50% computing power. But what is the case after activating CIP-43. We list some senarios here. 
+
+- **51% Attack:** If the attacker controls >51% computing power and the PoS chain works well, the pivot blocks that
+have been decided by the PoS chain are still safe. However, the PoW chain may lose liveness because the PoS nodes
+cannot confirm any new blocks. If the attacker disappears, the consensus protocol can execute as usual.
+- **17% Staking Attack:** If the attacker controls >17% committee members, the PoS chain may lose liveness. Then
+the Conflux chain runs as if CIP-43 is not activated. If the attacker disappears, the consensus protocol can execute as
+usual.
+- **84% Staking Attack:**  If the attacker controls >84% committee members, it can generate conflict PoS blocks. In this
+case, the PoW chain will diverge, even if the attacker disappears.
+- **Long-range attack:** Different from the 84% staking attack, in a long-range attack, a PoS node becomes malicious
+not because it intended to break the consensus, but because it lost private keys. So we assume the attacker can only
+control the majority committee in a very early stage. If the attacker controls >51% computing power and can revert
+the PoW chain from the early stage, a double-spending attack happens. Otherwise, the consensus protocol can execute
+as usual.
 
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
