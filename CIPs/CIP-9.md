@@ -22,10 +22,61 @@ The following standard specifies a key value format event log which include "ERC
 ## Specification
 
 ```plain
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "./RoleControl.sol";
-import "./IERC721Mint.sol";
+// SPDX-License-Identifier: MIT
+pragma solidity >=0.6.0 <0.8.0;
+pragma experimental ABIEncoderV2;
+
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "./RoleControl.sol";
+import "./IERC721Mint.sol";
+
+contract Certificate is ERC721, Ownable, RoleControl, IERC721Mint {
+	///Call sub contract ERC721, ownable, rolecontrol, ERC721min
+	///The address to create the calling contract is the contract owner
+	///Creating NFT of erc721
+
+    constructor () public ERC721(erc721Name, erc721Symbol) { 
+    ///Certificate creation administrator "role" creates NFT initialization in erc721 forma
+
+    modifier onlyMintAdmin() {
+    ///Certificate creation administrator "role" account validity confirmation
+     
+    }
+
+    function isMintAdmin(address account) public view returns (bool) {
+    ///If the account number of the Certificate creation administrator "role" is confirmed to be valid, return "MINT"_ AMNIN_ ROLE"
+    }
+
+    function grantMintRole(address account) public onlyOwner {
+    ///Set the current valid account to create an account for the certificate
+    }
+
+    function revokeMintRole(address account) public onlyOwner {
+    ///Delete the account created by the certificate
+    }
+
+    function mint(address to, string memory tokenURI) public override onlyMintAdmin returns(uint256 tokenId) {
+    ///Certificate code management
+    }
+
+    function transferFrom(address from, address to, uint256 tokenId) public virtual override {
+    ///Certificate delivery mode 1: including "address from, address to, uint256 tokenid"        
+    }
+    function safeTransferFrom(address from, address to, uint256 tokenId) public virtual override {
+    ///Certificate delivery mode 2: including "address from, address to, uint256 tokenid"
+
+    }
+    function safeTransferFrom(address from, address to, uint256 tokenId, bytes memory _data) public virtual override {
+    ///Certificate delivery mode 3: including "address from, address to, uint256 tokenId, bytes memory _data"
+
+    }
+
+    function burn(uint256 tokenId) public override onlyMintAdmin {
+    ///Confirm whether the token ID exists, and destroy it if it does not exist
+    }
+
+ }
 ```
 * The certificate issuer uses the contract "Ownable.sol"
 * The certificate owner uses the contract "RoleControl.sol"
@@ -34,26 +85,12 @@ Note: The standard specifies the format, and there are already specific implemen
 
 ## Rationale
 
-* The certificate issuer enters information in the certificate information input window, and produces the certificate
-```plain
-abstract contract Ownable is Context {
-    address private _owner;
-    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);
-```
-* The certificate owner can view and download the certificate according to the account
-```plain
-abstract contract RoleControl is Context {
-    using EnumerableSet for EnumerableSet.AddressSet;
-    using Address for address;
-    struct RoleData {
-        EnumerableSet.AddressSet members;
-        bytes32 adminRole;
-    }
-```
+* TBD
+
 ## Backwards Compatibility
 
 * TBD
-## Test Cases
+## Example
 
 Conflux University College Graduation Certificate
 
@@ -203,5 +240,4 @@ abstract contract RoleControl is Context {
 ## Copyright
 
 * Copyright and related rights waived via[CC0](https://creativecommons.org/publicdomain/zero/1.0/?fileGuid=ioPgblI7nGIBMFSo).
-
 
