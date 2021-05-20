@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 71
 title: Configurable anti-reentrancy
 author: Chenxing Li <chenxing@confluxnetwork.org>
 discussions-to: <URL>
