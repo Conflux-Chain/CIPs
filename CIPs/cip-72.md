@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 72
 title: Accept Ethereum transaction signature
 author: Chenxing Li <chenxing@confluxnetwork.org>
 discussions-to: <URL>
