@@ -31,21 +31,21 @@ contract AntiReentrancy {
      * @dev the contract turns on/off the anti-reentrancy. 
      * @param allow A boolean variable to indicate if the reentrancy is allowed in this contract.
      */
-    function allowReentracy(bool allow) external {}
+    function allowReentrancy(bool allow) external {}
 
     /**
      * @dev a contract admin turns on/off the anti-reentrancy for the contract. 
      * @param contractAddr The address of the contract. 
      * @param allow A boolean variable to indicate if the reentrancy is allowed in this contract.
      */
-    function allowReentracyByAdmin(address contractAddr, bool allow) external {}
+    function allowReentrancyByAdmin(address contractAddr, bool allow) external {}
 
 
     /**
      * @dev get whether the reentrancy is allowed for a contract. vote power staking balance at given blockNumber
      * @param contractAddr The address of the contract. 
      */
-    function isReentracyAllowed(address contractAddr) external returns (bool) {}
+    function isReentrancyAllowed(address contractAddr) external returns (bool) {}
 }
 ```
 
