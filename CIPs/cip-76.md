@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 76
 title: Remove VM-related constaints in Syncing Blocks
 author: Chenxing Li (<lylcx2007@gmail.com>)
 discussions-to: <URL>
