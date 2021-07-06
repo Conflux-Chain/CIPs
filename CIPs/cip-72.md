@@ -28,6 +28,13 @@ Conflux does not require the sender's balance can afford the storage collateral 
 
 When receiving an Ethereum-like transaction whose sender address does not start with `0x1`, the RPC should reject such a transaction.
 
+### Activation plan
+
+Parameters: `EPOCH_HEIGHT_CIP72A`, `BLOCK_NUMBER_CIP72B`.
+
+a. When `epoch_height >= EPOCH_HEIGHT_CIP72A`, the blocks can pack Ethereum like transaction. Before that, a block packing Ethereum like transaction will be treat invalid because its the target epoch height is too large.
+b. When `block_number >= BLOCK_NUMBER_CIP72B`, the VM can execute Ethereum like transaction. Before that, a Ethereum like transaction will be skipped. 
+
 ## Rationale
 
 We do not introduce an additional transaction format to avoid a massive effect on the network protocol, the database, and the block format. 
