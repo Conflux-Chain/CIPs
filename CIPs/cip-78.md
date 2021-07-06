@@ -1,7 +1,7 @@
 ---
 cip: 78
-title: Correct `is_sponsored` information in receipt
-author: <a list of the author's or authors' name(s) and/or username(s), or name(s) and email(s), e.g. (use with the parentheses or triangular brackets): Chenxing Li (<lylcx2007@gmail.com>)
+title: Correct `is_sponsored` fields in receipt
+author: Chenxing Li (<lylcx2007@gmail.com>)
 status: Draft
 type: Spec Breaking
 created: 2021-07-06
