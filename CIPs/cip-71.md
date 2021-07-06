@@ -53,6 +53,14 @@ contract AntiReentrancy {
 
 Conflux will forbid the write operations (trigger the anti-reentrancy mechanism) only if a contract address that does not allow reentrancy appears twice in the call stack.
 
+### Activation plan
+
+Parameters: `BLOCK_NUMBER_CIP71A`, `BLOCK_NUMBER_CIP71B`. 
+
+a. Enable the new internal contracts and disable the anti-reentrancy for contracts allowing reentrancy. Should be activated when `block_numer >= BLOCK_NUMBER_CIP71A`. 
+
+b. Fix incorrect behaviour in the current implementation of anti-reentrancy, when `block_number >= BLOCK_NUMBER_CIP71B`. 
+
 ## Rationale
 
 Now the contract developer can declare that "my contract will not trigger anti-reentrancy mechanism". But they can not declare that "my contract will ignore anti-reentrancy". These two declaration are different. For example, suppose the following call stack is the current call stack, contract A does not allow reentrancy but contract B allows reentrancy. When contract B is called for the second time, it cannot execute write operation, because contract A triggers anti-reentrancy mechanism. 
