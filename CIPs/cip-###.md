@@ -5,9 +5,8 @@ author: Cyberforker(cyberforker@outlook.com)
 discussions-to: https://forum.conflux.fun/t/nft-nft-cip/10019
 status: draft
 type: Standards Track
-category: CRC
 created: 2021-09-01
-requires: 165, 721
+requires: EIP-165, EIP-721
 ---
 ## Simple Summary
 This is a standard for time-stamp provable NFTs, which extends [ERC-721]([./eip-721.md](https://github.com/ethereum/EIPs/blob/master/EIPS/eip-721.md)).
