@@ -30,6 +30,27 @@ Explained in abstract.
 ### Signature recover
 
 ### Internal contracts
+- For the other internal contracts except `AdminControl`, each time we want to check if an address is a contract, we check its `code_hash` and whether the target address is in the call stack.
+- For `AdminControl`, we accept any address as admin.
+
+### State root
+Currently, the world state stores the private-key-controlled account and contract account in different format. This format will influence the state root. Even if an address started with `0x8` has not been initiated, it will be stored in format of a contract account. After CIP-80, we apply the following rule:
+- If an address starts with `0x8`, it will be stored in format of a contract account, even if it is an private-key-controlled address. 
+- For the other address, it will be stored in format of a contract account only if it has code. 
+
+### Address validity check in EVM
+The following address validity check will be removed.
+- The receiver address of a transaction or a message call. 
+- The refund address for suicide. 
+- The admin address. 
+
+We never checked the following address before, because they are always valid. 
+- The sender of a transaction.
+- The sponsor of a contract.
+
+### Block validity
+If a transaction has invalid receiver address, a block packing such transaction will not be regarded as invalid. So this CIP does not have block validity issue.
+
 
 ## Rationale
 
