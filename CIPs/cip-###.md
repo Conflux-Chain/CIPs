@@ -1,5 +1,5 @@
 ---
-cip: t.b.d
+cip: 3777
 title: Time proof non-fungible Token
 author: Cyberforker(cyberforker@outlook.com)
 discussions-to: https://forum.conflux.fun/t/nft-nft-cip/10019
@@ -24,7 +24,7 @@ Here are some brand new applications that can be achieved by tpNFT based on this
 - Prophecy: Make predictions and cast them into tpNFT with time proof ability, as proof of personal ability, or as a certificate for receiving bonuses.
 - Identity: Participating in a series of on-chain behaviors through tpNFT, including the prophecy mentioned in the previous point, revolves around tpNFT's timestamp proof, which has become a natural proof of identity.
 - Legacy: Binding assets to a tpNFT, others can receive part or all of the assets by submitting the preimage of encryption parameter(Hash or HashTree). We have another EIP to solve the front-running attacks.
-- Dynamic NFT: With tpNFT, we only need a little improvement than can get a brand new type of NFT which state on the chain will automatically change over time without consuming any gas fees. Such features can open up new areas for games, installation art, financial contracts, and so on.
+- Dynamic NFT: With tpNFT, we only need a little improvement then can get a brand new type of NFT which state on the chain will automatically change over time without consuming any gas fees. Such features can open up new areas for games, installation art, financial contracts, and so on.
    
 Summarize: From a philosophical point of view, The NFT of the ERC721 standard is mainly used to anchor and map things related to space, while tpNFT is used for related to time.
     
@@ -38,8 +38,8 @@ Compared to other possible solutions for on-chain time proof such as CallData or
    - Lack of timestamp proof: When mint an NFT, we directly ignored the time attribute and time value of the mapping object, while tpNFT solved this problem. 
    - Lack of encryption information storage: Based on the above points, we found that it is still unable to solve the problem of encryption Hash storage without leaking key information. To solve this problem, we added encryption Hash storage parameter to tpNFT, and also under the management of timestamp proof.  
    - Limited on-chain interaction and execution potential: Other contracts on the chain cannot interact directly with the NFT for timestamp + content validation to perform some automated logic, including but not limited to governance, prophecy, legacy processing, and other requirements mentioned in the summary. TpNFT's timestamp proof + other three parameters (description, URI, Hash encryption) provides a convenient possibility for the third party contract to directly interact, verify, and execute through the tpNFT contract interface.  
-    - The major difference between the on-chain timestamp and the timestamp stored in the log is that the on-chain timestamp parameters can be accessed directly by other contracts, thus allowing for composability. 
-    - The NFT has a time attribute that can make interactions with external accounts or between NFTs produce different results at different times, which provides a logical basis for the time dynamics of NFT.  
+   - The major difference between the on-chain timestamp and the timestamp stored in the log is that the on-chain timestamp parameters can be accessed directly by other contracts, thus allowing for composability. 
+   - The NFT has a time attribute that can make interactions with external accounts or between NFTs produce different results at different times, which provides a logical basis for the time dynamics of NFT.  
 
 Inspired by and based on ERC721's associated token ownership, we have implemented a tpNFT architecture that combines renewability and timestamp proof and supports the preservation of encrypted content, addressing the problems of other known solutions and giving NFT time attributes. This standard is based on and fully follows the ERC721 series of methods. Additional superset methods based on ERC721 implementation are as follows:
 ## Specification
@@ -279,7 +279,13 @@ We chose Standard Interface Detection (ERC-165) to expose the interfaces that a 
 ### Query
 ## Reference Implementation
 ### TimeMarker
-### Dynamic NFT
+### [Dynamic NFT](https://etherscan.io/address/0x1510b4bc4f6d19b17b00f2d330cdc4b2bc1f470a#code) 
+A dynamic emoji story NFT: 
+ * 📜The story is randomized emoji dynamic generated and stored on-chain.
+ * Script, text, plot, and other functionality are intentionally omitted for others to interpret.
+ * 🆕Each NFT updates the story automatically every 42 hours (default) over time. However, its rarity are not affected.
+ * Feel free to use emoji stories hints sheet in any way you want.
+ * Website:https://www.storyproject.xyz
 ### Governance voting
 ## Security Considerations
     1. Inherit the security based on the ERC721 standard.
