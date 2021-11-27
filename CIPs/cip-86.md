@@ -25,7 +25,7 @@ For the block whose block height equals `5000k`, where `k` is an integer, we com
 - `n`: The number of blocks in the last 5000 epochs.
 - `T`: The time elapsed in the last 5000 epochs (in terms of seconds). (See Conflux Protocol Specification for more details in computing `T`)
 
-Let `d'` be the difficulty before adjustment, then the estimated computing power in the last 5000 epochs is `p = n * d' / T` (hashes/second). In order to set the block generation rate to 0.5 blocks/second, the target difficulty `d` is defined as `d = p / 2 = n * d' / T / 2`.
+Let `d'` be the difficulty before adjustment, then the estimated computing power in the last 5000 epochs is `p = n * d' / T` (hashes/second). In order to set the block generation rate to 2 blocks/second, the target difficulty `d` is defined as `d = p / 2 = n * d' / T / 2`.
 
 So the difficulty after adjustment  `D`  will be set to `d`. Specially, if `d > 1.5 d'`, `D` is set to `1.5 d'`. If `d < 0.5d'`, `D` is set to `0.5 d'`.
 
