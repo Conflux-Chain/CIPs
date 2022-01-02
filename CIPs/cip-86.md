@@ -43,7 +43,7 @@ Instead of setting `d` as the adjusted difficulty, we apply a simple average met
 ## Rationale
 The root cause of computing power fluctuation is that the difficulty adjustment algorithm predicts the computing power for **the next several epochs** from the estimated computing power in **the last several epochs**. So if the computing power continues to change, the algorithm will always result in a wrong prediction. 
 
-A complete solution is to reduce the base reward if the actual computing power is much larger than the predicted computing power. So the miners will be disincentivized to switch in and out. However, this solution involves a change in the economic model and needs more discussion. So here we propose a simple solution, which reduces the period of adjustment and makes the computing power in the hour window stable. 
+A complete solution is to reduce the base reward if the actual computing power is much larger than predicted. So the miners will be disincentivized to switch in and out. However, this solution involves a change in the economic model and needs more discussion. So here we propose a simple solution, which reduces the period of adjustment and makes the computing power in the hour window stable. 
 
 ## Backward Compatibility
 
