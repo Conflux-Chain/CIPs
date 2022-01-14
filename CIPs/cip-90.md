@@ -49,7 +49,11 @@ In computing the *delta set storage key* (see section 3.2.2 for details) for acc
 - The `NUMBER` opcode will return the epoch number.
 - The `BLOCKHASH` opcode can only take `NUMBER-1` as input. (Unlike Ethereum, which takes any integer in `NUMBER-256` to `NUMBER-1` as input)
 - No gas refund in `SSTORE` opcode and `SUICIDE` opcode.
-- Different gas costs when `SSTORE` opcode changing a storage entry from zero to non-zero. (Has not decided yet)
+- The operations which occupy storage have a different gas cost.
+    - `SSTORE` costs 40000 gas (instead of 20000 gas in Ethereum) when changing a storage entry from zero to non-zero. 
+    - When deploying a new contract, each byte costs 400 gas (instead of 200 gas in Ethereum).
+    - When creating a new account by `CALL` or `SUICIDE`, it consumes 50000 gas (instead of 25000 gas in Ethereum).
+
 
 ### Cross Space Operations
 
@@ -61,7 +65,7 @@ Each the native space account has a mapped account in the EVM space. The address
 
 A new internal contract called the `CrossSpace` contract will be deployed at the address `0x0888000000000000000000000000000000000006` with the following interfaces. The native space user/contract can interact with the accounts in the EVM space and process the return value in the same transaction. So the cross-space operations can be atomic. 
 
-When making a cross-space call, only 1/20 of available gas can be passed in the EVM space. This is aimed to limit gas usage in a cross-space call. (Has not decided yet.)
+When making a cross-space call, only 1/10 of available gas can be passed in the EVM space. This is aimed to limit gas usage in a cross-space call. 
 
 ```solidity
 pragma solidity >=0.5.0;
@@ -75,8 +79,6 @@ interface CrossSpace {
     event Withdraw(bytes20 indexed sender, address indexed receiver, uint256 value);
 
     function createEVM(bytes calldata init) external payable returns (bytes20);
-
-    function create2EVM(bytes calldata init, bytes32 salt) external payable returns (bytes20);
 
     function transferEVM(bytes20 to) external payable returns (bytes memory output);
 
@@ -94,7 +96,7 @@ interface CrossSpace {
 
 ### Block gas limit
 
-Only the block whose block height is a multiple of 10 can pack Ethereum type transaction. The total gas limit of these transaction cannot exceed half of the block gas limit.
+Only the block whose block height is a multiple of 5 can pack Ethereum type transaction. The total gas limit of these transaction cannot exceed half of the block gas limit.
 
 
 
@@ -104,7 +106,7 @@ Only the block whose block height is a multiple of 10 can pack Ethereum type tra
 
 ### About the storage key
 
-In the current implementation, the 21-th byte of encoded storage key is a valid ascii charachter. So set the highest bit of the 21-th byte to 1 can distinguish new storage keys from the existing keys. 
+In the current implementation, the 21-th byte of encoded storage key is a valid ascii charachter. So set the highest bit of the 21-th byte can distinguish new storage keys from the existing keys. 
 
 ### About the interface of the internal contracts
 
