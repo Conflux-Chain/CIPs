@@ -45,10 +45,19 @@ And the options of each parameters are:
 1. Increase by 100%.
 2. Decrease by 50%.
 
-The internal contract `ParameterControl` has two interfaces cast the vote and to read the vote:
+The internal contract `ParameterControl` has a struct `Vote` as 
+```
+struct Vote {
+     uint8 index,
+     uint8 opt_index,
+     uint256 votes,
+}
+```
 
-* `function castVote(uint64 version, bytes vote_data) external;`. The first parameter is a version number to indicate which vote period is the call for. The second parameter is an encoded list of `(uint8, uint8, uint256)` where the first element is the voted parameter index, the second element is the chosen option index, and the last element is the number of votes to cast on this option.
-* `function readVote(bytes20 address) external view returns (bytes)`. Read the votes data of an account.
+and two interfaces cast the vote and to read the vote. 
+
+* `function castVote(uint64 version, Vote[] vote_data) external;`. The first parameter is a version number to indicate which vote period is the call for. The second parameter is an encoded list of `(uint8, uint8, uint256)` where the first element is the voted parameter index, the second element is the chosen option index, and the last element is the number of votes to cast on this option.
+* `function readVote(bytes20 address) external view returns (Vote[])`. Read the votes data of an account.
 
 An account can distribute his voting power to different options of the same parameter. For any parameter, the total votes for its options should not exceed the account's current total voting power. If the function is called for several times within a voting period, for each parameter, only the last successful call takes effect and overrides the previous votes. For example, if an account voted for both parameters in the first transactions TX1 and voted for parameter 2 in the second transaction TX2, its vote for parameter 1 remain the same as the one in TX1 and its vote for parameter 2 is changed to the one in TX2.
 
