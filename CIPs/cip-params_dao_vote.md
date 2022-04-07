@@ -1,8 +1,8 @@
 ---
-cip: <to be assigned>
+cip: 94
 title: On-chain DAO Vote for Chain Parameters
-author: <a list of the author's or authors' name(s) and/or username(s), or name(s) and email(s), e.g. (use with the parentheses or triangular brackets): FirstName LastName (@GitHubUsername), FirstName LastName <foo@bar.com>, FirstName (@GitHubUsername) and GitHubUsername (@GitHubUsername)>
-discussions-to: <URL>
+author: Peilun Li (@peilun-conflux)
+discussions-to: https://github.com/Conflux-Chain/CIPs/issues/95
 status: Draft
 type: <Spec Breaking>
 created: <2022-03-31>
@@ -47,14 +47,14 @@ And the options of each parameters are:
 
 The internal contract `ParameterControl` has two interfaces cast the vote and to read the vote:
 
-* `castVote(uint16, bytes)`. The first parameter is a version number to indicate which vote period is the call for. The second parameter is an encoded list of `(uint8, uint8, uint256)` where the first element is the voted parameter index, the second element is the chosen option index, and the last element is the number of votes to cast on this option.
-* `readVote(address)`. Read the votes data of an account.
+* `function castVote(uint64 version, bytes vote_data) external;`. The first parameter is a version number to indicate which vote period is the call for. The second parameter is an encoded list of `(uint8, uint8, uint256)` where the first element is the voted parameter index, the second element is the chosen option index, and the last element is the number of votes to cast on this option.
+* `function readVote(bytes20 address) external view returns (bytes)`. Read the votes data of an account.
 
-An account can distribute his voting power to different options of the same parameter. For any parameter, the total votes for its options should not exceed the account's current total voting power. If the function is called for several times within a voting period, only the last successful call takes effect and overrides the previous votes.
+An account can distribute his voting power to different options of the same parameter. For any parameter, the total votes for its options should not exceed the account's current total voting power. If the function is called for several times within a voting period, for each parameter, only the last successful call takes effect and overrides the previous votes. For example, if an account voted for both parameters in the first transactions TX1 and voted for parameter 2 in the second transaction TX2, its vote for parameter 1 remain the same as the one in TX1 and its vote for parameter 2 is changed to the one in TX2.
 
 At the end of a voting period (counted as block numbers), NEXT_KEY is used to update KEY, and VOTING_KEY is read to compute and update NEXT_KEY.
 
-An event is also emitted for each successful vote. The vote of each account will be stored as a separate storage entry with the key `prefix_and_hash(3, address)` following the PoS identifier storage.
+An event is also emitted for each successful vote. The vote of each account will be stored in a list of entries following the key `prefix_and_hash(3, address)`. Specifically, for the parameter index `i` and the option index `j`, the number of votes for it is stored in `prefix_and_hash(3, address) + i * 3 + j`.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
@@ -62,12 +62,7 @@ The rationale to store the voting results to NEXT_KEY instead of applying it imm
 
 We want an account to vote for multiple options for two reasons. One is that the PoS pool contract now can collect its users' choices and help to cast their votes. Another reason is that an account can combine these options to have a fine-grained option for a parameter. This allows us to make the options change range relatively large without a side effect.
 
-Discussion: 
-1. Do we require a minimal voting power? Or do we allow a faster update if the voting is unanimous?
-2. Do we need an option to vote for unchange or just let the user to distribute the votes for both increase and decrease?
-3. Do we want new votes to override old votes or do we want every vote to be final?
-4. Do we need to store the vote data in a way that they can be garbage collected after each vote period?
-
+We make later votes override early votes at the parameter level for efficiency reasons, because if an account only votes for one parameter, we only need to read the data for this parameter for validation. If we want every call to override all votes, we'll need to read all entries to see if they are voted before.
 
 ## Backwards Compatibility
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
