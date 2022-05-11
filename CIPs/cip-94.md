@@ -32,12 +32,12 @@ By integrating parameter update and the on-chain DAO voting, we can have a regul
 ## Specification
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 
-When the block number BN is executed, a new `ParameterControl` internal contract will be initialized the and the default parameters for PoW base reward and PoS reward interest will be stored as special storage entries KEY, NEXT_KEY. Besides the currently used parameter value, storage entries to store the summary of the on-going voting are also initialized for VOTING_KEY.
+When the block number BN is executed, a new `ParameterControl` internal contract will be initialized the and the default parameters for PoW base reward and PoS reward interest will be stored as special storage entries (the PoS reward interest has been kept in the storage before this CIP, and the PoW base reward will be stored under the key "pow_base_reward" in the contract `ParameterControl`). Besides the currently used parameter value, storage entries to store the summary of the on-going voting and the settled voting are also initialized as `CURRENT_VOTES_ENTRIES` and `SETTLED_VOTES_ENTRIES`.
 
 The list of parameters to vote are:
 
-0. PoW base block reward.
-1. PoS base reward interest rate.
+1. PoW base block reward.
+2. PoS base reward interest rate.
 
 And the options of each parameters are:
 
@@ -48,26 +48,32 @@ And the options of each parameters are:
 The internal contract `ParameterControl` has a struct `Vote` as 
 ```
 struct Vote {
-     uint8 index,
-     uint8 opt_index,
-     uint256 votes,
+     uint16 index;
+     uint256[3] votes;
 }
 ```
+where `index` is the parameter index to vote for and the array `votes` is the number of votes cast to each option (i.e., unchange, increase, and decrease in order).
 
-and two interfaces cast the vote and to read the vote. 
+The contract has two interfaces to cast the vote and to read the vote: 
 
-* `function castVote(uint64 version, Vote[] vote_data) external;`. The first parameter is a version number to indicate which vote period is the call for. The second parameter is an encoded list of `(uint8, uint8, uint256)` where the first element is the voted parameter index, the second element is the chosen option index, and the last element is the number of votes to cast on this option.
-* `function readVote(bytes20 address) external view returns (Vote[])`. Read the votes data of an account.
+* `function castVote(uint64 version, Vote[] vote_data) external;`. The first parameter is a version number to indicate which vote period is the call for. The second parameter is an encoded list of `Vote`.
+* `function readVote(address addr) external view returns (Vote[])`. Read the votes data of an account.
 
-An account can distribute his voting power to different options of the same parameter. For any parameter, the total votes for its options should not exceed the account's current total voting power. If the function is called for several times within a voting period, for each parameter, only the last successful call takes effect and overrides the previous votes. For example, if an account voted for both parameters in the first transactions TX1 and voted for parameter 2 in the second transaction TX2, its vote for parameter 1 remain the same as the one in TX1 and its vote for parameter 2 is changed to the one in TX2.
+An account can distribute his voting power to different options of the same parameter. For any parameter, the total votes for its options should not exceed the account's current total voting power. And for each call of `castVote`, a parameter can only be voted at most once. If the function is called for several times within a voting period, for each parameter, only the last successful call takes effect and overrides the previous votes. For example, if an account voted for both parameters in the first transactions TX1 and voted for parameter 2 in the second transaction TX2, its vote for parameter 1 remain the same as the one in TX1 and its vote for parameter 2 is changed to the one in TX2.
 
-At the end of a voting period (counted as block numbers), NEXT_KEY is used to update KEY, and VOTING_KEY is read to compute and update NEXT_KEY.
+At the end of a voting period (counted as block numbers), `SETTLED_VOTES_ENTRIES` is used to compute the new parameter values. Specifically, if the total votes for each option of a parameter is `[n_unchange, n_increase, n_decrease]`, the new value for this parameter is computed as 
 
-An event is also emitted for each successful vote. The vote of each account will be stored in a list of entries following the key `prefix_and_hash(3, address)`. Specifically, for the parameter index `i` and the option index `j`, the number of votes for it is stored in `prefix_and_hash(3, address) + i * 3 + j`.
+```
+new = old * 2 ** ((n_increase - n_decrease) / (n_increase + n_decease + n_unchange))
+```
+
+After the parameters are updated in the storage, we move the current votes `CURRENT_VOTES_ENTRIES` to `SETTLED_VOTES_ENTRIES` and reset the values of `CURRENT_VOTES_ENTRIES` to 0 for the votes in the next period.
+
+An event is also emitted for each successful vote. For each account, the latest votes and the version for these votes will also be stored as storage entries in the contract `ParamsControl`.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
-The rationale to store the voting results to NEXT_KEY instead of applying it immediately is that, if the result is manipulated unexpectedly, there is still a chance to revert it with a hardfork. And adding a delay allows more parameters (header-validity related, like difficulty) to be voted in the future, because the latest state for a new block may not be available.
+The rationale to store the voting results to `SETTLED_VOTES_ENTRIES` instead of applying it immediately is that, if the result is manipulated unexpectedly, there is still a chance to revert it with a hardfork. And adding a delay allows more parameters (header-validity related, like difficulty) to be voted in the future, because the latest state for a new block may not be available.
 
 We want an account to vote for multiple options for two reasons. One is that the PoS pool contract now can collect its users' choices and help to cast their votes. Another reason is that an account can combine these options to have a fine-grained option for a parameter. This allows us to make the options change range relatively large without a side effect.
 
