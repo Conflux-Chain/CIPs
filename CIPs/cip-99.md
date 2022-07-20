@@ -55,5 +55,7 @@ N/A.
 <!--All CIPs must contain a section that discusses the security implications/considerations relevant to the proposed change. Include information that might be important for security discussions, surfaces risks and can be used throughout the life cycle of the proposal. E.g. include security-relevant design decisions, concerns, important discussions, implementation-specific guidance and pitfalls, an outline of threats and risks and how they are being addressed. CIP submissions missing the "Security Considerations" section will be rejected. a CIP cannot proceed to status "Final" without a Security Considerations discussion deemed sufficient by the reviewers.-->
 Allowing more not-voting terms make crash failure to affect the system longer. But if the voting power of this not-voting node does not prevent the system from making progress, having it in the committee for two more terms still leaves enough honest voting power.
 
+Another issue is that the account that stakes before the hardfork height and withdraws after the height will be able to withdraw after less than 14 days. Since this only happens during the hardfork and not after, it should be okay.
+
 ## Copyright
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
