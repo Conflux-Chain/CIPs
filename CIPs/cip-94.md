@@ -19,7 +19,7 @@ This CIP proposes to use on-chain DAO voting to decide and update reward paramet
 
 ## Abstract
 <!--A short (~200 word) description of the technical issue being addressed.-->
-Currently, all reward parameters are hardcoded in the code. This CIP proposes to store these parameters as a part of the global state, so we can utilize the existing on-chain voting powers (by staking and locking CFXs through the internal `Staking` contract) to vote for parameter changes without a hardfork. The vote starts periodically (every few months), and only a fixed number of options (to increase the parameter, decrease the parameter, or keep it unchanged) are available. Accounts can cast their vote by sending transactions. The parameter state is updated when a vote period ends.
+Currently, all reward parameters are hardcoded in the code. This CIP proposes to store these parameters as a part of the global state, so we can utilize the existing on-chain voting powers (by staking and locking CFXs through the internal `Staking` contract) to vote for parameter changes without a hardfork. The vote starts periodically (every 2 months), and only a fixed number of options (to increase the parameter, decrease the parameter, or keep it unchanged) are available. Accounts can cast their vote by sending transactions. The parameter state is updated when a vote period ends.
 
 ## Motivation
 <!--The motivation is critical for CIPs that want to change the Conflux protocol. It should clearly explain why the existing protocol specification is inadequate to address the problem that the CIP solves. CIP submissions without sufficient motivation may be rejected outright.-->
@@ -70,6 +70,8 @@ new = old * 2 ** ((n_increase - n_decrease) / (n_increase + n_decease + n_unchan
 After the parameters are updated in the storage, we move the current votes `CURRENT_VOTES_ENTRIES` to `SETTLED_VOTES_ENTRIES` and reset the values of `CURRENT_VOTES_ENTRIES` to 0 for the votes in the next period.
 
 An event is also emitted for each successful vote. For each account, the latest votes and the version for these votes will also be stored as storage entries in the contract `ParamsControl`.
+
+The vote period is set to 2 months and is based on the block number, so every period is 2 * 60 * 60 * 24 * 30 * 2 = 10,368,000 blocks.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
