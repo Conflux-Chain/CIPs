@@ -31,13 +31,15 @@ Now since the force-retire is inevitable to happen sometimes, 7-day unlock perio
 <!--The technical specification should describe the syntax and semantics of any new feature. The specification should be detailed enough to allow competing, interoperable implementations for any of the current Conflux platforms ([conflux-rust](https://github.com/Conflux-Chain/conflux-rust)).-->
 The number of not-voting terms needed to force-retire a node becomes 3 continuous serving terms after the hardfork round. Note that if a node does not vote in the last 2 terms after it has been elected and is not elected into the committee in the next election, the node should not be force-retired.
 
-The unlocking period becomes 1 day (both for normal retirement and force retirement) after the hardfork round.
+The unlocking period becomes 1 day (both for normal retirement and force retirement) and the locking period becomes 13 days after the hardfork round.
 
 ## Rationale
 <!--The rationale fleshes out the specification by describing what motivated the design and why particular design decisions were made. It should describe alternate designs that were considered and related work, e.g. how the feature is supported in other languages. The rationale may also provide evidence of consensus within the community, and should discuss important objections or concerns raised during discussion.-->
 The unlocking period of the normal retirement should not be longer than force retirement so no nodes will actively trigger force retirement.
 
 Since every node serves the committee for 6 terms, checking 3 continuous terms helps regardless of the voting power of a node.
+
+The total time for a node to lock and unlock is still at least 14 days, so this proposal does not introduce more attack chances.
 
 ## Backwards Compatibility
 <!--All CIPs that introduce backwards incompatibilities must include a section describing these incompatibilities and their severity. The CIP must explain how the author proposes to deal with these incompatibilities. CIP submissions without a sufficient backwards compatibility treatise may be rejected outright.-->
