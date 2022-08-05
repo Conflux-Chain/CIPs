@@ -1,7 +1,7 @@
 ---
 cip: 10
 title: Mining Reward Finalization
-author: Fan Long <longfan@conflux-chain.org>
+author: Fan Long <longfan@confluxnetwork.org>
 discussions-to: <URL>
 status: Final
 type: Spec Breaking

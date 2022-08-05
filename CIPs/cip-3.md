@@ -1,7 +1,7 @@
 ---
 cip: 3
 title: Octopus Proof-of-Work Mining Algorithm
-author: Fan Long <longfan@conflux-chain.org> and Dong Zhou <dong.zhou@conflux-chain.org>
+author: Fan Long <longfan@confluxnetwork.org> and Dong Zhou <dong.zhou@confluxnetwork.org>
 discussions-to: <URL>
 status: Final
 type: Spec Breaking

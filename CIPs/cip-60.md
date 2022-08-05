@@ -3,7 +3,7 @@ cip: 60
 title: Log VM Error in Tracer 
 author: Chenxing Li (@ChenxingLi)
 discussions-to: https://github.com/Conflux-Chain/CIPs/issues/61
-status: Draft
+status: Final
 type: Database Breaking
 created: 2021-02-04
 ---

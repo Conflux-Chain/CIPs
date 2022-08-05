@@ -2,8 +2,7 @@
 cip: 71
 title: Disable anti-reentrancy
 author: Chenxing Li <chenxing@confluxnetwork.org>
-discussions-to: <URL>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2021-5-18
 ---

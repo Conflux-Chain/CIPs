@@ -1,9 +1,8 @@
 ---
 cip: 43
 title: Introduce Finality via Voting Among Staked
-author: Fan Long <longfan@conflux-chain.org> Chenxing Li <chenxing@conflux-chain.org>
-discussions-to: XXX
-status: Draft
+author: Fan Long <longfan@confluxnetwork.org> Chenxing Li <chenxing@confluxnetwork.org>
+status: Final
 type: Spec Breaking
 created: 2021-01-05
 ---

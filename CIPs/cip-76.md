@@ -2,8 +2,7 @@
 cip: 76
 title: Remove VM-related constaints in Syncing Blocks
 author: Chenxing Li (<lylcx2007@gmail.com>)
-discussions-to: <URL>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2021-07-02
 ---

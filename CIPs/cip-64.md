@@ -3,7 +3,7 @@ cip: 64
 title: Get current epoch number through internal contract
 author: Péter Garamvölgyi <@Thegaram>
 discussions-to: https://github.com/Conflux-Chain/CIPs/issues/65
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2021-03-08
 ---

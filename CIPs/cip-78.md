@@ -2,7 +2,7 @@
 cip: 78
 title: Correct `is_sponsored` fields in receipt
 author: Chenxing Li (<lylcx2007@gmail.com>)
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2021-07-06
 ---

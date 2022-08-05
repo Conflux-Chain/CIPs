@@ -2,7 +2,7 @@
 cip: 92
 title: Enable Blake2F builtin function
 author:  Chenxing Li (@ChenxingLi)>
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2022-01-26
 ---

@@ -1,8 +1,8 @@
 ---
 cip: 90
 title: A Space Fully EVM compatible
-author: Fan Long <longfan@conflux-chain.org> Chenxing Li <chenxing@conflux-chain.org>
-status: Draft
+author: Fan Long <longfan@confluxnetwork.org> Chenxing Li <chenxing@confluxnetwork.org>
+status: Final
 type: Spec Breaking
 created: 2022-01-10
 replaces: 72, 80
