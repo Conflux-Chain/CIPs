@@ -2,7 +2,7 @@
 cip: 98
 title: Fix bug of BLOCKHASH opcode in eSpace.
 author: Chenxing Li(@ChenxingLi)
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2022-06-14
 ---

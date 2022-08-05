@@ -2,8 +2,7 @@
 cip: 72
 title: Accept Ethereum transaction signature
 author: Chenxing Li <chenxing@confluxnetwork.org>
-discussions-to: <URL>
-status: Draft
+status: Replaced
 type: Spec Breaking
 created: 2021-05-20
 ---

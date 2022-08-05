@@ -1,7 +1,7 @@
 ---
 cip: 23
 title: Typed structured data hashing and signing
-author: Chenxing Li <chenxing@conflux-chain.org>
+author: Chenxing Li <chenxing@confluxnetwork.org>
 discussions-to: <URL>
 status: Final
 type: Backward Compatible

@@ -2,7 +2,7 @@
 cip: 97
 title: Clear staking lists
 author: Chenxing Li(@ChenxingLi)
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2022-6-13
 ---

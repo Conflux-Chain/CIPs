@@ -1,7 +1,7 @@
 ---
 cip: 4
 title: Add node type in Status message
-author: Ming Wu <ming@conflux-chain.org> and Peilun Li <peilun.li@conflux-chain.org>
+author: Ming Wu <ming@confluxnetwork.org> and Peilun Li <peilun.li@confluxnetwork.org>
 discussions-to: <URL>
 status: Final
 type: Protocol Breaking

@@ -2,7 +2,7 @@
 cip: 80
 title: Ethereum compatible signature recover
 author: Chenxing Li (lylcx2007@gmail.com)
-status: Draft
+status: Replaced
 type: Spec Breaking
 created: 2021-8-31
 requires: 72

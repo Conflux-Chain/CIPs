@@ -2,7 +2,7 @@
 cip: 86
 title: Update Difficulty Adjustment Algorithm
 author: Chenxing Li (@ChenxingLi)
-status: Draft
+status: Final
 type: Spec Breaking
 created: 2021-11-26
 ---
