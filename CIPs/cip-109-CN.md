@@ -2,7 +2,7 @@
 cip: 109
 title: RPC API for Host Wallet Provider
 author: Wenda Zhang<@darwintree>
-discussions-to: <URL>
+discussions-to: https://github.com/Conflux-Chain/CIPs/issues/110
 status: Draft
 type: Backward Compatible
 created: 2023-2-23
