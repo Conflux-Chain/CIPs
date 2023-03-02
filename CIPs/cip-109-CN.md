@@ -1,6 +1,6 @@
 ---
 cip: 109
-title: RPC API for Host Wallet Provider
+title: RPC API for Custodial Wallet Provider
 author: Wenda Zhang<@darwintree>
 discussions-to: https://github.com/Conflux-Chain/CIPs/issues/110
 status: Draft
@@ -30,8 +30,13 @@ requires: EIP-1193
   - [Errors](#errors)
     - [Inherited Errors](#inherited-errors)
     - [Extended Errors](#extended-errors)
+- [Rationale](#rationale)
+- [Backwards Compatibility](#backwards-compatibility)
+- [Test Cases](#test-cases)
+- [Implementations](#implementations)
+- [Security Considerations](#security-considerations)
 - [Copyright](#copyright)
-- [Appendix 1: 托管钱包提供商实现与安全性建议](#appendix-1-托管钱包提供商实现与安全性建议)
+- [Appendix 1: 托管钱包服务实现与安全性建议](#appendix-1-托管钱包服务实现与安全性建议)
   - [实现](#实现)
     - [基于 OAuth2 的实现](#基于-oauth2-的实现)
   - [安全性建议](#安全性建议)
@@ -53,9 +58,9 @@ requires: EIP-1193
 
 ## Abstract
 
-钱包是用户进入区块链的入口。根据实现、密钥存储方式的不同，各类钱包存在很大区别。其中，托管钱包是一类钱包服务：用户的私钥存储在第三方服务器上，用户通过使用托管钱包提供商的服务来使用钱包。这类钱包引入了对钱包方的信任，带来了一定风险，但同时也降低了区块链使用的门槛：托管钱包可以向用户屏蔽密钥管理等细节，同时也让用户得以在不安装浏览器插件（或钱包客户端）的场景下与 DAPP 交互。
+钱包是用户进入区块链的入口。根据实现、密钥存储方式的不同，各类钱包存在很大区别。其中，托管钱包是一类钱包服务：用户的私钥存储在第三方服务器上，用户通过使用托管钱包服务来使用钱包。这类钱包引入了对钱包方的信任，带来了一定风险，但同时也降低了区块链使用的门槛：托管钱包可以向用户屏蔽密钥管理等细节，同时也让用户得以在不安装浏览器插件（或钱包客户端）的场景下与 DAPP 交互。
 
-[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)对钱包与 DAPP 交互的方式进行了规范。在该 EIP 中，钱包 通过 Provider 对象暴露自身接口，DAPP 则借助 Provider 的接口与钱包进行交互。通过支持新的 RPC API，该 EIP 的功能能够得到扩展。对于托管钱包而言，其实现方式、授权方式、支持的功能与插件钱包存在一定差异，因此，托管钱包提供商在兼容EIP-1193时，常常需要定义额外的 RPC API 以提供服务，部分情况下还可能会更改已有的 RPC API。不同的托管钱包提供的 API 可能不一致，这意味着开发者需要为每个不同的托管钱包逐个适配不同的 API，增加了开发的难度和工作量，也限制了托管钱包在开发者中的应用范围。
+[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)对钱包与 DAPP 交互的方式进行了规范。在该 EIP 中，钱包 通过 Provider 对象暴露自身接口，DAPP 则借助 Provider 的接口与钱包进行交互。通过支持新的 RPC API，该 EIP 的功能能够得到扩展。对于托管钱包而言，其实现方式、授权方式、支持的功能与插件钱包存在一定差异，因此，托管钱包服务在兼容EIP-1193时，常常需要定义额外的 RPC API 以提供服务，部分情况下还可能会更改已有的 RPC API。不同的托管钱包提供的 API 可能不一致，这意味着开发者需要为每个不同的托管钱包逐个适配不同的 API，增加了开发的难度和工作量，也限制了托管钱包在开发者中的应用范围。
 
 本文档旨在提出一组适用于托管钱包 RPC API 规范，为开发者提供一致的 RPC API 标准，降低开发者的工作量和开发难度，从而促进托管钱包的更广泛应用。这些 API 规范将涵盖与托管钱包相关的一系列操作，例如授权、取消授权、签名等，此外，本 CIP 还将详细说明每个 API 的参数、返回值和异常情况等内容，以便开发者更好地实现或使用 API。
 
@@ -74,7 +79,7 @@ requires: EIP-1193
 - Provider。一个 Javascript 对象，DAPP 通过该对象与钱包交互，如无特殊说明，其遵循[EIP-1193](https://eips.ethereum.org/EIPS/eip-1193)的规范。
 - DAPP。去中心化应用程序。
 - Remote Procedure Call (RPC)。本文档中一般特指 DAPP 向 Provider 的提交的请求，其处理由 Provider 本身或远端钱包服务器负责。
-- 托管钱包提供商。托管钱包服务的提供者，也指代托管钱包提供商所控制的网页/APP。用户需要与托管钱包提供商进行交互才能向 DAPP 授权。
+- 托管钱包服务。托管钱包服务控制用户的私钥，用户通过使用在线的托管钱包服务来使用钱包。也指代托管钱包服务所控制的网页/APP。用户需要与托管钱包服务进行交互才能向 DAPP 授权。
 
 ### RPC API
 
@@ -82,7 +87,7 @@ requires: EIP-1193
 
 ##### wallet_authorize
 
-进行账户授权，在该 API 调用后，用户会与托管钱包提供商进行交互，对 DAPP 进行授权。该 API 的行为与参数有关。
+进行账户授权，在该 API 调用后，用户会与托管钱包服务进行交互，对 DAPP 进行授权。该 API 的行为与参数有关。
 
 参数
 
@@ -98,13 +103,13 @@ requires: EIP-1193
 
 - target： string
 
-  - 包括以下选项，托管钱包提供商**可以**只支持其中部分参数。
+  - 包括以下选项，托管钱包服务**可以**只支持其中部分参数。
 
     - `blank` 在新标签页中打开授权页面
     - `self` 由当前页面跳转至授权页面
     - `iframe` 在 iframe 中打开授权页面
 
-      > 这三种参数中，blank，self 会将用户引导至托管钱包提供商控制的页面进行授权，iframe 则会在页面内的 iframe 进行授权。详细解释参考[Appendix 2: target 参数](#appendix-2-target-参数)。
+      > 这三种参数中，blank，self 会将用户引导至托管钱包服务控制的页面进行授权，iframe 则会在页面内的 iframe 进行授权。详细解释参考[Appendix 2: target 参数](#appendix-2-target-参数)。
 
 - availableChains：
 
@@ -114,14 +119,14 @@ requires: EIP-1193
 
 - scope：
 
-  - 取决于托管钱包提供商提供的服务，决定了授权后能执行的操作种类。托管钱包提供商**必须**向用户展示应用申请的 scope 并由用户批准。
-    - 可选的，托管钱包提供商**可以**允许用户只批准其中一部分。
-  - 托管钱包提供商**必须**支持 `address` 与 `sign` scope。
+  - 决定了授权后能执行的操作种类。托管钱包服务**必须**向用户展示应用申请的 scope 并由用户批准。
+    - 可选的，托管钱包服务**可以**允许用户只批准其中一部分。
+  - 托管钱包服务**必须**支持 `address` 与 `sign` scope。
     - `address`。 查看地址。
-    - `sign`。 申请对数据/交易进行签名的权限。当此权限未被用户批准时，签名接口将不可用。**可选的**，托管钱包提供商可以额外支持下面两个子 scope，这将细化 DAPP 申请签名的能力
+    - `sign`。 申请对数据/交易进行签名的权限。当此权限未被用户批准时，签名接口将不可用。**可选的**，托管钱包服务可以额外支持下面两个子 scope，这将细化 DAPP 申请签名的能力
       - `sign_data`
       - `sign_tx`
-  - **可选的**，托管钱包提供商可以支持其他 scope，如
+  - **可选的**，托管钱包服务可以支持其他 scope，如
 
     - `phone`
     - `email`
@@ -129,7 +134,7 @@ requires: EIP-1193
     - `openid`
       等
 
-  > `sign` scope 被批准后，并不代表请求签名不再需要用户授权，这取决于托管钱包提供商的实现方式。
+  > `sign` scope 被批准后，并不代表请求签名不再需要用户授权，这取决于托管钱包服务的实现方式。
 
 返回值:
 
@@ -194,7 +199,7 @@ provider.request({
 ##### cfx_sendTransaction
 
 签名并发送交易。在`scope`中不包含`sign`（或子权限`sign_tx`）时，**应当** 直接抛出错误。
-同时托管钱包提供商**应当**以合适的方式辅助用户审查交易（如短信、移动端应用等）。对于`data`无法解析的交易，**可选的**，托管钱包方可以采取警告用户、拒绝签名等方式规避可能的安全风险。
+同时托管钱包服务**应当**以合适的方式辅助用户审查交易（如短信、移动端应用等）。对于`data`无法解析的交易，**可选的**，托管钱包方可以采取警告用户、拒绝签名等方式规避可能的安全风险。
 
 参数：
 
@@ -221,7 +226,7 @@ provider.request({
 ##### cfx_signTypedData_V4
 
 CIP-23 结构化数据签名。在`scope`中不包含`sign`（或子权限`sign_data`）时，**应当** 直接抛出错误。
-同时托管钱包提供商**应当**以合适的方式辅助用户审查签名内容（如短信、移动端应用等）。
+同时托管钱包服务**应当**以合适的方式辅助用户审查签名内容（如短信、移动端应用等）。
 
 参数：
 
@@ -235,7 +240,7 @@ CIP-23 结构化数据签名。在`scope`中不包含`sign`（或子权限`sign_
 
 ##### personal_sign
 
-CIP-23 非结构化消息签名。在`scope`中不包含`sign`（或子权限`sign_tx`）时，**应当** 直接抛出错误。同时托管钱包提供商**应当**以合适的方式辅助用户审查签名内容（如短信、移动端应用等）。
+CIP-23 非结构化消息签名。在`scope`中不包含`sign`（或子权限`sign_tx`）时，**应当** 直接抛出错误。同时托管钱包服务**应当**以合适的方式辅助用户审查签名内容（如短信、移动端应用等）。
 
 参数：
 
@@ -313,6 +318,26 @@ error 格式遵循 EIP-1193 的约定。此处额外定义更多错误。
 | 7101        | ServerInternalError | 钱包服务器内部错误                     |
 | 7102        | Timeout             | 连接到钱包服务器超时                   |
 
+## Rationale
+
+TBA.
+
+## Backwards Compatibility
+
+TBA.
+
+## Test Cases
+
+TBA.
+
+## Implementations
+
+见[Appendix 1: 托管钱包服务实现与安全性建议](#appendix-1-托管钱包服务实现与安全性建议)。
+
+## Security Considerations
+
+见[Appendix 1: 托管钱包服务实现与安全性建议](#appendix-1-托管钱包服务实现与安全性建议)。
+
 <!-- ## Rationale
 
 本规范中提供的RPC接口设计有如下考虑
@@ -352,11 +377,11 @@ error 格式遵循 EIP-1193 的约定。此处额外定义更多错误。
 
 Copyright and related rights waived via [CC0](https://creativecommons.org/publicdomain/zero/1.0/).
 
-## Appendix 1: 托管钱包提供商实现与安全性建议
+## Appendix 1: 托管钱包服务实现与安全性建议
 
 ### 实现
 
-本CIP不涉及“实现”与“安全性”的强制性要求，托管钱包提供商可以自行选择实现方式。
+本CIP不涉及“实现”与“安全性”的强制性要求，托管钱包服务可以自行选择实现方式。
 
 #### 基于 OAuth2 的实现
 
@@ -404,7 +429,7 @@ OAuth2 标准中对各类安全问题进行了讨论，一些问题也适用于�
 - blank
 - iframe
 
-对应用户在哪种窗口中进行授权。self 与 blank 为兼容 OAuth2 流程的参数，将分别在当前窗口/新窗口打开托管钱包提供商控制的授权页，授权完成后会携带 token（code）重定向至指定页面（OAuth2 中的`redirect_uri`）参数。
+对应用户在哪种窗口中进行授权。self 与 blank 为兼容 OAuth2 流程的参数，将分别在当前窗口/新窗口打开托管钱包服务控制的授权页，授权完成后会携带 token（code）重定向至指定页面（OAuth2 中的`redirect_uri`）参数。
 
 > 目前在 OAuth2 协议中，没有标准文件对基于 iframe 的授权方式进行讨论。可以基于“中间 iframe”的技术进行实现。实现参考：https://developers.google.com/identity/gsi/web/amp/intermediate-iframe?hl=zh-cn
 
@@ -412,7 +437,7 @@ OAuth2 标准中对各类安全问题进行了讨论，一些问题也适用于�
 
 ### `wallet_authorize`的返回值
 
-`target`为`blank`时，可以通过`window.opener`与`window.openee`方式在原窗口中获得返回值。但需要注意，特定环境中，`window.opener`与`window.openee`可能不可用，这有可能会导致`blank`参数的行为与预期不一致。
+`target`为`blank`时，可以通过`window.opener`与新窗口交互并在原窗口中获得返回值。但需要注意，特定环境中，`window.opener`可能不可用，这有可能会导致`blank`参数的行为与预期不一致。
 
 ### 是否为 cfx_sendTransaction 添加额外参数
 
