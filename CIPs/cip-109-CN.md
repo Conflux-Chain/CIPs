@@ -43,8 +43,6 @@ requires: EIP-1193
 - [Appendix 2: target 参数](#appendix-2-target-参数)
 - [Appendix 3: 其他讨论](#appendix-3-其他讨论)
   - [`wallet_authorize`的返回值](#wallet_authorize的返回值)
-  - [是否为 cfx\_sendTransaction 添加额外参数](#是否为-cfx_sendtransaction-添加额外参数)
-    - [`wallet_getTransactionStatusById`](#wallet_gettransactionstatusbyid)
 - [Appendix 4: 可选接口](#appendix-4-可选接口)
   - [net\_version](#net_version)
   - [wallet\_userInfo](#wallet_userinfo)
@@ -213,8 +211,6 @@ provider.request({
 
 交易哈希。
 
-> 关于此接口的额外讨论见[是否为 cfx_sendTransaction 添加额外参数](#是否为-cfx_sendtransaction-添加额外参数)
-
 ##### cfx_chainId
 
 获取当前用户授权网络的 chain id。
@@ -320,7 +316,17 @@ error 格式遵循 EIP-1193 的约定。此处额外定义更多错误。
 
 ## Rationale
 
-TBA.
+本CIP主要考虑以下几点进行设计：
+
+1. 与插件钱包RPC接口命名、参数、返回值的兼容。
+   - 保证`cfx_accounts`，`cfx_sendTransaction`等接口的行为与插件钱包相关RPC接口兼容性，减少代码移植的负担。
+   - 对于其他接口，尝试保证与以太坊相关EIP兼容并维持命名风格（如`wallet_switchConfluxChain`）。无法保证兼容的，使用不相同的命名。
+2. 为插件钱包中由用户主动发起的、基于UI的常用功能明确指定接口。
+   - 如撤销授权、切换链。
+3. 分离授权与资源请求过程，兼容OAuth2授权流程。
+4. 借用OAuth2中的 `scope` 概念进行统一的权限控制。
+   - 明确告知用户应用可能使用的权限，如是否会需要签名。
+   - 托管钱包中除了托管用户私钥外，还可能保存有其他用户信息。
 
 ## Backwards Compatibility
 
@@ -337,41 +343,6 @@ TBA.
 ## Security Considerations
 
 见[Appendix 1: 托管钱包服务实现与安全性建议](#appendix-1-托管钱包服务实现与安全性建议)。
-
-<!-- ## Rationale
-
-本规范中提供的RPC接口设计有如下考虑
-
-### 兼容性
-
-兼容性方面有如下考虑：
-
-- 添加`wallet_authorize`接口
-
-1. 兼容主流RPC标准。如尽量避免破坏`cfx_accounts`的行为。
-
-### 授权流程
-
-一种典型的授权流程是通过`cfx_accounts`(`eth_accounts`)接口同时完成`授权`与`资源请求`两步
-
-本CIP的授权流程主要参考OAuth2授权协议进行设计，分为授权->资源请求两步。
-
-目前存在EIP-1102
-
-### cfx_sendTransaction 的变更
-
-相比标准RPC新增了扩展参数`waitForHash`，
-
-### 使用环境
-
-## 向下兼容
-
-相关说明参考[兼容性](#兼容性)。
-
-## Implementation
-
-
-## Security Considerations -->
 
 ## Copyright
 
@@ -438,60 +409,6 @@ OAuth2 标准中对各类安全问题进行了讨论，一些问题也适用于�
 ### `wallet_authorize`的返回值
 
 `target`为`blank`时，可以通过`window.opener`与新窗口交互并在原窗口中获得返回值。但需要注意，特定环境中，`window.opener`可能不可用，这有可能会导致`blank`参数的行为与预期不一致。
-
-### 是否为 cfx_sendTransaction 添加额外参数
-
-考虑为`cfx_sendTransaction` 添加额外参数`waitForHash`。在签名前提前返回。
-
-调用接口->用户授权->签名是一个耗时较长的异步过程，直到签名完成前都无法拿到交易哈希。通过添加这一参数可以让 DAPP 更灵活地处理相关逻辑。
-
-waitForHash 决定返回值类型。
-
-参数：
-
-1. txParams
-
-- from
-- to
-- data
-
-1. waitForHash：（可选）bool，是否等待交易哈希。
-
-返回值：字符串
-
-返回值为 hex 字符串，其意义与 waitForHash 取值有关。
-
-- waitForHash 为空或 true：交易哈希。
-- waitForHash 为 false 时：交易标识`walletTxId`。之后通过接口 `wallet_getTransactionStatusById` 获取交易哈希
-
-#### `wallet_getTransactionStatusById`
-
-获取交易授权状态，用于`cfx_sendTransaction`的参数`waitForHash`为 false
-
-参数
-
-1. walletTxId：hex 字符串
-
-返回值
-
-一个对象
-
-```ts
-{
-    walletTxStatus: string,
-    message: string | undefined,
-    hash: string ｜ undefined
-}
-```
-
-- walletTxStatus. 字符串
-  - ”approving”, 授权中，用户未进行授权操作或正在进行授权操作
-  - ”approved”, 交易已被允许
-  - ”rejected”, 交易因各种原因未被批准（用户拒绝、超时等）
-  - ”not found”, 未找到对应交易或已超时被清除
-  - ”illegal”, 在签名/发送时发现交易不合法
-- message: string. 描述交易状态的额外信息
-- hash：string. walletTxStatus 为“approved”时包含此字段，为交易哈希
 
 ## Appendix 4: 可选接口
 
