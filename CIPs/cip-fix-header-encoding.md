@@ -1,5 +1,5 @@
 ---
-cip: <to be assigned>
+cip: 112
 title: Fix the Encoding and Decoding of the `custom` Field of Block Headers
 author: Peilun Li (@peilun-conflux)
 discussions-to: <URL>
