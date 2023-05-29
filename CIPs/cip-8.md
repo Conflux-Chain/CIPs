@@ -1,12 +1,11 @@
 ---
-cip: 8
-title: Put off code collateral settlement.
-author: <Chenxing Li (@ChenxingLi)>
-discussions-to: <URL>
-status: Final
-type: Spec Breaking
-created: 2020-07-23
-requires: 12
+CIP No.: 8
+Title: Delay Code Collateral Settlement
+Author: <Chenxing Li (@ChenxingLi)>
+Status: Final
+Type: Spec Breaking
+Created: 2020-07-23
+Required CIPs: 12
 ---
 
 ## Simple Summary

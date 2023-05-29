@@ -1,11 +1,11 @@
 ---
-cip: 64
-title: Get current epoch number through internal contract
-author: Péter Garamvölgyi <@Thegaram>
-discussions-to: https://github.com/Conflux-Chain/CIPs/issues/65
-status: Final
-type: Spec Breaking
-created: 2021-03-08
+CIP No.: 64
+Title: Get Current Epoch Number via Internal Contract
+Author: Péter Garamvölgyi <@Thegaram>
+Discussions: https://github.com/Conflux-Chain/CIPs/issues/65
+Status: Final
+Type: Spec Breaking
+Created: 2021-03-08
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

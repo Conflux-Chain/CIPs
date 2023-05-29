@@ -1,11 +1,10 @@
 ---
-cip: 10
-title: Mining Reward Finalization
-author: Fan Long <longfan@confluxnetwork.org>
-discussions-to: <URL>
-status: Final
-type: Spec Breaking
-created: 2020-07-24
+CIP No.: 10
+Title: Mining Reward Finalization
+Author: Fan Long <longfan@confluxnetwork.org>
+Status: Final
+Type: Spec Breaking
+Created: 2020-07-24
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

@@ -1,10 +1,10 @@
 ---
-cip: 78
-title: Correct `is_sponsored` fields in receipt
-author: Chenxing Li (<lylcx2007@gmail.com>)
-status: Final
-type: Spec Breaking
-created: 2021-07-06
+CIP No.: 78
+Title: Correct `is_sponsored` Fields in Receipt
+Author: Chenxing Li (<lylcx2007@gmail.com>)
+Status: Final
+Type: Spec Breaking
+Created: 2021-07-06
 ---
 
 

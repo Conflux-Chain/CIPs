@@ -1,10 +1,10 @@
 ---
-cip: 62
-title: Enable EC-related builtin contract
-author: Chenxing Li (@ChenxingLi)
-status: Final
-type: Spec Breaking
-created: 2020-11-17
+CIP No.: 62
+Title: Enable EC-Related Builtin Contracts
+Author: Chenxing Li (@ChenxingLi)
+Status: Final
+Type: Spec Breaking
+Created: 2020-11-17
 ---
 
 ## Simple Summary

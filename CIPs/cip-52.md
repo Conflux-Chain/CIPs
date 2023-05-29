@@ -1,11 +1,11 @@
 ---
-cip: 52
-title: Customized Rule for Eligibility to be Sponsored
-author: Chenxing Li (@ChenxingLi)
-discussions-to: https://github.com/Conflux-Chain/CIPs/issues/54
-status: Draft
-type: Spec Breaking
-created: 2021-01-12
+CIP No.: 52
+Title: Custom Eligibility Rules for Sponsorship
+Author: Chenxing Li (@ChenxingLi)
+Discussions: https://github.com/Conflux-Chain/CIPs/issues/54
+Status: Draft
+Type: Spec Breaking
+Created: 2021-01-12
 ---
 
 ## Simple Summary

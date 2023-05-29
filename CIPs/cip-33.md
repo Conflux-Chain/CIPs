@@ -1,11 +1,10 @@
 ---
-cip: 33
-title: Transaction fee pricing mechanism for Tephys
-author: Justin Pan (@zimengpan)
-discussions-to: <URL>
-status: Draft
-type: Backward Compatible
-created: 2020-10-15
+CIP No.: 33
+Title: Transaction Fee Pricing Mechanism for Tephys
+Author: Justin Pan (@zimengpan)
+Status: Draft
+Type: Spec Breaking
+Created: 2020-10-15
 ---
   
 ## Simple Summary

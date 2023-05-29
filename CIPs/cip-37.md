@@ -1,11 +1,11 @@
 ---
-cip: 37
-title: Introduce Base32 Checksum Addresses
-author: bytelaw, Péter Garamvölgyi <peter@conflux-chain.com>
-discussions-to: https://github.com/Conflux-Chain/CIPs/issues/37
-status: Final
-type: Database/RPC Breaking
-created: 2021-01-07
+CIP No.: 37
+Title: Introduce Base32 Checksum Addresses
+Author: bytelaw, Péter Garamvölgyi <peter@conflux-chain.com>
+Discussions: https://github.com/Conflux-Chain/CIPs/issues/37
+Status: Final
+Type: RPC Breaking
+Created: 2021-01-07
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->
@@ -179,7 +179,7 @@ Return `(addr-bytes, network-prefix)`.
 ```
 encode(0x1a2f80341409639ea6a35bbcab8299066109aa55, "cfx")
 
-1. address-type: "type.user"
+1. address-Type: "type.user"
 2. version-byte: 0x00
 3. payload: [0x00, 0x1a, 0x2f, 0x80, 0x34, 0x14, 0x09, 0x63, 0x9e, 0xa6, 0xa3, 0x5b, 0xbc, 0xab, 0x82, 0x99, 0x06, 0x61, 0x09, 0xaa, 0x55]
    5-bit parts: [0x00, 0x00, 0x0d, 0x02, 0x1f, 0x00, 0x01, 0x14, 0x02, 0x10, 0x04, 0x16, 0x07, 0x07, 0x15, 0x06, 0x14, 0x0d, 0x0d, 0x1b, 0x19, 0x0a, 0x1c, 0x02, 0x13, 0x04, 0x03, 0x06, 0x02, 0x02, 0x0d, 0x0a, 0x0a, 0x14]

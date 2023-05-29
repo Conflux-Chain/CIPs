@@ -1,11 +1,10 @@
 ---
-cip: 26
-title: Use timestamp from pivot block as TIMESTAMP (opcode 42)
-author: Yanpei Liu(@resodo)
-discussions-to: <URL>
-status: Final
-type: Spec Breaking
-created: 2020-09-16
+CIP No.: 26
+Title: Use Pivot Block Timestamp for Opcode TIMESTAMP
+Author: Yanpei Liu(@resodo)
+Status: Final
+Type: Spec Breaking
+Created: 2020-09-16
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

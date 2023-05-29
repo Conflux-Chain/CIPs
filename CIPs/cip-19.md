@@ -1,11 +1,10 @@
 ---
-cip: 19
-title: Key value EventLog Standard
-author: Haizhou Wang <Haizhou@confluxnetwork.org>
-discussions-to: <URL>
-status: Draft
-type: backward compatible
-created: 2020-08-10
+CIP No.: 19
+Title: KeyValue EventLog Standard
+Author: Haizhou Wang <Haizhou@confluxnetwork.org>
+Status: Draft
+Type: Backward Compatible
+Created: 2020-08-10
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

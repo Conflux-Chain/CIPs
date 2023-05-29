@@ -1,11 +1,11 @@
 ---
-cip: 40
-title: Reduce block base reward to 2 CFX.
-author: Peilun (@peilun-conflux)
-discussions-to: https://forum.conflux.fun/t/topic/4249
-status: Final
-type: Spec Breaking
-created: 2020-12-08
+CIP No.: 40
+Title: Reduce Block Base Reward to 2 CFX
+Author: Peilun (@peilun-conflux)
+Discussions: https://forum.conflux.fun/t/topic/4249
+Status: Final
+Type: Spec Breaking
+Created: 2020-12-08
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

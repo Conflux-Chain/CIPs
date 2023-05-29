@@ -1,12 +1,11 @@
 ---
-cip: 34
-title: Contract-friendly simple verification rules
-author: Guang Yang (@Regulusyg)
-discussions-to: <URL>
-status: Draft
-type: Spec Breaking
-created: 2020-11-01
-requires: 
+CIP No.: 34
+Title: Contract-Friendly Verification Rules
+Author: Guang Yang (@Regulusyg)
+Status: Draft
+Type: Spec Breaking
+Created: 2020-11-01
+Required CIPs: 
 ---
 
 ## Simple Summary

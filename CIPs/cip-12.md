@@ -1,12 +1,11 @@
 ---
-cip: 12
-title: Tolerate non-existent sponsor for collateral
-author: Chenxing Li(@Chenxing Li)
-discussions-to: <URL>
-status: Final
-type: Spec Breaking
-created: 2020-07-27
-replaces: 2
+CIP No.: 12
+Title: Allow Non-Existent Sponsor for Collateral
+Author: Chenxing Li(@Chenxing Li)
+Status: Final
+Type: Spec Breaking
+Created: 2020-07-27
+Replaced CIPs 2
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->
