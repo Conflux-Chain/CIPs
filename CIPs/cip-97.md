@@ -1,10 +1,10 @@
 ---
-cip: 97
-title: Clear staking lists
-author: Chenxing Li(@ChenxingLi)
-status: Final
-type: Spec Breaking
-created: 2022-6-13
+CIP No.: 97
+Title: Clear Staking Lists
+Author: Chenxing Li(@ChenxingLi)
+Status: Final
+Type: Spec Breaking
+Created: 2022-6-13
 ---
 
 

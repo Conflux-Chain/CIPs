@@ -22,3 +22,116 @@ When you believe your CIP is mature and ready to progress past the draft phase, 
 - **Last Call** - a CIP that is done with its initial iteration and ready for review by a wide audience.
 - **Accepted** - a CIP that has been in **Last Call** for at least 2 weeks and any technical changes that were requested have been addressed by the author. The process for Core Devs to decide whether to encode a CIP into their clients as part of a hard fork is not part of the CIP process. If such a decision is made, the CIP will move to **Final**.
 - **Final** - a CIP that the Core Devs have decided to implement and release in a future hard fork or has already been released in a hard fork.
+
+# CIP List
+
+## Highlighted CIPs
+
+These CIPs significantly influence the economic and governance models of Conflux, as well as its various features.
+
+| CIP Number | Title |
+| :-----: | :----- |
+| [37](CIPs/cip-37.md) | Introduce Base32 Checksum Addresses |
+| [40](CIPs/cip-40.md) | Reduce Block Base Reward to 2 CFX |
+| [43](CIPs/cip-43.md) | Introduce Finality Through Staking Vote |
+| [90](CIPs/cip-90.md) | Introduce a Fully EVM-Compatible Space |
+| [94](CIPs/cip-94.md) | On-Chain DAO Vote for Chain Parameters |
+| [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral |
+
+## Spec Breaking CIPs
+
+### Ongoing
+
+These CIPs are either in the midst of active development or have been fully developed, currently awaiting discussions on upgrade plans.
+
+| CIP Number | Title | Status |
+| :-----: | :----- | :-----: |
+| [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral | Developed |
+| [112](CIPs/cip-112.md) | Fix Block Headers `custom` Field Serde | Developed |
+| [113](CIPs/cip-113.md) | Accelerate Up PoS Finalization | Developed |
+
+### Activated
+
+These CIPs have successfully undergone upgrades on the mainnet.
+
+| CIP Number | Title | Activation Hardfork |
+| :-----: | :----- | :-----: |
+| [3](CIPs/cip-3.md) | Octopus Proof-of-Work Mining Algorithm | Tethys (V1.0) |
+| [5](CIPs/cip-5.md) | Fix MPT Key Encoding Corner Case | Tethys (V1.0) |
+| [8](CIPs/cip-8.md) | Delay Code Collateral Settlement | Tethys (V1.0) |
+| [10](CIPs/cip-10.md) | Mining Reward Finalization | Tethys (V1.0) |
+| [12](CIPs/cip-12.md) | Allow Non-Existent Sponsor for Collateral | Tethys (V1.0) |
+| [13](CIPs/cip-13.md) | Employ Big-Endian MPT Keys | Tethys (V1.0) |
+| [16](CIPs/cip-16.md) | Consolidate Contract Destruction Logic | Tethys (V1.0) |
+| [21](CIPs/cip-21.md) | Minimum Storage Commitment Per Epoch | Tethys (V1.0) |
+| [22](CIPs/cip-22.md) | Add Interfaces for Internal Contracts | Tethys (V1.0) |
+| [26](CIPs/cip-26.md) | Use Pivot Block Timestamp for Opcode TIMESTAMP | Tethys (V1.0) |
+| [27](CIPs/cip-27.md) | Delete Whitelist Keys at Contract Removal | Tethys (V1.0) |
+| [31](CIPs/cip-31.md) | Genesis Block Contract: Create2Factory | Tethys (V1.0) |
+| [39](CIPs/cip-39.md) | Use Custom Field for Incompatible Upgrade | Tanzanite (V1.1) |
+| [40](CIPs/cip-40.md) | Reduce Block Base Reward to 2 CFX | Tanzanite (V1.1) |
+| [43](CIPs/cip-43.md) | Introduce Finality Through Staking Vote | Hydra (V2.0) |
+| [62](CIPs/cip-62.md) | Enable EC-Related Builtin Contracts | Hydra (V2.0) |
+| [64](CIPs/cip-64.md) | Get Current Epoch Number via Internal Contract | Hydra (V2.0) |
+| [71](CIPs/cip-71.md) | Disable Anti-Reentrancy | Hydra (V2.0) |
+| [76](CIPs/cip-76.md) | Remove VM-Related Constraints in Syncing Blocks | Hydra (V2.0) |
+| [78](CIPs/cip-78.md) | Correct `is_sponsored` Fields in Receipt | Hydra (V2.0) |
+| [86](CIPs/cip-86.md) | Update Difficulty Adjustment Algorithm | Hydra (V2.0) |
+| [90](CIPs/cip-90.md) | Introduce a Fully EVM-Compatible Space | Hydra (V2.0) |
+| [92](CIPs/cip-92.md) | Enable Blake2F Builtin Function | Hydra (V2.0) |
+| [94](CIPs/cip-94.md) | On-Chain DAO Vote for Chain Parameters | V2.1 |
+| [97](CIPs/cip-97.md) | Clear Staking Lists | V2.1 |
+| [98](CIPs/cip-98.md) | Fix BLOCKHASH Opcode Bug in eSpace | V2.1 |
+| [99](CIPs/cip-99.md) | Extend Non-Voting Grace and Shorten Unlock Time | V2.1 |
+| [105](CIPs/cip-105.md) | Minimal DAO Vote Count Based on PoS Staking | V2.1 |
+
+
+### Dormancy
+
+These CIPs have been dormant, lacking recent discussions or follow-ups.
+
+| CIP Number | Title |
+| :-----: | :----- |
+| [28](CIPs/cip-28.md) | Include Block Number in Contract Address Calculation |
+| [33](CIPs/cip-33.md) | Transaction Fee Pricing Mechanism for Tephys |
+| [34](CIPs/cip-34.md) | Contract-Friendly Verification Rules |
+| [42](CIPs/cip-42.md) | Support Event-Driven Execution Model |
+| [44](CIPs/cip-44.md) | Introduce a VDF Verification Builtin |
+| [45](CIPs/cip-45.md) | Introduce Flexible Account Authorization |
+| [51](CIPs/cip-51.md) | Support SM-2/3 Verification in Internal Contracts |
+| [52](CIPs/cip-52.md) | Custom Eligibility Rules for Sponsorship |
+| [102](CIPs/cip-102.md) | Change PoW Mining Algorithm |
+| [104](CIPs/cip-104.md) | Create EVM-Compatible Space with Ethereum State |
+
+### Replaced
+
+These CIPs have been replaced by other CIPs.
+
+| CIP Number | Title | Replaced By |
+| :-----: | :----- | :-----: |
+| [2](CIPs/cip-2.md)  | Prohibit Storage Owner Destruction in Sub-Call | [12](CIPs/cip-12.md) |
+| [72](CIPs/cip-72.md) | Support Ethereum-Type Transactions | [90](CIPs/cip-90.md) |
+| [80](CIPs/cip-80.md)  | Align Conflux and Ethereum Address Generation Rules | [90](CIPs/cip-90.md)  |
+
+## Database / RPC Breaking CIPs
+
+These CIPs, while not requiring hard fork upgrades, could potentially impact the database or RPC.
+
+| CIP Number | Title | Status |
+| :-----: | :----- | :-----: |
+| [4](CIPs/cip-4.md) | Add Node Type in Status Message | Activated |
+| [11](CIPs/cip-11.md) | Distinguish Status and Heartbeat Messages | Activated |
+| [37](CIPs/cip-37.md) | Introduce Base32 Checksum Addresses | Activated |
+| [60](CIPs/cip-60.md) | Log VM Errors in Tracer | Activated |
+
+## Application-level CIPs
+
+These CIPs establish standards at the application layer, thereby not involving upgrades to the Conflux nodes.
+
+| CIP Number | Title |
+| :-----: | :----- |
+| [19](CIPs/cip-19.md) | KeyValue EventLog Standard |
+| [23](CIPs/cip-23.md) | Hashing and Signing Typed Structured Data |
+| [46](CIPs/cip-46.md) | Introduce Conflux Domain Name Service |
+| [109](CIPs/cip-109.md) | RPC API for Wallet Provider |
+| [1820](CIPs/cip-1820.md) | Migrate ERC1820 to Conflux |

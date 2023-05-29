@@ -1,10 +1,10 @@
 ---
-cip: 76
-title: Remove VM-related constaints in Syncing Blocks
-author: Chenxing Li (<lylcx2007@gmail.com>)
-status: Final
-type: Spec Breaking
-created: 2021-07-02
+CIP No.: 76
+Title: Remove VM-Related Constraints in Syncing Blocks
+Author: Chenxing Li (<lylcx2007@gmail.com>)
+Status: Final
+Type: Spec Breaking
+Created: 2021-07-02
 ---
 
 ## Simple Summary

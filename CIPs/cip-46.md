@@ -1,11 +1,10 @@
 ---
-cip: 46
-title: Introduce Conflux Domain Name Service
-author: Guang Yang (@Regulusyg)
-discussions-to: XXX
-status: Draft
-type: Spec Breaking
-created: 2021-01-06
+CIP No.: 46
+Title: Introduce Conflux Domain Name Service
+Author: Guang Yang (@Regulusyg)
+Status: Draft
+Type: Backward Compatible
+Created: 2021-01-06
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

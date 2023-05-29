@@ -1,14 +1,11 @@
 ---
-cip: 21
-title: Minimum Storage Commitment per Epoch
-author: Zhe Yang <yangzhe1990@gmail.com>
-discussions-to: https://github.com/Conflux-Chain/conflux-rust/issues/1406
-status: Draft
-type: Spec Breaking
-created: 2020-08-15
-requires (*optional): <CIP number(s)>
-replaces (*optional): <CIP number(s)>
-resolution (*optional): <URL>
+CIP No.: 21
+Title: Minimum Storage Commitment Per Epoch
+Author: Zhe Yang <yangzhe1990@gmail.com>
+Discussions: https://github.com/Conflux-Chain/conflux-rust/issues/1406
+Status: Draft
+Type: Spec Breaking
+Created: 2020-08-15
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

@@ -25,7 +25,7 @@ There are four types of CIPs:
   - If it is a complicated change, please submit an [issue](https://github.com/Conflux-Chain/conflux-rust/issues) to communicate with the core developer team first.
 
 - **Database/RPC Breaking Changes:** The updated client will be able to co-exist with previous versions, but it updates the interface/behavior of an existing RPC or it changes the blockchain database format. This would require modifications for applications depending on these RPCs and/or clean up the database to sync from the scratch. To submit a Database/RPC breaking change, you can follow the above process but you must submit an issue first.
-- **Protocol Breaking Changes:** These changes do not touch the specification of the Conflux Protocol, but require an update to the P2P network protocol in Conflux/Conflux-Rust. It is possible to enable the change without a hard-fork but it would require special protocol version handling and compatibility testing. To submit a protocol breaking change, please follow this process:
+- **P2P Protocol Breaking Changes:** These changes do not touch the specification of the Conflux Protocol, but require an update to the P2P network protocol in Conflux/Conflux-Rust. It is possible to enable the change without a hard-fork but it would require special protocol version handling and compatibility testing. To submit a protocol breaking change, please follow this process:
   - Submit a Conflux Improvement Proposal ([CIP](https://github.com/Conflux-Chain/CIPs)) draft.
   - Discuss the CIP until it is **Accepted**. Note that in the CIP, it is important to specify how the implementation can maintain compatibility with previous protocol versions (via versioning or other techniques). If this cannot be done, the change should be classified and treated as a spec breaking change instead.
   - Create an issue in [Conflux-Rust](https://github.com/Conflux-Chain/conflux-rust) corresponding to the CIP.
@@ -124,27 +124,27 @@ Image files should be included in a subdirectory of the `assets` folder for that
 
 Each CIP must begin with an [RFC 822](https://www.ietf.org/rfc/rfc822.txt) style header preamble, preceded and followed by three hyphens (`---`). This header is also termed ["front matter" by Jekyll](https://jekyllrb.com/docs/front-matter/). The headers must appear in the following order. Headers marked with "*" are optional and are described below. All other headers are required.
 
-` cip:` *CIP number* (this is determined by the CIP editor)
+` CIP No.:` *CIP number* (this is determined by the CIP editor)
 
-` title:` *CIP title*
+` Title:` *CIP title*
 
-` author:` *a list of the author's or authors' name(s) and/or username(s), or name(s) and email(s). Details are below.*
+` Author:` *a list of the author's or authors' name(s) and/or username(s), or name(s) and email(s). Details are below.*
 
-` * discussions-to:` *a url pointing to the official discussion thread*
+` * Discussions:` *a url pointing to the official discussion thread*
 
-` status:` *Draft | Last Call | Accepted | Final | Active | Abandoned | Rejected | Superseded*
+` Status:` *Draft | Last Call | Accepted | Final | Active | Abandoned | Rejected | Superseded*
 
 `* review-period-end:` *date review period ends*
 
-` type:` *Backward Compatible | Database/RPC Breaking | Protocol Breaking | Spec Breaking*
+` Type:` *Backward Compatible | Database/RPC Breaking | P2P Protocol Breaking | Spec Breaking*
 
-` created:` *date created on*
+` Created:` *date created on*
 
 ` * updated:` *comma separated list of dates*
 
-` * requires:` *CIP number(s)*
+` * Required CIPs:` *CIP number(s)*
 
-` * replaces:` *CIP number(s)*
+` * Replaced CIPs` *CIP number(s)*
 
 ` * superseded-by:` *CIP number(s)*
 
@@ -182,7 +182,7 @@ As a single exception, `discussions-to` cannot point to GitHub pull requests.
 
 #### `type` header
 
-The `type` header specifies the type of CIP: Backward Compatible, Database/RPC Breaking, Protocol Breaking, Spec Breaking.
+The `type` header specifies the type of CIP: Backward Compatible, Database/RPC Breaking, P2P Protocol Breaking, Spec Breaking.
 
 #### `created` header
 

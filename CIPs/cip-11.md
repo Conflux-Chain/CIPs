@@ -1,12 +1,11 @@
 ---
-cip: 11
-title: Separate Status and Heartbeat Messages
-author: Ming Wu <ming@confluxnetwork.org>
-discussions-to: Peilun Li <peilun.li@confluxnetwork.org>, Peter Garamvolgyi <peter@confluxnetwork.org>
-status: Final
-type: Protocol Breaking
-created: 2020-07-25
-requires: cip-4
+CIP No.: 11
+Title: Distinguish Status and Heartbeat Messages
+Author: Ming Wu <ming@confluxnetwork.org>
+Status: Final
+Type: P2P Protocol Breaking
+Created: 2020-07-25
+Required CIPs: 4
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->
@@ -26,7 +25,7 @@ The current Status message has the following fields:
 pub chain_id: ChainIdParams,
 pub genesis_hash: H256,
 pub best_epoch: u64,
-pub node_type: NodeType,
+pub node_Type: NodeType,
 pub terminal_block_hashes: Vec<H256>,
 ```
 The field *chain_id*, *genesis_hash*, and *node_type* do not need to be sent periodically, since we assume these values would not change during the running time of a node. Therefore, we may have a Status message containing these fields and a Heartbeat message containing the rest fields.

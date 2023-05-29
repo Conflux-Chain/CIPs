@@ -1,11 +1,11 @@
 ---
-cip: 51
-title: Support SM-2/3 verification as internal contracts
-author: Guang Yang (@Regulusyg)
-discussions-to: https://github.com/Conflux-Chain/CIPs/issues/55
-status: Draft
-type: Spec Breaking
-created: 2021-01-09
+CIP No.: 51
+Title: Support SM-2/3 Verification in Internal Contracts
+Author: Guang Yang (@Regulusyg)
+Discussions: https://github.com/Conflux-Chain/CIPs/issues/55
+Status: Draft
+Type: Spec Breaking
+Created: 2021-01-09
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

@@ -1,10 +1,10 @@
 ---
-cip: 71
-title: Disable anti-reentrancy
-author: Chenxing Li <chenxing@confluxnetwork.org>
-status: Final
-type: Spec Breaking
-created: 2021-5-18
+CIP No.: 71
+Title: Disable Anti-Reentrancy
+Author: Chenxing Li <chenxing@confluxnetwork.org>
+Status: Final
+Type: Spec Breaking
+Created: 2021-5-18
 ---
 
 ## Simple Summary

@@ -1,11 +1,11 @@
 ---
-cip: 45
-title: Introduce Flexible Account Authorization Methods
-author: Guang Yang (@Regulusyg)
-discussions-to: https://github.com/Conflux-Chain/CIPs/issues/54
-status: Draft
-type: Spec Breaking
-created: 2021-01-06
+CIP No.: 45
+Title: Introduce Flexible Account Authorization
+Author: Guang Yang (@Regulusyg)
+Discussions: https://github.com/Conflux-Chain/CIPs/issues/54
+Status: Draft
+Type: Spec Breaking
+Created: 2021-01-06
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

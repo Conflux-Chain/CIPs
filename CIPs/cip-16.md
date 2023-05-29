@@ -1,12 +1,12 @@
 ---
-cip: 16
-title: Put the logics for contract destruction together.
-author: Chenxing Li (@ChenxingLi)
-discussions-to: [Conflux-Chain/conflux-rust#1747](https://github.com/Conflux-Chain/conflux-rust/issues/1747)
-status: Final
-type: Spec Breaking
-created: 2020-08-05
-requires: 12
+CIP No.: 16
+Title: Consolidate Contract Destruction Logic
+Author: Chenxing Li (@ChenxingLi)
+Discussions: [Conflux-Chain/conflux-rust#1747](https://github.com/Conflux-Chain/conflux-rust/issues/1747)
+Status: Final
+Type: Spec Breaking
+Created: 2020-08-05
+Required CIPs: 12
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

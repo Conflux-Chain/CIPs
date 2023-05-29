@@ -1,11 +1,10 @@
 ---
-cip: 4
-title: Add node type in Status message
-author: Ming Wu <ming@confluxnetwork.org> and Peilun Li <peilun.li@confluxnetwork.org>
-discussions-to: <URL>
-status: Final
-type: Protocol Breaking
-created: 2020-07-22
+CIP No.: 4
+Title: Add Node Type in Status Message
+Author: Ming Wu <ming@confluxnetwork.org> and Peilun Li <peilun.li@confluxnetwork.org>
+Status: Final
+Type: P2P Protocol Breaking
+Created: 2020-07-22
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

@@ -1,10 +1,10 @@
 ---
-cip: 98
-title: Fix bug of BLOCKHASH opcode in eSpace.
-author: Chenxing Li(@ChenxingLi)
-status: Final
-type: Spec Breaking
-created: 2022-06-14
+CIP No.: 98
+Title: Fix BLOCKHASH Opcode Bug in eSpace
+Author: Chenxing Li(@ChenxingLi)
+Status: Final
+Type: Spec Breaking
+Created: 2022-06-14
 ---
 
 ## Simple Summary

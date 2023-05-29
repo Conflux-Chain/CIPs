@@ -1,12 +1,11 @@
 ---
-cip: 109
-title: RPC API for Custodial Wallet Provider
-author: Wenda Zhang<@darwintree>
-discussions-to: https://github.com/Conflux-Chain/CIPs/issues/110
-status: Draft
-type: Backward Compatible
-created: 2023-2-23
-requires: EIP-1193
+CIP No.: 109
+Title: RPC API for Wallet Provider
+Author: Wenda Zhang<@darwintree>
+Discussions: https://github.com/Conflux-Chain/CIPs/issues/110
+Status: Draft
+Type: Backward Compatible
+Created: 2023-2-23
 ---
 
 - [Simple Summary](#simple-summary)
