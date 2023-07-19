@@ -1,16 +1,22 @@
 # Conflux Improvement Proposals
 Conflux Improvement Proposals (CIPs) describe standards for the Conflux platform, including core protocol specifications, client APIs, and contract standards.
 
-# Contributing
+## Contributing
 
 1. Review [CIP-1](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/cip-1.md).
 2. Fork the repository by clicking "Fork" in the top right.
 3. Add your CIP to your fork of the repository. There is a [template CIP here](cip-template.md).
 4. Submit a Pull Request to Conflux's [CIPs repository](https://github.com/Conflux-Chain/CIPs).
 
-Your first PR should be a first draft of the final CIP. It must meet the formatting criteria enforced by the build (largely, correct metadata in the header). An editor will manually review the first PR for a new CIP and assign it a number before merging it. Make sure you include a `discussions-to` header with the URL to a discussion forum or open GitHub issue where people can discuss the CIP as a whole.
+Your initial PR should be a draft of the final CIP, and it must comply with the formatting rules set by the build, including correct metadata in the header.
+
+Your PR ID may be utilized as a provisional CIP ID at the submitter's discretion, obviating the necessity for editorial approval. An editor will manually review the first PR for a new CIP and assign a definitive CIP ID. Typically, editors do not alter CIP ID. However, exceptions do occur, as demonstrated by [CIP-1820](CIPs/cip-1820.md). In the event that the chosen PR ID is occupied by an existing CIP, the submitter is obliged to await the editor's allocation of a new CIP ID. CIPs submitted via issues are considered invalid.
+
+Considering the current size of the Conflux community, it's not practical for community members to follow up with technically complex CIPs. For such CIPs, the main discussions are held within the dev team, and the outcomes are promptly updated in the CIP documents. For CIPs that may have a significant impact, triggering large-scale discussions, you should start a topic in the GitHub issue or Conflux forum for more in-depth discussions. These CIPs must include a Discussion header with a link to a discussion forum or open GitHub issue where the CIP can be discussed as a whole.
 
 If your CIP requires images, the image files should be included in a subdirectory of the `assets` folder for that CIP as follows: `assets/CIP-N` (where **N** is to be replaced with the CIP number). When linking to an image in the CIP, use relative links such as `../assets/CIP-1/image.png`.
+
+If your CIP depends on other CIPs that haven't been activated on the mainnet, include a "Required CIPs" field in the header. You don't need to list prerequisites that have been activated on the mainnet.
 
 Once your first PR is merged, we have a bot that helps out by automatically merging PRs to draft CIPs. For this to work, it has to be able to tell that you own the draft being edited. Make sure that the 'author' line of your CIP contains either your GitHub username or your email address inside. If you use your email address, that address must be the one publicly shown on [your GitHub profile](https://github.com/settings/profile).
 

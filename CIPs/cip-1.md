@@ -5,7 +5,7 @@ Status: Active
 Type: Backward Compatible
 Author: Guang Yang
 Created: 2020-07-06
-Updated: 
+Updated: 2023-07-19
 ---
 
 ## What is a CIP?
@@ -220,9 +220,9 @@ The current CIP editors are
 
 ` * Guang Yang (@Regulusyg)`
 
-` * Zhe Yang (@yangzhe1990)`
+` * Chenxing Li(@ChenxingLi)`
 
-` * Dong Zhou (@dongz9)`
+` * Peilun Li(@peilun-conflux)`
 
 ## CIP Editor Responsibilities
 
