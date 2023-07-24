@@ -18,6 +18,8 @@ If your CIP requires images, the image files should be included in a subdirector
 
 If your CIP depends on other CIPs that haven't been activated on the mainnet, include a "Required CIPs" field in the header. You don't need to list prerequisites that have been activated on the mainnet.
 
+To facilitate communication, you can provide multilingual versions for CIP, such as [CIP-109](CIPs/cip-109.md). However, an English version is essential. In case of discrepancies between different language versions, the English one will serve as the definitive reference.
+
 Once your first PR is merged, we have a bot that helps out by automatically merging PRs to draft CIPs. For this to work, it has to be able to tell that you own the draft being edited. Make sure that the 'author' line of your CIP contains either your GitHub username or your email address inside. If you use your email address, that address must be the one publicly shown on [your GitHub profile](https://github.com/settings/profile).
 
 When you believe your CIP is mature and ready to progress past the draft phase, you should ask to have your issue added to the agenda of an upcoming All Core Devs meeting, where it can be discussed for inclusion in a future hard fork. If implementers agree to include it, the CIP editors will update the state of your CIP to **Accepted**.
@@ -55,6 +57,8 @@ These CIPs are either in the midst of active development or have been fully deve
 | [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral | Developed |
 | [112](CIPs/cip-112.md) | Fix Block Headers `custom` Field Serde | Developed |
 | [113](CIPs/cip-113.md) | Accelerate Up PoS Finalization | Developed |
+| [118](CIPs/cip-118.md) | Query Unused Storage Points in Internal Contract | Developed |
+| [119](CIPs/cip-119.md) | `PUSH0 (0x5f)` Instruction | Developed |
 
 ### Activated
 

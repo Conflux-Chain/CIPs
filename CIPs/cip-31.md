@@ -1,6 +1,6 @@
 ---
 CIP No.: 31
-Title: Genesis Block Contract: Create2Factory
+Title: "Genesis Block Contract: Create2Factory"
 Author: Fan Wang(@posaggen)
 Status: Final
 Type: Spec Breaking

@@ -2,7 +2,7 @@
 CIP No.: 16
 Title: Consolidate Contract Destruction Logic
 Author: Chenxing Li (@ChenxingLi)
-Discussions: [Conflux-Chain/conflux-rust#1747](https://github.com/Conflux-Chain/conflux-rust/issues/1747)
+Discussions: https://github.com/Conflux-Chain/conflux-rust/issues/1747
 Status: Final
 Type: Spec Breaking
 Created: 2020-08-05
