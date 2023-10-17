@@ -18,7 +18,7 @@ Currently, all the private-key-controlled addresses start with `0x1` in hex form
 
 CIP-72 introduces Ethereum-Like transactions, which make it possible to interact with Conflux Network by Ethereum wallet like metamask. However, Conflux has a different way to recover sender address from signature, and thus the same private key may produce different address. It significantly introduces the risk that the users transfer their assets to a dead address by mistake, and further impedes users experience Conflux by Ethereum wallet.
 
-This CIP plans to make Conflux and Etheruem have the same address with the same private key, while the existing Conflux address will not be effected. Conflux has two types of transactions: normal transaction and Ethereum-like transaction. The normal transaction will retain the original signature recover process and the Ethereum like transaction will recover signature in the same rule as Ethereum. If a user has address `0x40a...` on Ethereum, it will control both address `0x10a...` (by sending normal transaction) and `0x40a...` (by sending Ethereum-like transaction) on Conflux. 
+This CIP plans to make Conflux and Ethereum have the same address with the same private key, while the existing Conflux address will not be effected. Conflux has two types of transactions: normal transaction and Ethereum-like transaction. The normal transaction will retain the original signature recover process and the Ethereum like transaction will recover signature in the same rule as Ethereum. If a user has address `0x40a...` on Ethereum, it will control both address `0x10a...` (by sending normal transaction) and `0x40a...` (by sending Ethereum-like transaction) on Conflux. 
 
 
 ## Motivation
@@ -35,7 +35,7 @@ Explained in abstract.
 
 ### State root
 Currently, the world state stores the private-key-controlled account and contract account in different format. This format will influence the state root. Even if an address started with `0x8` has not been initiated, it will be stored in format of a contract account. After CIP-80, we apply the following rule:
-- If an address starts with `0x8`, it will be stored in format of a contract account, even if it is an private-key-controlled address. 
+- If an address starts with `0x8`, it will be stored in format of a contract account, even if it is a private-key-controlled address. 
 - For the other address, it will be stored in format of a contract account only if it has code. 
 
 ### Address validity check in EVM
