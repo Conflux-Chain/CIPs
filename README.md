@@ -54,11 +54,6 @@ These CIPs are either in the midst of active development or have been fully deve
 
 | CIP Number | Title | Status |
 | :-----: | :----- | :-----: |
-| [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral | Developed |
-| [112](CIPs/cip-112.md) | Fix Block Headers `custom` Field Serde | Developed |
-| [113](CIPs/cip-113.md) | Accelerate Up PoS Finalization | Developed |
-| [118](CIPs/cip-118.md) | Query Unused Storage Points in Internal Contract | Developed |
-| [119](CIPs/cip-119.md) | `PUSH0 (0x5f)` Instruction | Developed |
 
 ### Activated
 
@@ -94,6 +89,11 @@ These CIPs have successfully undergone upgrades on the mainnet.
 | [98](CIPs/cip-98.md) | Fix BLOCKHASH Opcode Bug in eSpace | V2.1 |
 | [99](CIPs/cip-99.md) | Extend Non-Voting Grace and Shorten Unlock Time | V2.1 |
 | [105](CIPs/cip-105.md) | Minimal DAO Vote Count Based on PoS Staking | V2.1 |
+| [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral | V2.3 |
+| [112](CIPs/cip-112.md) | Fix Block Headers `custom` Field Serde | V2.3 |
+| [113](CIPs/cip-113.md) | Accelerate Up PoS Finalization | V2.3 |
+| [118](CIPs/cip-118.md) | Query Unused Storage Points in Internal Contract | V2.3 |
+| [119](CIPs/cip-119.md) | `PUSH0 (0x5f)` Instruction | V2.3 |
 
 
 ### Dormancy
