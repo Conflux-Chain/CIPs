@@ -29,10 +29,10 @@ Before this CIP.
 | **Reverted / Fail** | Gas: false / Storage: false | Gas: false / Storage: false            | **Gas: false / Storage: false** |
 
 After this CIP.
-|                     | Not in whitelist            | In whitelist but sponsor cannot afford | Sponsored                       |
-| ------------------- | --------------------------- | -------------------------------------- | ------------------------------- |
-| **Success**         | Gas: false / Storage: false | Gas: false / **Storage: false**        | Gas: true / Storage: true       |
-| **Reverted / Fail** | Gas: false / Storage: false | Gas: false / Storage: false            | **Gas: true / Storage: true**   |
+|                     | Not in whitelist            | In whitelist but sponsor cannot afford       | Sponsored                               |
+| ------------------- | --------------------------- | -------------------------------------------- | --------------------------------------- |
+| **Success**         | Gas: false / Storage: false | Gas: false / **Storage: false**  (CIP-78a)   | Gas: true / Storage: true               |
+| **Reverted / Fail** | Gas: false / Storage: false | Gas: false / Storage: false                  | **Gas: true / Storage: true** (CIP-78b) |
 
 ## Rationale
 
