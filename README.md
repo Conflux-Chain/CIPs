@@ -46,6 +46,24 @@ These CIPs significantly influence the economic and governance models of Conflux
 | [94](CIPs/cip-94.md) | On-Chain DAO Vote for Chain Parameters |
 | [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral |
 
+These CIPs are primarily aimed at following EIPs to maintain compatibility with Ethereum. The specifications are highly align with Ethreum.
+
+| CIP Number | Title | Related EIP Number |
+| :-----: | :----- | :-----: |
+| [23](CIPs/cip-23.md) | Hashing and Signing Typed Structured Data | [EIP-712](https://eips.ethereum.org/EIPS/eip-712)
+| [119](CIPs/cip-119.md) | `PUSH0 (0x5f)` Instruction | [EIP-3855](https://eips.ethereum.org/EIPS/eip-3855)
+| [1820](CIPs/cip-1820.md) | Migrate ERC1820 to Conflux | [EIP-1820](https://eips.ethereum.org/EIPS/eip-1820)
+
+
+The following CRCs do not have dedicated documentation; they are identical to the corresponding ERCs.
+
+| CRC Number | Related ERC Number |
+| :-----: | :-----: |
+| 20 | [ERC-20](https://eips.ethereum.org/EIPS/eip-20) |
+| 721 | [ERC-721](https://eips.ethereum.org/EIPS/eip-721) |
+| 1155 | [ERC-1155](https://eips.ethereum.org/EIPS/eip-1155) |
+
+
 ## Spec Breaking CIPs
 
 ### Ongoing
