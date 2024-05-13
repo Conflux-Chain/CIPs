@@ -5,7 +5,6 @@ Author: Guang Yang (@Regulusyg)
 Status: Draft
 Type: Spec Breaking
 Created: 2020-11-01
-Required CIPs: 
 ---
 
 ## Simple Summary
