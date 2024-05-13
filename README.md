@@ -76,7 +76,9 @@ These CIPs are either in the midst of active development or have been fully deve
 | [131](CIPs/cip-131.md) | Retain Whitelist on Contract Deletion | Developed |
 | [132](CIPs/cip-132.md) | Fix Static Context Check for Internal Contracts | Developed |
 | [133](CIPs/cip-133.md) | Enhanced Block Hash Query | Developed |
+| [136](CIPs/cip-136.md) | Increase PoS Retire Period | Draft |
 | [137](CIPs/cip-137.md) | Base Fee Sharing in CIP-1559 | Draft |
+| [1559](CIPs/cip-1559.md) | Fee market change for Conflux | Draft |
 
 ### Activated
 
