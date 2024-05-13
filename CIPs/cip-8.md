@@ -5,7 +5,7 @@ Author: <Chenxing Li (@ChenxingLi)>
 Status: Final
 Type: Spec Breaking
 Created: 2020-07-23
-Required CIPs: [12](cip-12.md)
+Required CIPs: 12
 ---
 
 ## Simple Summary
