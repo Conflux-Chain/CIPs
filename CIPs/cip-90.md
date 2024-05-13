@@ -5,7 +5,7 @@ Author: Fan Long <longfan@confluxnetwork.org> Chenxing Li <chenxing@confluxnetwo
 Status: Final
 Type: Spec Breaking
 Created: 2022-01-10
-Replaced CIPs 72, 80
+Replaced CIPs: 72, 80
 ---
 
 
