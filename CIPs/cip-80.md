@@ -5,7 +5,7 @@ Author: Chenxing Li (lylcx2007@gmail.com)
 Status: Superseded
 Type: Spec Breaking
 Created: 2021-8-31
-Required CIPs: [72](cip-72.md)
+Required CIPs: 72
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->

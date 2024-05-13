@@ -6,7 +6,7 @@ Discussions: https://github.com/Conflux-Chain/conflux-rust/issues/1747
 Status: Final
 Type: Spec Breaking
 Created: 2020-08-05
-Required CIPs: [12](cip-12.md)
+Required CIPs: 12
 ---
 
 <!--You can leave these HTML comments in your merged CIP and delete the visible duplicate text guides, they will not appear and may be helpful to refer to if you edit it again. This is the suggested template for new CIPs. Note that a CIP number will be assigned by an editor. When opening a pull request to submit your CIP, please use an abbreviated title in the filename, `CIP-draft_title_abbrev.md`. The title should be 44 characters or less.-->
