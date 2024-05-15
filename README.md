@@ -52,6 +52,8 @@ These CIPs are primarily aimed at following EIPs to maintain compatibility with 
 | :-----: | :----- | :-----: |
 | [23](CIPs/cip-23.md) | Hashing and Signing Typed Structured Data | [EIP-712](https://eips.ethereum.org/EIPS/eip-712)
 | [119](CIPs/cip-119.md) | `PUSH0 (0x5f)` Instruction | [EIP-3855](https://eips.ethereum.org/EIPS/eip-3855)
+| [142](CIPs/cip-142.md) | Transient Storage Opcodes | [EIP-1153](https://eips.ethereum.org/EIPS/eip-1153)
+| [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy  | [EIP-5656](https://eips.ethereum.org/EIPS/eip-5656)
 | [1820](CIPs/cip-1820.md) | Migrate ERC1820 to Conflux | [EIP-1820](https://eips.ethereum.org/EIPS/eip-1820)
 
 
@@ -76,9 +78,12 @@ These CIPs are either in the midst of active development or have been fully deve
 | [131](CIPs/cip-131.md) | Retain Whitelist on Contract Deletion | Developed |
 | [132](CIPs/cip-132.md) | Fix Static Context Check for Internal Contracts | Developed |
 | [133](CIPs/cip-133.md) | Enhanced Block Hash Query | Developed |
-| [136](CIPs/cip-136.md) | Increase PoS Retire Period | Draft |
-| [137](CIPs/cip-137.md) | Base Fee Sharing in CIP-1559 | Draft |
-| [1559](CIPs/cip-1559.md) | Fee market change for Conflux | Draft |
+| [136](CIPs/cip-136.md) | Increase PoS Retire Period | Developed |
+| [137](CIPs/cip-137.md) | Base Fee Sharing in CIP-1559 | Developed |
+| [141](CIPs/cip-141.md) | Disable Subroutine Opcodes | Draft |
+| [142](CIPs/cip-142.md) | Transient Storage Opcodes | Draft |
+| [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy | Draft |
+| [1559](CIPs/cip-1559.md) | Fee market change for Conflux | Developed |
 
 ### Activated
 
