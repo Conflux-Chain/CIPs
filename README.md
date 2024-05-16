@@ -51,9 +51,11 @@ These CIPs are primarily aimed at following EIPs to maintain compatibility with 
 | CIP Number | Title | Related EIP Number |
 | :-----: | :----- | :-----: |
 | [23](CIPs/cip-23.md) | Hashing and Signing Typed Structured Data | [EIP-712](https://eips.ethereum.org/EIPS/eip-712)
+| [92](CIPs/cip-92.md) | Enable Blake2F Builtin Function | [EIP-152](https://eips.ethereum.org/EIPS/eip-152)
 | [119](CIPs/cip-119.md) | `PUSH0 (0x5f)` Instruction | [EIP-3855](https://eips.ethereum.org/EIPS/eip-3855)
 | [142](CIPs/cip-142.md) | Transient Storage Opcodes | [EIP-1153](https://eips.ethereum.org/EIPS/eip-1153)
 | [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy  | [EIP-5656](https://eips.ethereum.org/EIPS/eip-5656)
+| [144](CIPs/cip-144.md) | Point Evaluation Precompile from EIP-4844  | [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)
 | [1820](CIPs/cip-1820.md) | Migrate ERC1820 to Conflux | [EIP-1820](https://eips.ethereum.org/EIPS/eip-1820)
 
 
@@ -83,6 +85,7 @@ These CIPs are either in the midst of active development or have been fully deve
 | [141](CIPs/cip-141.md) | Disable Subroutine Opcodes | Draft |
 | [142](CIPs/cip-142.md) | Transient Storage Opcodes | Draft |
 | [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy | Draft |
+| [144](CIPs/cip-144.md) | Point Evaluation Precompile from EIP-4844 | Draft |
 | [1559](CIPs/cip-1559.md) | Fee market change for Conflux | Developed |
 
 ### Activated
