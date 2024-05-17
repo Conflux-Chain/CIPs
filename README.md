@@ -86,6 +86,7 @@ These CIPs are either in the midst of active development or have been fully deve
 | [142](CIPs/cip-142.md) | Transient Storage Opcodes | Draft |
 | [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy | Draft |
 | [144](CIPs/cip-144.md) | Point Evaluation Precompile from EIP-4844 | Draft |
+| [145](CIPs/cip-145.md) | Fix Receipts upon `NotEnoughBalance` Error | Draft |
 | [1559](CIPs/cip-1559.md) | Fee market change for Conflux | Developed |
 
 ### Activated
