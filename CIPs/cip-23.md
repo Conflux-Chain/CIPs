@@ -41,6 +41,7 @@ The specification is derived from [EIP-712](https://github.com/ethereum/EIPs/blo
 - When encoding a bytestring `message ∈ 𝔹⁸ⁿ`, Conflux adds a prefix `\x19Conflux Signed Message:\n` instead of `\x19Ethereum Signed Message:\n`.
 - Rename `EIP712domain` to `CIP23domain`
 - In `CIP23domain`, the `chainId` field must be included. The user-agent should refuse to sign a typed data whose `CIP23domain` does not include `chainId` field.
+- The `address` type must be in [cip-37 Base32 Address](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/cip-37.md) format, and it should be converted to Hex address format before signing.
 
 ### Encoding method
 
@@ -232,16 +233,16 @@ Here is a valid typed data object.
         "name": "Ether Mail",
         "version": "1",
         "chainId": 1,
-        "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
+        "verifyingContract": "cfx:acgp3xgp3xgp3xgp3xgp3xgp3xgp3xgp3uppe8tn15"
     },
     "message": {
         "from": {
             "name": "Cow",
-            "wallet": "0xCD2a3d9F938E13CD947Ec05AbC7FE734Df8DD826"
+            "wallet": "cfx:aaswytp9wshbhxpyt5afztd9664r9ds2e2rsm7fx6n"
         },
         "to": {
             "name": "Bob",
-            "wallet": "0xbBbBBBBbbBBBbbbBbbBbbbbBBbBbbbbBbBbbBBbB"
+            "wallet": "cfx:aar51s751s751s751s751s751s751s751ptsbxh948"
         },
         "contents": "Hello, Bob!"
     }
@@ -264,7 +265,78 @@ This CIP only provides a standard for signing messages to be read by the smart c
 
 ## Test Cases
 <!--Test cases for an implementation are mandatory for CIPs that are affecting consensus changes. Other CIPs can choose to include links to test cases if applicable.-->
-TBA.
+```
+sign({
+    // hash: 0xf1637f19932ca1ac061253a0deb47e14dda224a1eb3341dab73300fc01a339bd
+    hash: hashTypedData({
+      types: {
+        CIP23Domain: [
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "version",
+            type: "string",
+          },
+          {
+            name: "chainId",
+            type: "uint256",
+          },
+          {
+            name: "verifyingContract",
+            type: "address",
+          },
+        ],
+        Person: [
+          {
+            name: "name",
+            type: "string",
+          },
+          {
+            name: "wallet",
+            type: "address",
+          },
+        ],
+        Mail: [
+          {
+            name: "from",
+            type: "Person",
+          },
+          {
+            name: "to",
+            type: "Person",
+          },
+          {
+            name: "contents",
+            type: "string",
+          },
+        ],
+      },
+      primaryType: "Mail",
+      domain: {
+        name: "Ether Mail",
+        version: "1",
+        chainId: 1n,
+        verifyingContract: "cfx:acgp3xgp3xgp3xgp3xgp3xgp3xgp3xgp3uppe8tn15",
+      },
+      message: {
+        from: {
+          name: "Cow",
+          wallet: "cfx:aaswytp9wshbhxpyt5afztd9664r9ds2e2rsm7fx6n",
+        },
+        to: {
+          name: "Bob",
+          wallet: "cfx:aar51s751s751s751s751s751s751s751ptsbxh948",
+        },
+        contents: "Hello, Bob!",
+      },
+    }),
+    privateKey:
+      "0x34fce6e29a7b0dbd92f51a3d0a3d4db83f55958ff6552e6f0d4ee3ef21cd2d3e",
+  })
+// result: 0x1228cb5ec784a9c78d528da0747893e6398ee6b89c86e4371bb3c7ab2b1ee28857b7caa018c097e21d863892508b4c29bfd375e6fa014ca154c97de8f952586000
+```
 
 ## Implementation
 <!--The implementations must be completed before any CIP is given status "Final", but it need not be completed before the CIP is accepted. While there is merit to the approach of reaching consensus on the specification and rationale before writing code, the principle of "rough consensus and running code" is still useful when it comes to resolving many discussions of API details.-->
