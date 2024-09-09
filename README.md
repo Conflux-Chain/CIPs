@@ -45,8 +45,9 @@ These CIPs significantly influence the economic and governance models of Conflux
 | [90](CIPs/cip-90.md) | Introduce a Fully EVM-Compatible Space |
 | [94](CIPs/cip-94.md) | On-Chain DAO Vote for Chain Parameters |
 | [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral |
+| [1559](CIPs/cip-1559.md) | Fee market change for Conflux |
 
-These CIPs are primarily aimed at following EIPs to maintain compatibility with Ethereum. The specifications are highly align with Ethreum.
+These CIPs are primarily aimed at following EIPs to maintain compatibility with Ethereum. The specifications are highly align with Ethereum.
 
 | CIP Number | Title | Related EIP Number |
 | :-----: | :----- | :-----: |
@@ -76,18 +77,6 @@ These CIPs are either in the midst of active development or have been fully deve
 
 | CIP Number | Title | Status |
 | :-----: | :----- | :-----: |
-| [130](CIPs/cip-130.md) | Aligning Gas Limit with Transaction Size | Developed |
-| [131](CIPs/cip-131.md) | Retain Whitelist on Contract Deletion | Developed |
-| [132](CIPs/cip-132.md) | Fix Static Context Check for Internal Contracts | Developed |
-| [133](CIPs/cip-133.md) | Enhanced Block Hash Query | Developed |
-| [136](CIPs/cip-136.md) | Increase PoS Retire Period | Developed |
-| [137](CIPs/cip-137.md) | Base Fee Sharing in CIP-1559 | Developed |
-| [141](CIPs/cip-141.md) | Disable Subroutine Opcodes | Draft |
-| [142](CIPs/cip-142.md) | Transient Storage Opcodes | Draft |
-| [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy | Draft |
-| [144](CIPs/cip-144.md) | Point Evaluation Precompile from EIP-4844 | Draft |
-| [145](CIPs/cip-145.md) | Fix Receipts upon `NotEnoughBalance` Error | Draft |
-| [1559](CIPs/cip-1559.md) | Fee market change for Conflux | Developed |
 
 ### Activated
 
@@ -128,6 +117,18 @@ These CIPs have successfully undergone upgrades on the mainnet.
 | [113](CIPs/cip-113.md) | Accelerate Up PoS Finalization | V2.3 |
 | [118](CIPs/cip-118.md) | Query Unused Storage Points in Internal Contract | V2.3 |
 | [119](CIPs/cip-119.md) | `PUSH0 (0x5f)` Instruction | V2.3 |
+| [130](CIPs/cip-130.md) | Aligning Gas Limit with Transaction Size | V2.4 |
+| [131](CIPs/cip-131.md) | Retain Whitelist on Contract Deletion | V2.4 |
+| [132](CIPs/cip-132.md) | Fix Static Context Check for Internal Contracts | V2.4 |
+| [133](CIPs/cip-133.md) | Enhanced Block Hash Query | V2.4 |
+| [136](CIPs/cip-136.md) | Increase PoS Retire Period | V2.4 |
+| [137](CIPs/cip-137.md) | Base Fee Sharing in CIP-1559 | V2.4 |
+| [141](CIPs/cip-141.md) | Disable Subroutine Opcodes | V2.4 |
+| [142](CIPs/cip-142.md) | Transient Storage Opcodes | V2.4 |
+| [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy | V2.4 |
+| [144](CIPs/cip-144.md) | Point Evaluation Precompile from EIP-4844 | V2.4 |
+| [145](CIPs/cip-145.md) | Fix Receipts upon `NotEnoughBalance` Error | V2.4 |
+| [1559](CIPs/cip-1559.md) | Fee market change for Conflux | V2.4 |
 
 
 ### Dormancy
