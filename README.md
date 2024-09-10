@@ -130,6 +130,17 @@ These CIPs have successfully undergone upgrades on the mainnet.
 | [145](CIPs/cip-145.md) | Fix Receipts upon `NotEnoughBalance` Error | V2.4 |
 | [1559](CIPs/cip-1559.md) | Fee market change for Conflux | V2.4 |
 
+### List of Hardforks
+
+| Hardfork Version Number | Main Features | Time Nodes |
+|-------------------------|---------------|------------|
+| Tethys (V1.0) | Mainnet Activation | All features activated at genesis block (2020-10-29) |
+| Tanzanite (V1.1) | Reducing base reward to alleviate selling pressure | All features activated at epoch number 3,615,000 (2020-11-18) |
+| Hydra (V2.0) | Introduction of PoS hybrid consensus and EVM-compatible Space | Features activated based on epoch number: activated at epoch number 36,935,000 (2022-02-21)<br><br>Features activated based on block number: activated at block number 92,060,600 (2022-02-22)<br><br>First round of PoS consensus committee election ends at block number 92,751,800 (2022-02-26)<br><br>PoS consensus starts at epoch number 37,400,000 (2022-02-27) |
+| V2.1 | Introduction of DAO voting mechanism | Features activated based on epoch number: activated at epoch number 56,800,000 (2022-10-15)<br><br>Features activated based on block number: activated at block number 133,800,000 (2022-10-25) |
+| V2.2 | Emergency bug fix for PoS Key security | Activated at block number 137,740,000 (2022-11-17) |
+| V2.3 | Introduction of storage collateral token burning mechanism | Features activated based on epoch number: activated at epoch number 79,050,000 (2023-09-10)<br><br>Features activated based on block number: activated at block number 188,900,000 (2023-09-09) |
+| V2.4 | Introduction of EIP-1559 gas fee burning mechanism | Features activated based on epoch number: activated at epoch number 101,900,000 (2024-08-06)<br><br>Features activated based on block number: activated at block number 247,480,000 (2024-08-13) |
 
 ### Dormancy
 
