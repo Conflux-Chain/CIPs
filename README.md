@@ -57,7 +57,8 @@ These CIPs are primarily aimed at following EIPs to maintain compatibility with 
 | [142](CIPs/cip-142.md) | Transient Storage Opcodes | [EIP-1153](https://eips.ethereum.org/EIPS/eip-1153)
 | [143](CIPs/cip-143.md) | `MCOPY (0x5e)` Opcode for Efficient Memory Copy  | [EIP-5656](https://eips.ethereum.org/EIPS/eip-5656)
 | [144](CIPs/cip-144.md) | Point Evaluation Precompile from EIP-4844  | [EIP-4844](https://eips.ethereum.org/EIPS/eip-4844)
-| [150](CIPs/cip-150.md) | Reject New Contract Code Starting with the 0xEF Byte  | [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541)
+| [150](CIPs/cip-150.md) | Reject New Contract Code Starting with the 0xEF Byte | [EIP-3541](https://eips.ethereum.org/EIPS/eip-3541)
+| [151](CIPs/cip-151.md) | SELFDESTRUCT only in Same Transaction | [EIP-6780](https://eips.ethereum.org/EIPS/eip-6780)
 | [1820](CIPs/cip-1820.md) | Migrate ERC1820 to Conflux | [EIP-1820](https://eips.ethereum.org/EIPS/eip-1820)
 
 
