@@ -61,6 +61,7 @@ These CIPs are primarily aimed at following EIPs to maintain compatibility with 
 | [151](CIPs/cip-151.md) | SELFDESTRUCT only in Same Transaction | [EIP-6780](https://eips.ethereum.org/EIPS/eip-6780)
 | [152](CIPs/cip-152.md) | Reject Transactions from Senders with Deployed Code | [EIP-3607](https://eips.ethereum.org/EIPS/eip-3607)
 | [1820](CIPs/cip-1820.md) | Migrate ERC1820 to Conflux | [EIP-1820](https://eips.ethereum.org/EIPS/eip-1820)
+| [7702](CIPs/cip-7702.md) | Set Code for EOA | [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702)
 
 
 The following CRCs do not have dedicated documentation; they are identical to the corresponding ERCs.
