@@ -1,5 +1,5 @@
 ---
-CIP No.: <to be assigned>
+CIP No.: 156
 Title: Change the PoS Malicious Penalty From Stake Forfeiting to Stake Locking 
 Author: Peilun Li <peilun.li@confluxnetwork.org>, Chenxing Li <chenxing@confluxnetwork.org>
 Status: Draft
