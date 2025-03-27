@@ -146,6 +146,7 @@ These CIPs have successfully undergone upgrades on the mainnet.
 | V2.2 | Emergency bug fix for PoS Key security | Activated at block number 137,740,000 (2022-11-17) |
 | V2.3 | Introduction of storage collateral token burning mechanism | Features activated based on epoch number: activated at epoch number 79,050,000 (2023-09-10)<br><br>Features activated based on block number: activated at block number 188,900,000 (2023-09-09) |
 | V2.4 | Introduction of EIP-1559 gas fee burning mechanism | Features activated based on epoch number: activated at epoch number 101,900,000 (2024-08-06)<br><br>Features activated based on block number: activated at block number 247,480,000 (2024-08-13) |
+| V2.5 | Emergency bug fix for eSpace CREATE2 opcode security | Features activated based on epoch number: activated at epoch number 118,580,000 (2025-03-18) |
 
 ### Dormancy
 
