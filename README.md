@@ -102,7 +102,6 @@ These CIPs have successfully undergone upgrades on the mainnet.
 | [31](CIPs/cip-31.md) | Genesis Block Contract: Create2Factory | Tethys (V1.0) |
 | [39](CIPs/cip-39.md) | Use Custom Field for Incompatible Upgrade | Tanzanite (V1.1) |
 | [40](CIPs/cip-40.md) | Reduce Block Base Reward to 2 CFX | Tanzanite (V1.1) |
-| [37](CIPs/cip-37.md) | Introduce Base32 Checksum Addresses |  V1.1.1 |
 | [43](CIPs/cip-43.md) | Introduce Finality Through Staking Vote | Hydra (V2.0) |
 | [62](CIPs/cip-62.md) | Enable EC-Related Builtin Contracts | Hydra (V2.0) |
 | [64](CIPs/cip-64.md) | Get Current Epoch Number via Internal Contract | Hydra (V2.0) |
