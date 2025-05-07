@@ -37,15 +37,17 @@ When you believe your CIP is mature and ready to progress past the draft phase, 
 
 These CIPs significantly influence the economic and governance models of Conflux, as well as its various features.
 
-| CIP Number | Title |
-| :-----: | :----- |
-| [37](CIPs/cip-37.md) | Introduce Base32 Checksum Addresses |
-| [40](CIPs/cip-40.md) | Reduce Block Base Reward to 2 CFX |
-| [43](CIPs/cip-43.md) | Introduce Finality Through Staking Vote |
-| [90](CIPs/cip-90.md) | Introduce a Fully EVM-Compatible Space |
-| [94](CIPs/cip-94.md) | On-Chain DAO Vote for Chain Parameters |
-| [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral |
-| [1559](CIPs/cip-1559.md) | Fee market change for Conflux |
+| CIP Number | Title | Activation Hardfork |
+| :-----: | :----- | :-----: |
+| [37](CIPs/cip-37.md) | Introduce Base32 Checksum Addresses | (Not Spec Breaking) |
+| [40](CIPs/cip-40.md) | Reduce Block Base Reward to 2 CFX | Tanzanite (V1.1) |
+| [43](CIPs/cip-43.md) | Introduce Finality Through Staking Vote | Hydra (V2.0) |
+| [90](CIPs/cip-90.md) | Introduce a Fully EVM-Compatible Space | Hydra (V2.0) |
+| [94](CIPs/cip-94.md) | On-Chain DAO Vote for Chain Parameters | V2.1 |
+| [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral | V2.3 |
+| [1559](CIPs/cip-1559.md) | Fee market change for Conflux | V2.4 |
+| [7702](CIPs/cip-7702.md) | Set Code for EOA | (Not Activated) |
+| [645](CIPs/cip-645.md) | Align Conflux eSpace Behavior with EVM | (Not Activated) |
 
 These CIPs are primarily aimed at following EIPs to maintain compatibility with Ethereum. The specifications are highly align with Ethereum.
 
@@ -80,8 +82,14 @@ The following CRCs do not have dedicated documentation; they are identical to th
 These CIPs are either in the midst of active development or have been fully developed, currently awaiting discussions on upgrade plans.
 
 | CIP Number | Title | Status |
-| :-----: | :----- | :-----: |
-
+| :--------: | :---- | :----: |
+| [150](CIPs/cip-150.md) | Reject New Contract Code starting with the 0xEF byte | Final |
+| [151](CIPs/cip-151.md) | SELFDESTRUCT only in Same Transaction | Final |
+| [152](CIPs/cip-152.md) | Reject Transactions from Senders with Deployed Code | Final |
+| [154](CIPs/cip-154.md) | Fix Inconsistent Implementation of TLOAD | Final |
+| [156](CIPs/cip-156.md) | Change the PoS Malicious Penalty From Stake Forfeiting to Stake Locking | Accepted |
+| [645](CIPs/cip-645.md) | Align Conflux eSpace Behavior with EVM | Accepted |
+| [7702](CIPs/cip-7702.md) | Set Code for EOA | Accepted |
 ### Activated
 
 These CIPs have successfully undergone upgrades on the mainnet.
