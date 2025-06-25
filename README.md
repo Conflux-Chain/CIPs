@@ -46,8 +46,8 @@ These CIPs significantly influence the economic and governance models of Conflux
 | [94](CIPs/cip-94.md) | On-Chain DAO Vote for Chain Parameters | V2.1 |
 | [107](CIPs/cip-107.md) | DAO-Adjustable Burn of Storage Collateral | V2.3 |
 | [1559](CIPs/cip-1559.md) | Fee market change for Conflux | V2.4 |
-| [7702](CIPs/cip-7702.md) | Set Code for EOA | (Not Activated) |
-| [645](CIPs/cip-645.md) | Align Conflux eSpace Behavior with EVM | (Not Activated) |
+| [7702](CIPs/cip-7702.md) | Set Code for EOA | V3.0 (Pending) |
+| [645](CIPs/cip-645.md) | Align Conflux eSpace Behavior with EVM | V3.0 (Pending) |
 
 These CIPs are primarily aimed at following EIPs to maintain compatibility with Ethereum. The specifications are highly align with Ethereum.
 
@@ -64,7 +64,7 @@ These CIPs are primarily aimed at following EIPs to maintain compatibility with 
 | [152](CIPs/cip-152.md) | Reject Transactions from Senders with Deployed Code | [EIP-3607](https://eips.ethereum.org/EIPS/eip-3607)
 | [1820](CIPs/cip-1820.md) | Migrate ERC1820 to Conflux | [EIP-1820](https://eips.ethereum.org/EIPS/eip-1820)
 | [7702](CIPs/cip-7702.md) | Set Code for EOA | [EIP-7702](https://eips.ethereum.org/EIPS/eip-7702)
-
+| [165](CIPs/cip-165.md) | Precompile for BLS12-381 Curve Operations | [EIP-2537](https://eips.ethereum.org/EIPS/eip-2537)
 
 The following CRCs do not have dedicated documentation; they are identical to the corresponding ERCs.
 
@@ -87,9 +87,12 @@ These CIPs are either in the midst of active development or have been fully deve
 | [151](CIPs/cip-151.md) | SELFDESTRUCT only in Same Transaction | Final |
 | [152](CIPs/cip-152.md) | Reject Transactions from Senders with Deployed Code | Final |
 | [154](CIPs/cip-154.md) | Fix Inconsistent Implementation of TLOAD | Final |
-| [156](CIPs/cip-156.md) | Change the PoS Malicious Penalty From Stake Forfeiting to Stake Locking | Accepted |
-| [645](CIPs/cip-645.md) | Align Conflux eSpace Behavior with EVM | Accepted |
-| [7702](CIPs/cip-7702.md) | Set Code for EOA | Accepted |
+| [156](CIPs/cip-156.md) | Change the PoS Malicious Penalty From Stake Forfeiting to Stake Locking | Final |
+| [645](CIPs/cip-645.md) | Align Conflux eSpace Behavior with EVM | Final |
+| [7702](CIPs/cip-7702.md) | Set Code for EOA | Final |
+| [165](CIPs/cip-165.md) | Precompile for BLS12-381 Curve Operations | Final |
+
+
 ### Activated
 
 These CIPs have successfully undergone upgrades on the mainnet.
@@ -154,6 +157,7 @@ These CIPs have successfully undergone upgrades on the mainnet.
 | V2.3 | Introduction of storage collateral token burning mechanism | Features activated based on epoch number: activated at epoch number 79,050,000 (2023-09-10)<br><br>Features activated based on block number: activated at block number 188,900,000 (2023-09-09) |
 | V2.4 | Introduction of EIP-1559 gas fee burning mechanism | Features activated based on epoch number: activated at epoch number 101,900,000 (2024-08-06)<br><br>Features activated based on block number: activated at block number 247,480,000 (2024-08-13) |
 | V2.5 | Emergency bug fix for eSpace CREATE2 opcode security | Features activated based on epoch number: activated at epoch number 118,580,000 (2025-03-18) |
+| V3.0 | Align Conflux eSpace Behavior with EVM | (Pending) |
 
 ### Dormancy
 
