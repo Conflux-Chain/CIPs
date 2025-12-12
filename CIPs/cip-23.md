@@ -39,8 +39,8 @@ This CIP aims to provide a method for off-chain message signing which is compati
 The specification is derived from [EIP-712](https://github.com/ethereum/EIPs/blob/3194278525e4ffec192dd75d3e18bf648e28524e/EIPS/eip-712.md). Conflux has the following differences compared to EIP-712. 
 
 - When encoding a bytestring `message ∈ 𝔹⁸ⁿ`, Conflux adds a prefix `\x19Conflux Signed Message:\n` instead of `\x19Ethereum Signed Message:\n`.
-- Rename `EIP712domain` to `CIP23domain`
-- In `CIP23domain`, the `chainId` field must be included. The user-agent should refuse to sign a typed data whose `CIP23domain` does not include `chainId` field.
+- Rename `EIP712Domain` to `CIP23Domain`
+- In `CIP23Domain`, the `chainId` field must be included. The user-agent should refuse to sign a typed data whose `CIP23Domain` does not include `chainId` field.
 - The `address` type must be in [cip-37 Base32 Address](https://github.com/Conflux-Chain/CIPs/blob/master/CIPs/cip-37.md) format, and it should be converted to Hex address format before signing.
 
 ### Encoding method
